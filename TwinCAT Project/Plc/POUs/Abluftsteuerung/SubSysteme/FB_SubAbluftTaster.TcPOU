@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_SubAbluftTaster" Id="{a6640a97-d85b-49ab-93ab-340a325d99a9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SubAbluftTaster
+VAR_INPUT
+	INbSchieberAuf						: BOOL;
+	INbRuettlerStart					: BOOL;
+END_VAR
+VAR_OUTPUT
+	OUTbSchieber							: BOOL;
+END_VAR
+VAR_IN_OUT
+	IObVentilatorEin					: BOOL;
+	IObRuettlerEin						: BOOL;
+END_VAR
+VAR
+	IbStart						AT %I*	: BOOL;
+	IbStop						AT %I*	: BOOL;
+
+	QbAbluftSchieber	AT %Q*	: BOOL;
+
+	bAbluftSchieber						: BOOL;
+	ftrigStart								: F_TRIG;
+
+	tonStartLang							: TON := (PT:= t#2s);
+	tofSchieber								: TOF := (PT:= T#10M);
+	tofAutoStop								: TOF := (PT:= t#240m);
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ftrigStart(CLK:= IbStart);
+
+IF NOT IbStop
+OR (bAbluftSchieber
+		AND (ftrigStart.Q (* 2. Betaetigung des Start-Tasters schaltet wieder aus *)
+				OR NOT tofAutoStop.Q))
+THEN
+	bAbluftSchieber := FALSE;
+
+ELSIF ftrigStart.Q
+AND NOT tonStartLang.Q THEN
+	bAbluftSchieber := TRUE;
+	tofAutoStop.IN := TRUE;
+
+END_IF
+
+(* Ruettler Start, wenn IbStart länger als 1 Sekunde gedrückt wird *)
+tonStartLang(IN:= IbStart AND INbRuettlerStart);
+IF tonStartLang.Q THEN
+	IObRuettlerEin := TRUE;
+END_IF
+
+
+
+tofAutoStop();
+tofAutoStop.IN := FALSE;
+
+tofSchieber(IN:= bAbluftSchieber);
+OUTbSchieber := tofSchieber.Q;
+QbAbluftSchieber := OUTbSchieber OR INbSchieberAuf;
+
+IF bAbluftSchieber THEN
+	IObVentilatorEin := TRUE;
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.47" ClassName="CNestedPlcProjDef">
+	<Project GUID="{54FD8FBE-9F63-4D13-A32D-547B3DAEAEDC}" Name="Plc" PrjFilePath="..\..\Plc\Plc.plcProj" TmcFilePath="..\..\Plc\Plc.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e">
+		<Instance Id="#x01010010" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+			<Name>Plc Instance</Name>
+			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+			<Vars VarGrpType="1">
+				<Name>PlcTaskMain Inputs</Name>
+				<Var>
+					<Name>PLC_PRG.IbZentral1</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.IbStart</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.IbStop</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.IbStoerung</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.IbAbluft2_Aktiv</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.IbAbluft3_Aktiv</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblTaster1.IbStart</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblTaster1.IbStop</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch01.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch02.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch03.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch04.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.IbAbluft2_Aktiv</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.IbAbluft3_Aktiv</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblTaster1.IbStart</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblTaster1.IbStop</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch01.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch02.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch03.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch04.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.IbRolloWindmesser</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *******************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.IbRolloZentralAuf</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.IbRolloZentralAb</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleAltbau.IbInTaster</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *******************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleAltbau.IbInBewegunsm</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleNeubau.IbInTaster</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *******************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleNeubau.IbInBewegunsm</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleAnbau.IbInTaster</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *******************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleAnbau.IbInBewegunsm</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtBueroChef.IbInTaster</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *******************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtBueroChef.IbInBewegunsm</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtBueroAssist.IbInTaster</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *******************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtBueroAssist.IbInBewegunsm</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtPausenraum.IbInTaster</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *******************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtPausenraum.IbInBewegunsm</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCDamen.IbLichtBewegungsmelder</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCDamen.IbTasterHeizenStart</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCHerren.IbLichtBewegungsmelder</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCHerren.IbTasterHeizenStart</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp11_Puffer4000_Brauchw.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp11_Puffer4000_Brauchw.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp12_Puffer4000_oben.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp12_Puffer4000_oben.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp13_Puffer4000_mitte.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp13_Puffer4000_mitte.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp14_Puffer4000_unten.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp14_Puffer4000_unten.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp21_PufferWohnh_oben.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp21_PufferWohnh_oben.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp22_PufferWohnh_unten.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp22_PufferWohnh_unten.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp23_PufferWerkst_oben.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp23_PufferWerkst_oben.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp24_PufferWerkst_unten.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp24_PufferWerkst_unten.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp31_KomprWRG_Ruecklauf.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp31_KomprWRG_Ruecklauf.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp32_KomprWRG_Vorlauf.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp32_KomprWRG_Vorlauf.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp33_WCDamen_Raum.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp33_WCDamen_Raum.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp34_WCHerren_Raum.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp34_WCHerren_Raum.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp41_Schluckbrunnen.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp41_Schluckbrunnen.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp42_Res.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp42_Res.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp43_Res.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp43_Res.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp44_Res.IusiState</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp44_Res.IiDataIn</Name>
+					<Type>INT</Type>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="2">
+				<Name>PlcTaskMain Outputs</Name>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbLMStatus</Name>
+					<Comment>
+						<![CDATA[ Leuchtmelder Kompressorstatus ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbKompressor</Name>
+					<Comment>
+						<![CDATA[ Hauptkompressor ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbNotKompressor</Name>
+					<Comment>
+						<![CDATA[ Notkompressor ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbLufttrockner</Name>
+					<Comment>
+						<![CDATA[ Lufttrockner ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbUmwaelzpumpeWRG</Name>
+					<Comment>
+						<![CDATA[ Kompressor-Waermerueckgew. Umwaelzpumpe ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbVentilSchnellauflWRG</Name>
+					<Comment>
+						<![CDATA[ Umschaltventil zur Schnellaufladung des Puffers durch WRG ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbUmwaelzpumpeWohnhaus</Name>
+					<Comment>
+						<![CDATA[ Umwaelzpumpe vom Puffer zum Wohnhaus und Werkstatt ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.QbVentilUmschWerkstatt</Name>
+					<Comment>
+						<![CDATA[ Umschaltventil von Wohnhaus zur Werkstatt ]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.QbAbluftVentilator</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.QbRuettler</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblTaster1.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch01.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch02.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch03.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung1.fbAblMasch04.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.QbAbluftVentilator</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.QbRuettler</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblTaster1.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch01.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch02.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch03.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch04.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.QbRolloZentralAuf</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.QbRolloZentralAb</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleAltbau.QbOutLicht</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleNeubau.QbOutLicht</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGHalle.fbLichtHalleAnbau.QbOutLicht</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtBueroChef.QbOutLicht</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtBueroAssist.QbOutLicht</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbEGBuero.fbLichtPausenraum.QbOutLicht</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCDamen.QbLMHeizungAktiv</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCDamen.QbStellventilHeizkoerper</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCDamen.QbAbluftventilator</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCHerren.QbLMHeizungAktiv</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCHerren.QbStellventilHeizkoerper</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbWCHerren.QbAbluftventilator</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp11_Puffer4000_Brauchw.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp11_Puffer4000_Brauchw.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp12_Puffer4000_oben.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp12_Puffer4000_oben.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp13_Puffer4000_mitte.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp13_Puffer4000_mitte.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp14_Puffer4000_unten.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp14_Puffer4000_unten.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp21_PufferWohnh_oben.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp21_PufferWohnh_oben.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp22_PufferWohnh_unten.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp22_PufferWohnh_unten.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp23_PufferWerkst_oben.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp23_PufferWerkst_oben.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp24_PufferWerkst_unten.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp24_PufferWerkst_unten.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp31_KomprWRG_Ruecklauf.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp31_KomprWRG_Ruecklauf.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp32_KomprWRG_Vorlauf.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp32_KomprWRG_Vorlauf.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp33_WCDamen_Raum.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp33_WCDamen_Raum.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp34_WCHerren_Raum.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp34_WCHerren_Raum.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp41_Schluckbrunnen.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp41_Schluckbrunnen.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp42_Res.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp42_Res.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp43_Res.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp43_Res.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp44_Res.QusiCtrl</Name>
+					<Type>USINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbTemp44_Res.QiDataOut</Name>
+					<Type>INT</Type>
+				</Var>
+			</Vars>
+			<UnrestoredVarLinks ImportTime="2016-04-01T06:56:55">
+				<OwnerA Name="InputDst" Type="1">
+					<OwnerB Name="TIID^CX5120 (EtherCAT)^Term 1 (EK1200)^CouplerEBus-KBus (BK1250)">
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[1]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 3^Input"/>
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[2]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 4^Input"/>
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[3]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 1^Input"/>
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[4]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 2^Input"/>
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[5]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 7^Input"/>
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[6]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 8^Input"/>
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[7]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 5^Input"/>
+						<Link VarA="P_Schwimmbad.IabInLichtTaster[8]" GrpA="PlcTaskMain Inputs" VarB="02-DI12 (KL1408)^Channel 6^Input"/>
+					</OwnerB>
+				</OwnerA>
+			</UnrestoredVarLinks>
+			<UnrestoredVarLinks ImportTime="2016-04-01T06:59:13">
+				<OwnerA Name="OutputSrc" Prefix="TIPC^Plc^Plc Instance" Type="2">
+					<OwnerB Name="TIID^CX5120 (EtherCAT)^Term 1 (EK1200)^CouplerEBus-KBus (BK1250)">
+						<Link VarA="PLC_PRG.fbDMXMasterLine1.QbDCNetzteil_1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO18 (KL2408)^Channel 6^Output" Size="1"/>
+						<Link VarA="P_Analog.QbChannel1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO03 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Analog.QbChannel2" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO03 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Analog.QbChannel3" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO03 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Analog.QbSignalReset" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO03 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_BadDG.QbRollo1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 6^Output" Size="1"/>
+						<Link VarA="P_BadDG.QbRolloAb" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 5^Output" Size="1"/>
+						<Link VarA="P_BadDG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO13 (KL2114)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_BadDG.fbHeizregler2.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO14 (KL2114)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_BadDG.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_BadDG.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_BadEG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO12 (KL2114)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_BadEG.fbHeizregler2.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO10 (KL2114)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_BadEG.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO04 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Buero.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO10 (KL2114)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Buero.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Buero.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_Buero.fbRolloGruppe.QbOutRollo1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 6^Output" Size="1"/>
+						<Link VarA="P_Buero.fbRolloGruppe.QbOutRolloAb" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 5^Output" Size="1"/>
+						<Link VarA="P_DieleDG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO13 (KL2114)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_DieleEG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO12 (KL2114)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_DieleEG.fbHeizregler2.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO12 (KL2114)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_DieleKG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO16 (KL2114)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Garage.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO01 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Garage.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO01 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Garage.fbLicht3.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO01 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_GarageDG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO15 (KL2114)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_GarageDG.fbHeizregler2.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO15 (KL2114)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_GarageDG.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO01 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_GarageDG.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO01 (KL2408)^Channel 5^Output" Size="1"/>
+						<Link VarA="P_GarageDG.fbLicht3.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO01 (KL2408)^Channel 6^Output" Size="1"/>
+						<Link VarA="P_Hobby.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO16 (KL2114)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Hobby.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO17 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Kind1.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO14 (KL2114)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_Kind1.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 7^Output" Size="1"/>
+						<Link VarA="P_Kind1.fbRolloGruppe.QbOutRollo1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Kind1.fbRolloGruppe.QbOutRollo2" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Kind1.fbRolloGruppe.QbOutRolloAb" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 8^Output" Size="1"/>
+						<Link VarA="P_Kind2.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO14 (KL2114)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Kind2.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Kind3.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO14 (KL2114)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Kind3.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO07 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO11 (KL2114)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbHeizregler2.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO11 (KL2114)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO04 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO04 (KL2408)^Channel 5^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbLicht3.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbRolloGruppe.QbOutRollo1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO04 (KL2408)^Channel 7^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbRolloGruppe.QbOutRollo2" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO04 (KL2408)^Channel 8^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbRolloGruppe.QbOutRollo3" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbRolloGruppe.QbOutRolloAb" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO04 (KL2408)^Channel 6^Output" Size="1"/>
+						<Link VarA="P_Sauna.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO13 (KL2114)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Sauna.fbHeizregler2.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO16 (KL2114)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Sauna.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO17 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Sauna.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO17 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Schlafen.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO15 (KL2114)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Schlafen.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Schlafen.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_Schlafen.fbRolloGruppe.QbOutRollo1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 6^Output" Size="1"/>
+						<Link VarA="P_Schlafen.fbRolloGruppe.QbOutRollo2" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 7^Output" Size="1"/>
+						<Link VarA="P_Schlafen.fbRolloGruppe.QbOutRolloAb" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 5^Output" Size="1"/>
+						<Link VarA="P_Schwimmbad.QbOutFilterpumpe" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO18 (KL2408)^Channel 7^Output" Size="1"/>
+						<Link VarA="P_Schwimmbad.QbOutGegenstromanlage" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO18 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Schwimmbad.QbOutLufttrocker" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO18 (KL2408)^Channel 5^Output" Size="1"/>
+						<Link VarA="P_Schwimmbad.QbOutWasserHeizung" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO18 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Schwimmbad.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO18 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturFBHeizRL.QiDataOut" TypeA="INT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 3^Data Out"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturFBHeizRL.QusiCtrl" TypeA="USINT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 3^Ctrl"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturHeizVorlauf.QiDataOut" TypeA="INT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 2^Data Out"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturHeizVorlauf.QusiCtrl" TypeA="USINT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 2^Ctrl"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturRaum.QiDataOut" TypeA="INT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 1^Data Out"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturRaum.QusiCtrl" TypeA="USINT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 1^Ctrl"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturSchwimmwasser.QiDataOut" TypeA="INT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 4^Data Out"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturSchwimmwasser.QusiCtrl" TypeA="USINT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 4^Ctrl"/>
+						<Link VarA="P_WC_DG.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO08 (KL2408)^Channel 8^Output" Size="1"/>
+						<Link VarA="P_WC_EG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO12 (KL2114)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_WC_EG.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO04 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_WC_KG.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO16 (KL2114)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_WC_KG.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO17 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbHeizregler1.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO11 (KL2114)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbHeizregler2.QbOutHeizSteller" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO11 (KL2114)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht1.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 7^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht2.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO05 (KL2408)^Channel 8^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht3.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht4.QbOutLicht" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DO09 (KL2114)^Channel 1^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe1.QbOutRollo1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 3^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe1.QbOutRollo2" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 4^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe1.QbOutRolloAb" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 2^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe2.QbOutRollo1" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 6^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe2.QbOutRollo2" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 7^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe2.QbOutRollo3" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 8^Output" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe2.QbOutRolloAb" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DO06 (KL2408)^Channel 5^Output" Size="1"/>
+					</OwnerB>
+				</OwnerA>
+				<OwnerA Name="InputDst" Prefix="TIPC^Plc^Plc Instance" Type="1">
+					<OwnerB Name="TIID^CX5120 (EtherCAT)^Term 1 (EK1200)^CouplerEBus-KBus (BK1250)">
+						<Link VarA="P_Analog.IbChannel1" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 3^Input" Size="1"/>
+						<Link VarA="P_Analog.IbChannel2" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_Analog.IbChannel3" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 5^Input" Size="1"/>
+						<Link VarA="P_Analog.IbChannel4" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 6^Input" Size="1"/>
+						<Link VarA="P_Analog.IbChannel5" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 7^Input" Size="1"/>
+						<Link VarA="P_Analog.IbChannel6" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 8^Input" Size="1"/>
+						<Link VarA="P_Analog.IbLimitHigh" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_Analog.IbLimitLow" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI01 (KL1408)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_BadDG.IbRolloAb" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI05 (KL1104)^Channel 3^Input" Size="1"/>
+						<Link VarA="P_BadDG.IbRolloAuf" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI05 (KL1104)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_BadDG.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 8^Input" Size="1"/>
+						<Link VarA="P_BadDG.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI05 (KL1104)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_BadEG.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI02 (KL1408)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_Buero.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_Buero.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 3^Input" Size="1"/>
+						<Link VarA="P_Buero.fbRolloGruppe.IbInTasterAb" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 5^Input" Size="1"/>
+						<Link VarA="P_Buero.fbRolloGruppe.IbInTasterAuf" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_Garage.IbTor1Offen" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 7^Input" Size="1"/>
+						<Link VarA="P_Garage.IbTor2Offen" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 8^Input" Size="1"/>
+						<Link VarA="P_Garage.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_Garage.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_Garage.fbLicht3.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 3^Input" Size="1"/>
+						<Link VarA="P_GarageDG.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_GarageDG.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 5^Input" Size="1"/>
+						<Link VarA="P_GarageDG.fbLicht3.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI10 (KL1408)^Channel 6^Input" Size="1"/>
+						<Link VarA="P_Hobby.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_Kind1.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI05 (KL1104)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_Kind1.fbRolloGruppe.IbInTasterAb" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI06 (KL1104)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_Kind1.fbRolloGruppe.IbInTasterAuf" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI06 (KL1104)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_Kind2.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 7^Input" Size="1"/>
+						<Link VarA="P_Kind3.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 6^Input" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI02 (KL1408)^Channel 3^Input" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI02 (KL1408)^Channel 7^Input" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbLicht3.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI02 (KL1408)^Channel 6^Input" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbRolloGruppe.IbInTasterAb" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI02 (KL1408)^Channel 5^Input" Size="1"/>
+						<Link VarA="P_KochenEssenSpeiss.fbRolloGruppe.IbInTasterAuf" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI02 (KL1408)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_Sauna.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_Sauna.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 3^Input" Size="1"/>
+						<Link VarA="P_Schlafen.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI06 (KL1104)^Channel 3^Input" Size="1"/>
+						<Link VarA="P_Schlafen.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI07 (KL1104)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_Schlafen.fbRolloGruppe.IbInTasterAb" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI07 (KL1104)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_Schlafen.fbRolloGruppe.IbInTasterAuf" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI06 (KL1104)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_Schwimmbad.IbGegenstromDrucktaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_Schwimmbad.IbRaumHygrometerkontakt" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 7^Input" Size="1"/>
+						<Link VarA="P_Schwimmbad.IbRaumTemperaturkontakt" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 8^Input" Size="1"/>
+						<Link VarA="P_Schwimmbad.IbStroemungswaechter" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 6^Input" Size="1"/>
+						<Link VarA="P_Schwimmbad.IbTasterFilterpumpe" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="02-DI11 (KL1408)^Channel 5^Input" Size="1"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturFBHeizRL.IiDataIn" TypeA="INT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 3^Data In"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturFBHeizRL.IusiState" TypeA="USINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 3^State"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturHeizVorlauf.IiDataIn" TypeA="INT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 2^Data In"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturHeizVorlauf.IusiState" TypeA="USINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 2^State"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturRaum.IiDataIn" TypeA="INT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 1^Data In"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturRaum.IusiState" TypeA="USINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 1^State"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturSchwimmwasser.IiDataIn" TypeA="INT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="02-AI01 PT1000 (KL3204)^Channel 4^Data In"/>
+						<Link VarA="P_Schwimmbad.fbTemperaturSchwimmwasser.IusiState" TypeA="USINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000002}" VarB="02-AI01 PT1000 (KL3204)^Channel 4^State"/>
+						<Link VarA="P_WC_DG.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 5^Input" Size="1"/>
+						<Link VarA="P_WC_EG.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI02 (KL1408)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht1.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 6^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht2.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 7^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht3.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 8^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbLicht4.IbInTaster" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI03 (KL1408)^Channel 7^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe1.IbInTasterAb" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 2^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe1.IbInTasterAuf" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 1^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe2.IbInTasterAb" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 4^Input" Size="1"/>
+						<Link VarA="P_Wohnen.fbRolloGruppe2.IbInTasterAuf" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="01-DI04 (KL1408)^Channel 3^Input" Size="1"/>
+					</OwnerB>
+				</OwnerA>
+			</UnrestoredVarLinks>
+			<TaskPouOids>
+				<TaskPouOid Prio="30" OTCID="#x01010012"/>
+				<TaskPouOid Prio="21" OTCID="#x01010011"/>
+			</TaskPouOids>
+		</Instance>
+	</Project>
+	<Mappings>
+		<OwnerA Name="Plc Instance">
+			<OwnerB Name="TIID^CX5120 (CX-BK)^CXBK (CX-BK)">
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp11_Puffer4000_Brauchw.IiDataIn" VarB="AI01 Temp (KL3204)^Channel 1^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp11_Puffer4000_Brauchw.IusiState" VarB="AI01 Temp (KL3204)^Channel 1^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp12_Puffer4000_oben.IiDataIn" VarB="AI01 Temp (KL3204)^Channel 2^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp12_Puffer4000_oben.IusiState" VarB="AI01 Temp (KL3204)^Channel 2^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp13_Puffer4000_mitte.IiDataIn" VarB="AI01 Temp (KL3204)^Channel 3^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp13_Puffer4000_mitte.IusiState" VarB="AI01 Temp (KL3204)^Channel 3^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp14_Puffer4000_unten.IiDataIn" VarB="AI01 Temp (KL3204)^Channel 4^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp14_Puffer4000_unten.IusiState" VarB="AI01 Temp (KL3204)^Channel 4^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp21_PufferWohnh_oben.IiDataIn" VarB="AI02 Temp (KL3204)^Channel 1^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp21_PufferWohnh_oben.IusiState" VarB="AI02 Temp (KL3204)^Channel 1^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp22_PufferWohnh_unten.IiDataIn" VarB="AI02 Temp (KL3204)^Channel 2^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp22_PufferWohnh_unten.IusiState" VarB="AI02 Temp (KL3204)^Channel 2^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp23_PufferWerkst_oben.IiDataIn" VarB="AI02 Temp (KL3204)^Channel 3^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp23_PufferWerkst_oben.IusiState" VarB="AI02 Temp (KL3204)^Channel 3^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp24_PufferWerkst_unten.IiDataIn" VarB="AI02 Temp (KL3204)^Channel 4^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp24_PufferWerkst_unten.IusiState" VarB="AI02 Temp (KL3204)^Channel 4^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp31_KomprWRG_Ruecklauf.IiDataIn" VarB="AI03 Temp (KL3204)^Channel 1^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp31_KomprWRG_Ruecklauf.IusiState" VarB="AI03 Temp (KL3204)^Channel 1^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp32_KomprWRG_Vorlauf.IiDataIn" VarB="AI03 Temp (KL3204)^Channel 2^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp32_KomprWRG_Vorlauf.IusiState" VarB="AI03 Temp (KL3204)^Channel 2^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp33_WCDamen_Raum.IiDataIn" VarB="AI03 Temp (KL3204)^Channel 3^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp33_WCDamen_Raum.IusiState" VarB="AI03 Temp (KL3204)^Channel 3^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp34_WCHerren_Raum.IiDataIn" VarB="AI03 Temp (KL3204)^Channel 4^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp34_WCHerren_Raum.IusiState" VarB="AI03 Temp (KL3204)^Channel 4^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp41_Schluckbrunnen.IiDataIn" VarB="AI04 Temp (KL3204)^Channel 1^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp41_Schluckbrunnen.IusiState" VarB="AI04 Temp (KL3204)^Channel 1^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp42_Res.IiDataIn" VarB="AI04 Temp (KL3204)^Channel 2^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp42_Res.IusiState" VarB="AI04 Temp (KL3204)^Channel 2^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp43_Res.IiDataIn" VarB="AI04 Temp (KL3204)^Channel 3^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp43_Res.IusiState" VarB="AI04 Temp (KL3204)^Channel 3^State"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp44_Res.IiDataIn" VarB="AI04 Temp (KL3204)^Channel 4^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^.gfbTemp44_Res.IusiState" VarB="AI04 Temp (KL3204)^Channel 4^State"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbAbluftsteuerung1.fbAblMasch01.IbMaschineEin" VarB="DI04 (KL1408)^Channel 1^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbAbluftsteuerung1.fbAblTaster1.IbStart" VarB="DI04 (KL1408)^Channel 3^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbAbluftsteuerung2.fbAblMasch01.IbMaschineEin" VarB="DI04 (KL1408)^Channel 2^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbAbluftsteuerung2.fbAblTaster1.IbStart" VarB="DI04 (KL1408)^Channel 4^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbEGBuero.fbLichtBueroAssist.IbInBewegunsm" VarB="DI02 (KL1408)^Channel 6^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbEGBuero.fbLichtBueroChef.IbInBewegunsm" VarB="DI02 (KL1408)^Channel 5^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbEGBuero.fbLichtPausenraum.IbInBewegunsm" VarB="DI02 (KL1408)^Channel 4^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbEGHalle.IbRolloWindmesser" VarB="DI03 (KL1408)^Channel 5^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbEGHalle.fbLichtHalleAltbau.IbInBewegunsm" VarB="DI02 (KL1408)^Channel 2^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbEGHalle.fbLichtHalleAnbau.IbInBewegunsm" VarB="DI02 (KL1408)^Channel 3^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbEGHalle.fbLichtHalleNeubau.IbInBewegunsm" VarB="DI02 (KL1408)^Channel 1^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbKompressorSteuerung.IbStart" VarB="DI01 (KL1408)^Channel 5^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbKompressorSteuerung.IbStoerung" VarB="DI01 (KL1408)^Channel 7^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbKompressorSteuerung.IbStop" VarB="DI01 (KL1408)^Channel 6^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.IiDataIn" VarB="AO01 (KL4004)^Channel 1^Data In"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.IusiState" VarB="AO01 (KL4004)^Channel 1^State"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbWCDamen.IbLichtBewegungsmelder" VarB="DI03 (KL1408)^Channel 2^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbWCDamen.IbTasterHeizenStart" VarB="DI03 (KL1408)^Channel 1^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbWCHerren.IbLichtBewegungsmelder" VarB="DI03 (KL1408)^Channel 4^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbWCHerren.IbTasterHeizenStart" VarB="DI03 (KL1408)^Channel 3^Input"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp11_Puffer4000_Brauchw.QiDataOut" VarB="AI01 Temp (KL3204)^Channel 1^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp11_Puffer4000_Brauchw.QusiCtrl" VarB="AI01 Temp (KL3204)^Channel 1^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp12_Puffer4000_oben.QiDataOut" VarB="AI01 Temp (KL3204)^Channel 2^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp12_Puffer4000_oben.QusiCtrl" VarB="AI01 Temp (KL3204)^Channel 2^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp13_Puffer4000_mitte.QiDataOut" VarB="AI01 Temp (KL3204)^Channel 3^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp13_Puffer4000_mitte.QusiCtrl" VarB="AI01 Temp (KL3204)^Channel 3^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp14_Puffer4000_unten.QiDataOut" VarB="AI01 Temp (KL3204)^Channel 4^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp14_Puffer4000_unten.QusiCtrl" VarB="AI01 Temp (KL3204)^Channel 4^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp21_PufferWohnh_oben.QiDataOut" VarB="AI02 Temp (KL3204)^Channel 1^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp21_PufferWohnh_oben.QusiCtrl" VarB="AI02 Temp (KL3204)^Channel 1^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp22_PufferWohnh_unten.QiDataOut" VarB="AI02 Temp (KL3204)^Channel 2^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp22_PufferWohnh_unten.QusiCtrl" VarB="AI02 Temp (KL3204)^Channel 2^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp23_PufferWerkst_oben.QiDataOut" VarB="AI02 Temp (KL3204)^Channel 3^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp23_PufferWerkst_oben.QusiCtrl" VarB="AI02 Temp (KL3204)^Channel 3^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp24_PufferWerkst_unten.QiDataOut" VarB="AI02 Temp (KL3204)^Channel 4^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp24_PufferWerkst_unten.QusiCtrl" VarB="AI02 Temp (KL3204)^Channel 4^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp31_KomprWRG_Ruecklauf.QiDataOut" VarB="AI03 Temp (KL3204)^Channel 1^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp31_KomprWRG_Ruecklauf.QusiCtrl" VarB="AI03 Temp (KL3204)^Channel 1^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp32_KomprWRG_Vorlauf.QiDataOut" VarB="AI03 Temp (KL3204)^Channel 2^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp32_KomprWRG_Vorlauf.QusiCtrl" VarB="AI03 Temp (KL3204)^Channel 2^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp33_WCDamen_Raum.QiDataOut" VarB="AI03 Temp (KL3204)^Channel 3^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp33_WCDamen_Raum.QusiCtrl" VarB="AI03 Temp (KL3204)^Channel 3^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp34_WCHerren_Raum.QiDataOut" VarB="AI03 Temp (KL3204)^Channel 4^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp34_WCHerren_Raum.QusiCtrl" VarB="AI03 Temp (KL3204)^Channel 4^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp41_Schluckbrunnen.QiDataOut" VarB="AI04 Temp (KL3204)^Channel 1^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp41_Schluckbrunnen.QusiCtrl" VarB="AI04 Temp (KL3204)^Channel 1^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp42_Res.QiDataOut" VarB="AI04 Temp (KL3204)^Channel 2^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp42_Res.QusiCtrl" VarB="AI04 Temp (KL3204)^Channel 2^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp43_Res.QiDataOut" VarB="AI04 Temp (KL3204)^Channel 3^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp43_Res.QusiCtrl" VarB="AI04 Temp (KL3204)^Channel 3^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp44_Res.QiDataOut" VarB="AI04 Temp (KL3204)^Channel 4^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^.gfbTemp44_Res.QusiCtrl" VarB="AI04 Temp (KL3204)^Channel 4^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbAbluftsteuerung1.QbAbluftVentilator" VarB="DO02 (KL2408)^Channel 5^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbAbluftsteuerung2.QbAbluftVentilator" VarB="DO02 (KL2408)^Channel 6^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbEGBuero.fbLichtBueroAssist.QbOutLicht" VarB="DO04 (KL2408)^Channel 7^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbEGBuero.fbLichtBueroChef.QbOutLicht" VarB="DO04 (KL2408)^Channel 6^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbEGHalle.QbRolloZentralAb" VarB="DO04 (KL2408)^Channel 2^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbEGHalle.QbRolloZentralAuf" VarB="DO04 (KL2408)^Channel 1^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbEGHalle.fbLichtHalleAltbau.QbOutLicht" VarB="DO04 (KL2408)^Channel 4^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbEGHalle.fbLichtHalleAnbau.QbOutLicht" VarB="DO04 (KL2408)^Channel 5^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbEGHalle.fbLichtHalleNeubau.QbOutLicht" VarB="DO04 (KL2408)^Channel 3^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbKompressor" VarB="DO01 (KL2408)^Channel 6^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbLMStatus" VarB="DO01 (KL2408)^Channel 5^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbLufttrockner" VarB="DO01 (KL2408)^Channel 8^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbNotKompressor" VarB="DO01 (KL2408)^Channel 7^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbUmwaelzpumpeWRG" VarB="DO02 (KL2408)^Channel 1^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbUmwaelzpumpeWohnhaus" VarB="DO02 (KL2408)^Channel 3^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbVentilSchnellauflWRG" VarB="DO02 (KL2408)^Channel 2^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.QbVentilUmschWerkstatt" VarB="DO02 (KL2408)^Channel 4^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.QiDataOut" VarB="AO01 (KL4004)^Channel 1^Data Out"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbKompressorSteuerung.fbAnalogOutUmwaelzpumpeWRG.QusiCtrl" VarB="AO01 (KL4004)^Channel 1^Ctrl"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCDamen.QbAbluftventilator" VarB="DO03 (KL2408)^Channel 3^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCDamen.QbLMHeizungAktiv" VarB="DO03 (KL2408)^Channel 1^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCDamen.QbStellventilHeizkoerper" VarB="DO03 (KL2408)^Channel 2^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCHerren.QbAbluftventilator" VarB="DO03 (KL2408)^Channel 6^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCHerren.QbLMHeizungAktiv" VarB="DO03 (KL2408)^Channel 4^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCHerren.QbStellventilHeizkoerper" VarB="DO03 (KL2408)^Channel 5^Output"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmItem>

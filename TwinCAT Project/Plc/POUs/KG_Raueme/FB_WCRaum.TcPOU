@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <POU Name="FB_WCRaum" Id="{1a1fc185-a6be-41ed-b88c-b33e78ca48a2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_WCRaum
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	(* Analgoe Eingaenge ***************************)
+	IOfbTemperaturRaum					: FB_TemperatureInput; (* Raumtermperatur *)
+	
+END_VAR
+VAR
+	bInit					: BOOL := TRUE;
+
+	IbLichtBewegungsmelder		AT %I*	: BOOL;
+	IbTasterHeizenStart				AT %I*	: BOOL;
+
+	QbLMHeizungAktiv					AT %Q*	: BOOL;
+	QbStellventilHeizkoerper	AT %Q*	: BOOL;
+	QbAbluftventilator				AT %Q*	: BOOL;
+
+	tofAbluftVentilator				: TOF := (PT:= T#60S);
+END_VAR
+
+VAR PERSISTENT
+	VdiAbluftNachlaufzeit							: DINT := 60; (* Sekunden *)
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[;
+
+(* Abluftventilator-Steuerung ***************************************)
+tofAbluftVentilator(
+	IN:= IbLichtBewegungsmelder,
+	PT:= DINT_TO_TIME(VdiAbluftNachlaufzeit * 1000));
+QbAbluftVentilator := tofAbluftVentilator.Q;
+
+
+(* FB END*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

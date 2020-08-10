@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_KompressorSteuerung" Id="{cf4cb4e1-0bd0-4cb2-9cf2-fe1b4b72f8a0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_KompressorSteuerung
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	
+END_VAR
+VAR
+	bInit															: BOOL := TRUE;
+	bblink														: BOOL;
+
+	eState														: E_StateKompressor;
+	
+	IbStart										AT %I*	: BOOL;
+	IbStop										AT %I*	: BOOL;
+	IbStoerung								AT %I*	: BOOL;
+
+	QbLMStatus								AT %Q*	: BOOL; (* Leuchtmelder Kompressorstatus *)
+	QbKompressor							AT %Q*	: BOOL; (* Hauptkompressor *)
+	QbNotKompressor						AT %Q*	: BOOL; (* Notkompressor *)
+	QbLufttrockner						AT %Q*	: BOOL; (* Lufttrockner *)
+	QbUmwaelzpumpeWRG					AT %Q*	: BOOL; (* Kompressor-Waermerueckgew. Umwaelzpumpe *)
+	QbVentilSchnellauflWRG		AT %Q*	: BOOL; (* Umschaltventil zur Schnellaufladung des Puffers durch WRG *)
+	QbUmwaelzpumpeWohnhaus		AT %Q*	: BOOL; (* Umwaelzpumpe vom Puffer zum Wohnhaus und Werkstatt *)
+	QbVentilUmschWerkstatt		AT %Q*	: BOOL; (* Umschaltventil von Wohnhaus zur Werkstatt *)
+
+	fbAnalogOutUmwaelzpumpeWRG				: FB_AnalogOutput;
+	fbKuehlregler_Kompr								: FB_Kuehlregler_Kompr;
+	
+	tonBlinkTakt											: TON := (PT:= T#350MS);
+	tonKompressorStart								: TON := (PT:= T#300S); (* Kompressor-Startverzoegerung nach Lufttrockner *)
+	tonLufttrocknerStop								: TON := (PT:= T#240S); (* Lufttrocker Nachlaufzeit nach Kompressorabschaltung *)
+	tofUmwaelzpumpe										: TOF := (PT:= T#15M); (* Umwaelzpumpem Nachlaufzeit *)
+
+	VbStart														: BOOL; (* Visu: Start *)
+	VbStop														: BOOL; (* Visu: Stop *)
+	bStop															: BOOL;
+	rtrigStart												: R_TRIG;
+	tonVisuReset											: TON := (PT:= T#2S);
+	tonStartLang											: TON := (PT:= T#2S);
+	bTempAnfordWohnhaus								: BOOL;
+	bTempAnfordWerkstatt							: BOOL;
+	
+	bWRGPufferTemperatur_ValueOk			: BOOL;
+	rWRGPufferTemperatur_Value				: REAL;
+	
+END_VAR
+VAR PERSISTENT
+	VrUmwaelzpumpeWRGSollwert					: REAL := 30; (* Sollwert in % *)
+	VrKomprWRG_TempVorlaufSollwert		: REAL := 70; (* Kompressor-WRG Vorlauf Sollwert in °C *)
+	VrKomprWRG_TempSchnellaufl				: REAL := 55; (* Kompressor-WRG Schnellaufladung bis Temparutur im Puffer oben in °C *)
+	VrKomprWRG_TempUmschaltZurWohnh		: REAL := 55; (* Kompressor-WRG 4000l-Puffertemperatur, bei der auf Wohnaus umgeschaltet werden soll in °C *)
+	VrKomprWRG_TempUmschaltZurWerkst	: REAL := 55; (* Kompressor-WRG Wohnh.-Puffertemperatur, bei der auf Werkstatt umgeschaltet werden soll  in °C *)
+	VrKomprWRG_TempUmschaltHyst				: REAL := 3.0; (* Kompressor-WRG Temperartur-Umschalthysterese in °C *)
+	VrKomprWRG_TempMinDifferenz				: REAL := 3.0; (* Kompressor-WRG Mindest-Temperaturdifferenz zwischen den Puffern in °C *)
+	
+	ViWRGTempSensorSelect							: INT := 3; (* Auswahl des Temperatursensors zur Steuerung der Pufferumwaelzpumpen zum Wohnhaus/Werkstatt 
+			1: Puffer4000_unten
+			2: Puffer4000_mitte
+			3: Puffer4000_oben
+			4: Puffer4000_Brauchw *)
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+bStop := IbStop OR VbStop;
+rtrigStart(CLK := IbStart OR VbStart);
+IF NOT IbStart
+	AND NOT VbStart
+OR bStop 
+THEN
+	tonStartLang(IN:= FALSE);
+ELSE
+	IF rtrigStart.Q THEN
+		tonStartLang.IN := TRUE;
+	END_IF	
+	tonStartLang();
+END_IF
+
+tonVisuReset(IN:= VbStart OR VbStop);
+IF tonVisuReset.Q THEN
+	VbStart := FALSE;
+	VbStop := FALSE;
+END_IF
+
+CASE eState OF
+
+	eStateKompr_AUS:
+		QbLMStatus := FALSE;
+		QbKompressor := FALSE;
+		QbNotKompressor := FALSE;
+		QbLufttrockner := FALSE;
+		tonKompressorStart(IN:= FALSE);
+		tonLufttrocknerStop(IN:= FALSE);
+		
+		IF NOT bStop
+		AND rtrigStart.Q
+		THEN
+			eState := eStateKompr_START;
+		END_IF
+	
+	eStateKompr_START:
+		QbLufttrockner := TRUE;
+		QbLMStatus := bblink;
+		tonKompressorStart(IN:= TRUE);
+	
+		IF bStop THEN
+			eState := eStateKompr_AUS;
+		ELSIF tonKompressorStart.Q THEN
+			(* Kompressor-Startverzoegerung nach Lufttrockner *)
+			eState := eStateKompr_AKTIV;
+		ELSIF tonStartLang.Q THEN
+			(* Kompressor direkt starten, wenn Start-Taster dauerhaft betätigt wird *)
+			eState := eStateKompr_AKTIV;
+		END_IF
+	
+	eStateKompr_AKTIV:
+		QbKompressor := TRUE;
+		QbNotKompressor := TRUE;
+		QbLMStatus := TRUE;
+	
+		IF bStop THEN
+			eState := eStateKompr_STOP;
+		END_IF
+	
+	eStateKompr_STOP:
+		QbKompressor := FALSE;
+		QbNotKompressor := FALSE;
+		QbLMStatus := FALSE;
+		tonLufttrocknerStop(IN:= TRUE);
+	
+		IF NOT bStop
+		AND rtrigStart.Q
+		THEN
+			eState := eStateKompr_AKTIV;
+		ELSIF tonLufttrocknerStop.Q THEN
+			eState := eStateKompr_AUS;
+		END_IF
+	
+	eStateKompr_STOERUNG: 
+		IF bStop THEN
+			eState := eStateKompr_AUS;
+		END_IF
+
+END_CASE
+
+
+(* Kompressor-Kuehlung (Waermerueckgewinnung WRG) *)
+A_Kuehlung();
+
+
+IF NOT tonBlinkTakt.Q THEN
+	tonBlinkTakt(IN:= TRUE);
+ELSE
+	tonBlinkTakt(IN:= FALSE);
+	bblink := NOT bblink;
+END_IF
+
+(* FB END*)]]></ST>
+    </Implementation>
+    <Action Name="A_Kuehlung" Id="{2b280832-c603-4af5-aa4b-c71fe78858ce}">
+      <Implementation>
+        <ST><![CDATA[tofUmwaelzpumpe(IN := QbKompressor);
+
+IF gfbTemp32_KomprWRG_Vorlauf.OUTbValueOk THEN
+	(* Regler fuer Kuehlung aktivieren *)
+	fbKuehlregler_Kompr.INbEnable := tofUmwaelzpumpe.Q;
+ELSE
+	(* Isttemperatur ungueltig => Regelung nicht moeglich *)
+	fbKuehlregler_Kompr.INbEnable := FALSE;
+END_IF
+fbKuehlregler_Kompr(
+	INrTempSoll := VrKomprWRG_TempVorlaufSollwert,
+	INrTempIst := gfbTemp32_KomprWRG_Vorlauf.OUTrValue);
+
+IF tofUmwaelzpumpe.Q THEN
+	(* Umwaelzpumpe WRG vom Kompressor *)
+	QbUmwaelzpumpeWRG := TRUE;
+	fbAnalogOutUmwaelzpumpeWRG.INbEnable := TRUE;
+	IF fbKuehlregler_Kompr.INbEnable THEN
+		fbAnalogOutUmwaelzpumpeWRG.INrValue :=
+				fbKuehlregler_Kompr.OUTrResult / 100; 
+	ELSE
+		(* wenn Kuehlregeler inaktiv, dann die Umwaelzpumpe mit Festsollwert betreiben *)
+		fbAnalogOutUmwaelzpumpeWRG.INrValue := 
+				VrUmwaelzpumpeWRGSollwert / 100;
+	END_IF
+	
+	(* Umschalt-Ventil fuer Schnellaufladung des 4000l-Puffers *)
+	IF gfbTemp12_Puffer4000_oben.OUTbValueOk THEN
+		IF (gfbTemp12_Puffer4000_oben.OUTrValue
+				< (VrKomprWRG_TempSchnellaufl
+					- VrKomprWRG_TempUmschaltHyst))
+		THEN
+			QbVentilSchnellauflWRG := TRUE;
+		ELSIF (gfbTemp12_Puffer4000_oben.OUTrValue
+				> VrKomprWRG_TempSchnellaufl)
+		THEN
+			QbVentilSchnellauflWRG := FALSE;
+		END_IF
+	ELSE (* Stoerung Temperatursensor *)
+		QbVentilSchnellauflWRG := FALSE;
+	END_IF
+
+	(* Umwaelzpumpe zum Wohnhaus bzw. Werkstatt ***************************************************)
+	(* Auswahl des Temperatursensors*)
+	CASE ViWRGTempSensorSelect OF
+	1: (* Puffer4000_unten *)
+		bWRGPufferTemperatur_ValueOk := gfbTemp14_Puffer4000_unten.OUTbValueOk;
+		rWRGPufferTemperatur_Value := gfbTemp14_Puffer4000_unten.OUTrValue;
+
+	2: (* Puffer4000_mitte *)
+		bWRGPufferTemperatur_ValueOk := gfbTemp13_Puffer4000_mitte.OUTbValueOk;
+		rWRGPufferTemperatur_Value := gfbTemp13_Puffer4000_mitte.OUTrValue;
+
+	3: (* Puffer4000_oben *)
+		bWRGPufferTemperatur_ValueOk := gfbTemp12_Puffer4000_oben.OUTbValueOk;
+		rWRGPufferTemperatur_Value := gfbTemp12_Puffer4000_oben.OUTrValue;
+
+	4: (* Puffer4000_Brauchw *)
+		bWRGPufferTemperatur_ValueOk := gfbTemp11_Puffer4000_Brauchw.OUTbValueOk;
+		rWRGPufferTemperatur_Value := gfbTemp11_Puffer4000_Brauchw.OUTrValue;
+
+	END_CASE
+
+	IF bWRGPufferTemperatur_ValueOk THEN
+		(* pruefen, ob die Temperaturdifferenz zw. Puffer und Wohnhaus ausreichend ist
+			und damit das Laden des Wohnhauspuffers sinnvoll ist *)
+		IF NOT gfbTemp22_PufferWohnh_unten.OUTbValueOk THEN
+			bTempAnfordWohnhaus := FALSE;
+		ELSIF bTempAnfordWohnhaus THEN
+			IF (rWRGPufferTemperatur_Value
+					< (gfbTemp22_PufferWohnh_unten.OUTrValue
+						+ VrKomprWRG_TempMinDifferenz))
+			THEN
+				bTempAnfordWohnhaus := FALSE;
+
+			ELSIF (rWRGPufferTemperatur_Value
+					< (VrKomprWRG_TempUmschaltZurWohnh
+							- VrKomprWRG_TempUmschaltHyst))
+			THEN
+				bTempAnfordWohnhaus := FALSE;
+			END_IF			
+
+		ELSIF (rWRGPufferTemperatur_Value
+					> (gfbTemp22_PufferWohnh_unten.OUTrValue
+						+ VrKomprWRG_TempMinDifferenz
+						+ VrKomprWRG_TempUmschaltHyst))
+		AND (rWRGPufferTemperatur_Value
+					> VrKomprWRG_TempUmschaltZurWohnh)
+		THEN
+			bTempAnfordWohnhaus := TRUE;
+
+		ELSE
+			bTempAnfordWohnhaus := FALSE;
+		END_IF
+
+		(* pruefen, ob die Temperaturdifferenz zw. Puffer rund Werkstatt ausreichend ist
+			und damit das Laden des Werkstattpuffers sinnvoll ist *)
+		IF NOT gfbTemp24_PufferWerkst_unten.OUTbValueOk THEN
+			bTempAnfordWerkstatt := FALSE;
+		ELSIF bTempAnfordWerkstatt THEN
+			IF (rWRGPufferTemperatur_Value
+					< (gfbTemp24_PufferWerkst_unten.OUTrValue
+						+ VrKomprWRG_TempMinDifferenz))
+			THEN
+				bTempAnfordWerkstatt := FALSE;
+
+			ELSIF (rWRGPufferTemperatur_Value
+					< (VrKomprWRG_TempUmschaltZurWerkst
+							- VrKomprWRG_TempUmschaltHyst))
+			THEN
+				bTempAnfordWerkstatt := FALSE;
+			END_IF
+
+		ELSIF (rWRGPufferTemperatur_Value
+					> (gfbTemp24_PufferWerkst_unten.OUTrValue
+						+ VrKomprWRG_TempMinDifferenz
+						+ VrKomprWRG_TempUmschaltHyst))
+		AND (rWRGPufferTemperatur_Value
+					> VrKomprWRG_TempUmschaltZurWerkst)
+		THEN
+			bTempAnfordWerkstatt := TRUE;
+
+		ELSE
+			bTempAnfordWerkstatt := FALSE;
+		END_IF
+						
+		IF bTempAnfordWohnhaus THEN
+			QbUmwaelzpumpeWohnhaus := TRUE;
+			QbVentilUmschWerkstatt := TRUE;
+
+		ELSIF bTempAnfordWerkstatt THEN
+			QbUmwaelzpumpeWohnhaus := TRUE;
+			QbVentilUmschWerkstatt := FALSE;
+		
+		ELSE
+			QbUmwaelzpumpeWohnhaus := FALSE;
+			QbVentilUmschWerkstatt := FALSE;
+		END_IF
+	
+	ELSE (* Stoerung Temperatursensor *)
+		QbUmwaelzpumpeWohnhaus := FALSE;
+		QbVentilUmschWerkstatt := FALSE;
+		bTempAnfordWohnhaus :=  FALSE;
+		bTempAnfordWerkstatt := FALSE;
+	END_IF
+	
+ELSE
+	fbAnalogOutUmwaelzpumpeWRG.INbEnable := FALSE;
+	QbUmwaelzpumpeWRG := FALSE;
+	QbVentilSchnellauflWRG := FALSE;
+	QbUmwaelzpumpeWohnhaus := FALSE;
+	QbVentilUmschWerkstatt := FALSE;
+END_IF
+fbAnalogOutUmwaelzpumpeWRG();
+
+
+(* END of Action *)]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

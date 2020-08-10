@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.27" ClassName="CDevEthernetProtocolBkDef" SubType="138">
+	<Device Id="8" Disabled="true" DevType="138" AmsPort="28680" AmsNetId="0.0.0.0.9.1" RemoteName="Device 8 (RT-Ethernet Protocol)">
+		<Name>__FILENAME__</Name>
+		<AddressInfo>
+			<Pnp>
+				<DeviceDesc>Local Area Connection (TwinCAT-Intel PCI Ethernet A</DeviceDesc>
+				<DeviceName/>
+				<DeviceData>000000000000</DeviceData>
+			</Pnp>
+		</AddressInfo>
+		<Image Id="8" AddrType="2" ImageType="3">
+			<Name>Image</Name>
+		</Image>
+		<Ethernet DeviceDesc="Local Area Connection (TwinCAT-Intel PCI Ethernet A" VirtualDeviceName="true"/>
+	</Device>
+</TcSmItem>

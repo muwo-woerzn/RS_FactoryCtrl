@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{54fd8fbe-9f63-4d13-a32d-547b3daeaedc}</ProjectGuid>
+    <Name>Plc</Name>
+    <Application>{38c53c7d-24be-4472-870b-205f4feaa9dc}</Application>
+    <TypeSystem>{ff869ea5-b637-430a-a987-8f8ac216272b}</TypeSystem>
+    <Implicit_Task_Info>{19064f7f-039f-4833-bb19-dc788ff4cad2}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{0bacf665-3ffe-4b19-8288-291fe15e4c29}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{7d5cdd6f-72c4-4755-8b1c-a2ed684148ca}</Implicit_Jitter_Distribution>
+    <FileVersion>1.0.0.0</FileVersion>
+    <LibraryReferences>{61c7917c-b20b-4d3c-b5f9-c35d69718d51}</LibraryReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Data types" />
+    <Folder Include="Global Variables" />
+    <Folder Include="POUs" />
+    <Folder Include="POUs\Abluftsteuerung\SubSysteme" />
+    <Folder Include="POUs\KG_Raueme" />
+    <Folder Include="POUs\Abluftsteuerung" />
+    <Folder Include="POUs\Kompressor" />
+    <Folder Include="POUs\EG" />
+    <Folder Include="POUs\Temperaturen" />
+    <Folder Include="POUs\_Grundfunktionen" />
+    <Folder Include="POUs\_Grundfunktionen\System" />
+    <Folder Include="Visualizations" />
+    <Folder Include="Visualizations\Module" />
+    <Folder Include="Visualizations\Frames" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data types\E_ModeRGB.TcDUT">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Data types\E_StateKompressor.TcDUT">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Data types\E_RolloMode.TcDUT" />
+    <Compile Include="Data types\E_StateAnalog.TcDUT" />
+    <Compile Include="Data types\E_WeekDay.TcDUT" />
+    <Compile Include="Data types\ST_AnalogScaling.TcDUT" />
+    <Compile Include="Data types\ST_DMXRGBWCtrl.TcDUT">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Data types\ST_TimeSwitchTimes.TcDUT">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Global Variables\Globale_Variablen.TcGVL" />
+    <Compile Include="GlobalImagePool.TcGIPO" />
+    <Compile Include="GlobalTextList.TcGTLO">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="PlcTaskMain.TcTTO" />
+    <Compile Include="POUs\Abluftsteuerung\FB_Abluftsteuerung.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\Abluftsteuerung\SubSysteme\FB_SubAbluftMaschine.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\Abluftsteuerung\SubSysteme\FB_SubAbluftTaster.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\EG\FB_EGHalle.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\EG\FB_EGBuero.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\KG_Raueme\FB_WCRaum.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\Kompressor\FB_KompressorSteuerung.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\PLC_PRG.TcPOU" />
+    <Compile Include="POUs\Temperaturen\PRG_Temperaturen.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\FB_Heizregler.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\FB_Heizregler_FBHR.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\FB_Kuehlregler_Kompr.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\FB_Licht.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\FB_LichtBewegungsmelder.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\FB_Rollo.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\FB_RolloGruppe.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\FB_Taster.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\FB_TasterProg.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\FB_TemperatureInput.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\FB_AnalogOutput.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\FB_TimeSwitch.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\F_diColorOfTemperature.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\_Grundfunktionen\F_RolDownTime.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\F_Scaling.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\F_SunRise.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\System\FB_SystemCX.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualization Manager.TcVMO" />
+    <Compile Include="Visualizations\Frames\V_Dialog_Mob.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Frames\V_Main_Mob.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Frames\V_Main_PC.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_NumInputReal.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_RadioButton.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_WCRaum.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_WeekDay.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\VisuStart.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_Heizung.TcVIS" />
+    <Compile Include="Visualizations\Module\V_Licht.TcVIS" />
+    <Compile Include="Visualizations\Module\V_Rol.TcVIS" />
+    <Compile Include="Visualizations\Module\V_RolGrp.TcVIS" />
+    <Compile Include="Visualizations\V_KomprWRG.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\V_Einstellungen.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="VISU_TASK.TcTTO">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="System_VisuElem3DPath">
+      <DefaultResolution>VisuElem3DPath, 3.5.6.0 (System)</DefaultResolution>
+      <Namespace>VisuElem3DPath</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemMeter">
+      <DefaultResolution>VisuElemMeter, 3.5.6.0 (System)</DefaultResolution>
+      <Namespace>VisuElemMeter</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElems">
+      <DefaultResolution>VisuElems, 3.5.6.10 (System)</DefaultResolution>
+      <Namespace>VisuElems</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemsDateTime">
+      <DefaultResolution>VisuElemsDateTime, 3.5.6.0 (System)</DefaultResolution>
+      <Namespace>VisuElemsDateTime</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemsSpecialControls">
+      <DefaultResolution>VisuElemsSpecialControls, 3.5.6.0 (System)</DefaultResolution>
+      <Namespace>VisuElemsSpecialControls</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemsWinControls">
+      <DefaultResolution>VisuElemsWinControls, 3.5.6.0 (System)</DefaultResolution>
+      <Namespace>VisuElemsWinControls</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuElemTextEditor">
+      <DefaultResolution>VisuElemTextEditor, 3.5.6.0 (System)</DefaultResolution>
+      <Namespace>VisuElemTextEditor</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="system_visuinputs">
+      <DefaultResolution>visuinputs, 3.5.6.0 (system)</DefaultResolution>
+      <Namespace>visuinputs</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="System_VisuNativeControl">
+      <DefaultResolution>VisuNativeControl, 3.5.6.0 (System)</DefaultResolution>
+      <Namespace>VisuNativeControl</Namespace>
+      <SystemLibrary>True</SystemLibrary>
+      <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_DMX">
+      <DefaultResolution>Tc2_DMX, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_DMX</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_SUPS">
+      <DefaultResolution>Tc2_SUPS, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_SUPS</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_SystemCX">
+      <DefaultResolution>Tc2_SystemCX, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_SystemCX</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Interfaces">
+      <DefaultResolution>Tc3_Interfaces, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Interfaces</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Module">
+      <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="VisuDialogs">
+      <DefaultResolution>VisuDialogs, * (System)</DefaultResolution>
+      <Namespace>VisuDialogs</Namespace>
+      <PublishSymbolsInContainer>True</PublishSymbolsInContainer>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Plc.tmc">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="Tc2_Utilities,3.3.11.0,Beckhoff Automation GmbH">
+      <Namespace>Tc2_Utilities</Namespace>
+    </LibraryReference>
+  </ItemGroup>
+  <ProjectExtensions>
+    <PlcProjectOptions>
+      <XmlArchive>
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
+      <v n="Name">"&lt;ProjectRoot&gt;"</v>
+      <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+        <v>{FE9F63D4-9E34-43ce-9322-D46747A00F33}</v>
+        <o>
+          <v n="Name">"{FE9F63D4-9E34-43ce-9322-D46747A00F33}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{8F99A816-E488-41E4-9FA3-846536012284}</v>
+        <o>
+          <v n="Name">"{8F99A816-E488-41E4-9FA3-846536012284}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
+        <o>
+          <v n="Name">"{29BD8D0C-3586-4548-BB48-497B9A01693F}"</v>
+          <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+            <v>Rules</v>
+            <o>
+              <v n="Name">"Rules"</v>
+              <d n="SubKeys" t="Hashtable" />
+              <d n="Values" t="Hashtable" />
+            </o>
+          </d>
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
+        <o>
+          <v n="Name">"{40450F57-0AA3-4216-96F3-5444ECB29763}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="String">
+            <v>ActiveVisuProfile</v>
+            <v>IR0whWr8bwf8BwAA6S073gAAAACmAgAA3S1CUAAAAAABAAAAAAAAAAEaUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwACTHsAZgA5ADUAYgBiADQAMgA2AC0ANQA1ADIANAAtADQAYgA0ADUALQA5ADQAMAAwAC0AZgBiADAAZgAyAGUANwA3AGUANQAxAGIAfQADCE4AYQBtAGUABCxUAHcAaQBuAEMAQQBUACAAMwAuADEAIABCAHUAaQBsAGQAIAA0ADAAMQA4AAUWUAByAG8AZgBpAGwAZQBEAGEAdABhAAZMewAxADYAZQA1ADUAYgA2ADAALQA3ADAANAAzAC0ANABhADYAMwAtAGIANgA1AGIALQA2ADEANAA3ADEAMwA4ADcAOABkADQAMgB9AAcSTABpAGIAcgBhAHIAaQBlAHMACEx7ADMAYgBmAGQANQA0ADUAOQAtAGIAMAA3AGYALQA0AGQANgBlAC0AYQBlADEAYQAtAGEAOAAzADMANQA2AGEANQA1ADEANAAyAH0ACUx7ADkAYwA5ADUAOAA5ADYAOAAtADIAYwA4ADUALQA0ADEAYgBiAC0AOAA4ADcAMQAtADgAOQA1AGYAZgAxAGYAZQBkAGUAMQBhAH0ACg5WAGUAcgBzAGkAbwBuAAsGaQBuAHQADApVAHMAYQBnAGUADQpUAGkAdABsAGUADhxWAGkAcwB1AEUAbABlAG0AMwBEAFAAYQB0AGgADw5DAG8AbQBwAGEAbgB5ABAMUwB5AHMAdABlAG0AERpWAGkAcwB1AEUAbABlAG0ATQBlAHQAZQByABISVgBpAHMAdQBFAGwAZQBtAHMAEyJWAGkAcwB1AEUAbABlAG0AcwBEAGEAdABlAFQAaQBtAGUAFDBWAGkAcwB1AEUAbABlAG0AcwBTAHAAZQBjAGkAYQBsAEMAbwBuAHQAcgBvAGwAcwAVKFYAaQBzAHUARQBsAGUAbQBzAFcAaQBuAEMAbwBuAHQAcgBvAGwAcwAWJFYAaQBzAHUARQBsAGUAbQBUAGUAeAB0AEUAZABpAHQAbwByABciVgBpAHMAdQBOAGEAdABpAHYAZQBDAG8AbgB0AHIAbwBsABgUdgBpAHMAdQBpAG4AcAB1AHQAcwAZDHMAeQBzAHQAZQBtABoYVgBpAHMAdQBFAGwAZQBtAEIAYQBzAGUAGyZEAGUAdgBQAGwAYQBjAGUAaABvAGwAZABlAHIAcwBVAHMAZQBkABwIYgBvAG8AbAAdIlAAbAB1AGcAaQBuAEMAbwBuAHMAdAByAGEAaQBuAHQAcwAeTHsANAAzAGQANQAyAGIAYwBlAC0AOQA0ADIAYwAtADQANABkADcALQA5AGUAOQA0AC0AMQBiAGYAZABmADMAMQAwAGUANgAzAGMAfQAfHEEAdABMAGUAYQBzAHQAVgBlAHIAcwBpAG8AbgAgFFAAbAB1AGcAaQBuAEcAdQBpAGQAIRZTAHkAcwB0AGUAbQAuAEcAdQBpAGQAIkhhAGYAYwBkADUANAA0ADYALQA0ADkAMQA0AC0ANABmAGUANwAtAGIAYgA3ADgALQA5AGIAZgBmAGUAYgA3ADAAZgBkADEANwAjFFUAcABkAGEAdABlAEkAbgBmAG8AJEx7AGIAMAAzADMANgA2AGEAOAAtAGIANQBjADAALQA0AGIAOQBhAC0AYQAwADAAZQAtAGUAYgA4ADYAMAAxADEAMQAwADQAYwAzAH0AJQ5VAHAAZABhAHQAZQBzACZMewAxADgANgA4AGYAZgBjADkALQBlADQAZgBjAC0ANAA1ADMAMgAtAGEAYwAwADYALQAxAGUAMwA5AGIAYgA1ADUANwBiADYAOQB9ACdMewBhADUAYgBkADQAOABjADMALQAwAGQAMQA3AC0ANAAxAGIANQAtAGIAMQA2ADQALQA1AGYAYwA2AGEAZAAyAGIAOQA2AGIANwB9ACgWTwBiAGoAZQBjAHQAcwBUAHkAcABlAClUVQBwAGQAYQB0AGUATABhAG4AZwB1AGEAZwBlAE0AbwBkAGUAbABGAG8AcgBDAG8AbgB2AGUAcgB0AGkAYgBsAGUATABpAGIAcgBhAHIAaQBlAHMAKhBMAGkAYgBUAGkAdABsAGUAKxRMAGkAYgBDAG8AbQBwAGEAbgB5ACweVQBwAGQAYQB0AGUAUAByAG8AdgBpAGQAZQByAHMALThTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEgAYQBzAGgAdABhAGIAbABlAC4SdgBpAHMAdQBlAGwAZQBtAHMAL0g2AGMAYgAxAGMAZABlADEALQBkADUAZABjAC0ANABhADMAYgAtADkAMAA1ADQALQAyADEAZgBhADcANQA2AGEAMwBmAGEANAAwKEkAbgB0AGUAcgBmAGEAYwBlAFYAZQByAHMAaQBvAG4ASQBuAGYAbwAxTHsAYwA2ADEAMQBlADQAMAAwAC0ANwBmAGIAOQAtADQAYwAzADUALQBiADkAYQBjAC0ANABlADMAMQA0AGIANQA5ADkANgA0ADMAfQAyGE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuADMYTQBpAG4AbwByAFYAZQByAHMAaQBvAG4ANAxMAGUAZwBhAGMAeQA1MEwAYQBuAGcAdQBhAGcAZQBNAG8AZABlAGwAVgBlAHIAcwBpAG8AbgBJAG4AZgBvADYaQwBvAG0AcABhAHQAaQBiAGkAbABpAHQAeQDQAAIaA9ADAS0E0AUGGgbQBwgaAUUHCQrQAAkaBEUKCwQDAAAABQAAAAYAAAAAAAAA0AwLrQIAAADQDQEtDtAPAS0Q0AAJGgRFCgsEAwAAAAUAAAAGAAAAAAAAANAMC60CAAAA0A0BLRHQDwEtENAACRoERQoLBAMAAAAFAAAABgAAAAoAAADQDAutAQAAANANAS0S0A8BLRDQAAkaBEUKCwQDAAAABQAAAAYAAAAAAAAA0AwLrQIAAADQDQEtE9APAS0Q0AAJGgRFCgsEAwAAAAUAAAAGAAAAAAAAANAMC60CAAAA0A0BLRTQDwEtENAACRoERQoLBAMAAAAFAAAABgAAAAAAAADQDAutAgAAANANAS0V0A8BLRDQAAkaBEUKCwQDAAAABQAAAAYAAAAAAAAA0AwLrQIAAADQDQEtFtAPAS0Q0AAJGgRFCgsEAwAAAAUAAAAGAAAAAAAAANAMC60CAAAA0A0BLRfQDwEtENAACRoERQoLBAMAAAAFAAAABgAAAAAAAADQDAutAgAAANANAS0Y0A8BLRnQAAkaBEUKCwQDAAAABQAAAAYAAAAAAAAA0AwLrQQAAADQDQEtGtAPAS0Q0BscrQFFHR4B0AAeGgJFHwsEAwAAAAUAAAAGAAAAAAAAANAgIS0i0CMkGgJFJSYC0AAnGgVFCgsEAwAAAAMAAAAAAAAACgAAANAoC60AAAAA0AMBLSnQKgEtEtArAS0Q0AAnGgVFCgsEAwAAAAMAAAAAAAAACgAAANAoC60BAAAA0AMBLSnQKgEtEtArAS0QmiwtAUUAAQLQAAEtLtAAAS0Z0AAhLS/QMDEaA9AyC60BAAAA0DMLrRAAAADQNBytANA1MRoD0DILrQIAAADQMwutAgAAANA0HK0A0DYcrQA=</v>
+          </d>
+        </o>
+        <v>{A3BBA713-63D7-4de6-BEC2-E3BAAD8789F8}</v>
+        <o>
+          <v n="Name">"{A3BBA713-63D7-4de6-BEC2-E3BAAD8789F8}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{C70B7845-2722-4a9b-A0EA-88C877A4B36F}</v>
+        <o>
+          <v n="Name">"{C70B7845-2722-4a9b-A0EA-88C877A4B36F}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String">
+            <v>MaxAuthenticationTrials</v>
+            <v>3</v>
+            <v>UserList</v>
+            <o t="UserList">
+              <a n="Users" cet="User">
+                <o>
+                  <v n="Id">{85858113-2cd5-4842-a8db-65a14c58a74a}</v>
+                  <v n="Name">"Owner"</v>
+                  <v n="FullName">""</v>
+                  <v n="Description">""</v>
+                  <v n="Active">true</v>
+                </o>
+              </a>
+            </o>
+            <v>MaxTimeOfInactivity</v>
+            <v>10</v>
+            <v>EnableMaxTimeOfInactivity</v>
+            <v>true</v>
+            <v>GroupList</v>
+            <o t="GroupList">
+              <a n="Groups" cet="Group">
+                <o>
+                  <v n="Id">{969b878c-be03-4e9a-b61f-1ae51f0820e9}</v>
+                  <v n="Name">"Owner"</v>
+                  <v n="Description">""</v>
+                  <v n="IsEveryoneGroup">false</v>
+                  <v n="IsOwnerGroup">true</v>
+                  <l n="UserMembers" t="ArrayList" cet="Guid">
+                    <v>85858113-2cd5-4842-a8db-65a14c58a74a</v>
+                  </l>
+                  <l n="GroupMembers" t="ArrayList" />
+                </o>
+                <o>
+                  <v n="Id">{21aa4f02-e287-4aa7-a1c3-b7a529505e04}</v>
+                  <v n="Name">"Everyone"</v>
+                  <v n="Description">""</v>
+                  <v n="IsEveryoneGroup">true</v>
+                  <v n="IsOwnerGroup">false</v>
+                  <l n="UserMembers" t="ArrayList" cet="Guid">
+                    <v>85858113-2cd5-4842-a8db-65a14c58a74a</v>
+                  </l>
+                  <l n="GroupMembers" t="ArrayList" />
+                </o>
+              </a>
+            </o>
+            <v>UserAuthentication</v>
+            <o t="UserAuthentication">
+              <d n="UserToPasswordHash" t="Hashtable" ckt="Guid" cvt="String">
+                <v>85858113-2cd5-4842-a8db-65a14c58a74a</v>
+                <v>d41d8cd98f00b204e9800998ecf8427e</v>
+              </d>
+            </o>
+            <v>EnableMaxAuthenticationTrials</v>
+            <v>true</v>
+          </d>
+        </o>
+        <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
+        <o>
+          <v n="Name">"{192FAD59-8248-4824-A8DE-9177C94C195A}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{246001F4-279D-43AC-B241-948EB31120E1}</v>
+        <o>
+          <v n="Name">"{246001F4-279D-43AC-B241-948EB31120E1}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+      </d>
+      <d n="Values" t="Hashtable" />
+    </o>
+  </Data>
+  <TypeList>
+    <Type n="ArrayList">System.Collections.ArrayList</Type>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Group">{daecd4be-1e2b-4335-a125-4a1ac83ea49f}</Type>
+    <Type n="GroupList">{bf4dffda-f055-446d-9d7a-5f126720896b}</Type>
+    <Type n="Guid">System.Guid</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="Int32">System.Int32</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+    <Type n="User">{cd83029e-13b0-491e-9e4b-921adda0d86b}</Type>
+    <Type n="UserAuthentication">{3635a671-97f5-41bb-9e29-0ebb9795975c}</Type>
+    <Type n="UserList">{9fe6b547-6bc8-4f11-b589-b517860c5891}</Type>
+  </TypeList>
+</XmlArchive>
+    </PlcProjectOptions>
+  </ProjectExtensions>
+</Project>

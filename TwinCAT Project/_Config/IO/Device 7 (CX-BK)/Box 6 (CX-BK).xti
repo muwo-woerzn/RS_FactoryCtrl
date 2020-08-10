@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.27" ClassName="CCx1100Def" SubType="9703">
+	<Box Id="6" BoxType="9703" AmsPort="28930">
+		<Name>__FILENAME__</Name>
+		<ImageId>5</ImageId>
+		<Vars VarGrpType="1">
+			<Name>Inputs</Name>
+			<Var>
+				<Name>State</Name>
+				<Comment>
+					<![CDATA[Bit 0 = K-Bus Err
+Bit 1 = Terminal State Err
+Bit 2 = Process Data Length Err
+Bit 8 = No valid Inputs
+Bit 9 = K-Bus Input Update busy
+Bit 10 = K-Bus Output Update busy
+Bit 11 = Watchdog Err
+Bit 15 = Acyc. Function atcive (e.g. K-Bus Reset)
+]]>
+				</Comment>
+				<Type>UINT</Type>
+			</Var>
+		</Vars>
+		<Vars VarGrpType="2">
+			<Name>Outputs</Name>
+			<Var>
+				<Name>Ctrl</Name>
+				<Type>UINT</Type>
+			</Var>
+		</Vars>
+		<BusCoupler ComplexTermSupport="true" NewHardware="true">
+			<Term Id="35" TermType="#x580" Fieldbus="6">
+				<Name>DI01 (KL1408)</Name>
+				<ImageId>7</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>512</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>513</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>514</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>515</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>516</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>517</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>518</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>519</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="36" TermType="#x580" Fieldbus="6">
+				<Name>DI02 (KL1408)</Name>
+				<ImageId>7</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>520</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>521</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>522</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>523</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>524</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>525</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>526</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>527</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="37" TermType="#x580" Fieldbus="6">
+				<Name>DI03 (KL1408)</Name>
+				<ImageId>7</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>528</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>529</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>530</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>531</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>532</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>533</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>534</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>535</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="38" TermType="#x580" Fieldbus="6">
+				<Name>DI04 (KL1408)</Name>
+				<ImageId>7</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>536</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>537</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>538</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>539</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>540</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>541</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>542</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Input</Name>
+						<Type>BIT</Type>
+						<BitOffs>543</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="39" TermType="#xc84" Fieldbus="6">
+				<Name>AI01 Temp (KL3204)</Name>
+				<ImageId>33</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>32</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>40</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>32</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>40</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>56</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>64</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>56</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>64</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>80</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>88</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>80</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>88</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>104</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>112</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>104</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>112</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="40" TermType="#xc84" Fieldbus="6">
+				<Name>AI02 Temp (KL3204)</Name>
+				<ImageId>33</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>128</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>136</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>128</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>136</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>152</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>160</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>152</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>160</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>176</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>184</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>176</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>184</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>200</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>208</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>200</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>208</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="41" TermType="#xc84" Fieldbus="6">
+				<Name>AI03 Temp (KL3204)</Name>
+				<ImageId>33</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>224</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>232</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>224</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>232</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>248</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>256</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>248</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>256</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>272</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>280</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>272</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>280</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>296</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>304</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>296</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>304</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="42" TermType="#xc84" Fieldbus="6">
+				<Name>AI04 Temp (KL3204)</Name>
+				<ImageId>33</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>320</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>328</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>320</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>328</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>344</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>352</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>344</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>352</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>368</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>376</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>368</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>376</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>392</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>400</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>392</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x5">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>400</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="43" TermType="#xfa4" Fieldbus="6">
+				<Name>AO01 (KL4004)</Name>
+				<ImageId>34</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>416</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>424</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>416</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>424</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>440</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>448</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>440</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>448</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>464</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>472</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>464</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>472</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>State</Name>
+						<Type>USINT</Type>
+						<BitOffs>488</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data In</Name>
+						<Type>INT</Type>
+						<BitOffs>496</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>Ctrl</Name>
+						<Type>USINT</Type>
+						<BitOffs>488</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var DisplayScale="#x1">
+						<Name>Data Out</Name>
+						<Type>INT</Type>
+						<BitOffs>496</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="44" TermType="#x968" Fieldbus="6">
+				<Name>DO01 (KL2408)</Name>
+				<ImageId>31</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>512</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>513</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>514</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>515</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>516</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>517</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>518</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>519</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="45" TermType="#x968" Fieldbus="6">
+				<Name>DO02 (KL2408)</Name>
+				<ImageId>31</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>520</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>521</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>522</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>523</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>524</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>525</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>526</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>527</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="46" TermType="#x968" Fieldbus="6">
+				<Name>DO03 (KL2408)</Name>
+				<ImageId>31</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>528</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>529</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>530</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>531</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>532</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>533</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>534</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>535</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="47" TermType="#x968" Fieldbus="6">
+				<Name>DO04 (KL2408)</Name>
+				<ImageId>31</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>536</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 2</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>537</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 3</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>538</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 4</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>539</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 5</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>540</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 6</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>541</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 7</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>542</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>Channel 8</Name>
+					<Var>
+						<Name>Output</Name>
+						<Type>BIT</Type>
+						<BitOffs>543</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+			<Term Id="34" TermType="#x2332" Fieldbus="6">
+				<Name>End Term (KL9010)</Name>
+				<ImageId>32</ImageId>
+			</Term>
+		</BusCoupler>
+		<CxBk/>
+	</Box>
+</TcSmItem>

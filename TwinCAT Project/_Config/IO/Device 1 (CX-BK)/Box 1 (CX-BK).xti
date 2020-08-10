@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.0" ClassName="CCx1100Def" SubType="9703">
+	<Box Id="1" BoxType="9703" AmsPort="28928">
+		<Name>__FILENAME__</Name>
+		<ImageId>5</ImageId>
+		<Vars VarGrpType="1">
+			<Name>Inputs</Name>
+			<Var>
+				<Name>State</Name>
+				<Comment>
+					<![CDATA[Bit 0 = K-Bus Err
+Bit 1 = Terminal State Err
+Bit 2 = Process Data Length Err
+Bit 8 = No valid Inputs
+Bit 9 = K-Bus Input Update busy
+Bit 10 = K-Bus Output Update busy
+Bit 11 = Watchdog Err
+Bit 15 = Acyc. Function atcive (e.g. K-Bus Reset)
+]]>
+				</Comment>
+				<Type>UINT</Type>
+			</Var>
+		</Vars>
+		<Vars VarGrpType="2">
+			<Name>Outputs</Name>
+			<Var>
+				<Name>Ctrl</Name>
+				<Type>UINT</Type>
+			</Var>
+		</Vars>
+		<BusCoupler ComplexTermSupport="true" NewHardware="true">
+			<Term Id="1" TermType="#x2332" Fieldbus="6">
+				<Name>End Term (KL9010)</Name>
+				<ImageId>32</ImageId>
+			</Term>
+		</BusCoupler>
+		<CxBk/>
+	</Box>
+</TcSmItem>

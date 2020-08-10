@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_Rollo" Id="{ae0f1ce1-c4ec-44db-bdff-eacc12f57612}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Rollo
+VAR_INPUT
+	bInTasterAuf 			: BOOL;
+	bInTasterAb				: BOOL;
+	bCfgTimeAb				: BOOL; (* Rollo ab, bei globaler Schaltzeit *)
+	bCfgTimeAbWinter	: BOOL; (* Rollo ab, bei globaler Schaltzeit, aber nur waehrend Winderzeit *)
+	itGesamt					: INT; (* x 100ms *)
+	itSchatten				: INT; (* x 100ms *)
+END_VAR
+VAR_OUTPUT
+	bOutRollo			: BOOL;
+END_VAR
+VAR_IN_OUT
+	bAbVorw	: BOOL;
+	bAb			: BOOL;
+END_VAR
+VAR
+	bInVisuAuf 	: BOOL;
+	bInVisuAb		: BOOL;
+	bOutVisuAb	: BOOL;
+	bInAuf 			: BOOL;
+	bInAb				: BOOL;
+
+	iRolloMode 	: E_RolloMode;
+	bTaster			: BOOL;
+	bTasterAb		: BOOL;
+	bRollo			: BOOL;
+	bAbVorwi	: BOOL;
+	iActPos			: INT;
+
+	tofLock		: TOF := (PT:= t#50ms);
+	fbTaster	: FB_Taster;
+
+
+	tonSwitch		: TON := (PT:= t#100ms);
+	tonStart		: TON := (PT:= t#50ms);
+
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bInAuf := bInTasterAuf
+				OR bInVisuAuf
+				OR (bCfgTimeAb
+						AND gbTimeRolloAuf);
+bInAb := bInTasterAb
+				OR bInVisuAb
+				OR (bCfgTimeAb
+						AND gbTimeRolloAb
+						AND (NOT bCfgTimeAbWinter
+								OR NOT gfbSystemCX.OUTbSummerTime));
+bOutVisuAb := bAb;
+
+IF bInAuf AND bInAb THEN
+	tofLock.IN := TRUE;
+ELSIF NOT bInAuf AND NOT bInAb THEN
+	tofLock.IN := FALSE;
+END_IF
+tofLock();
+
+bTaster := (bInAuf XOR bInAb) AND NOT tofLock.Q;
+IF bTaster THEN
+	bTasterAb := bInAb;
+END_IF
+fbTaster(bIn:= bTaster);
+
+
+IF NOT tofLock.Q THEN
+	IF fbTaster.bLang THEN
+		iRolloMode := eRollo_Manuell;
+	ELSIF fbTaster.bKlick THEN
+		IF iRolloMode > eRollo_Stop THEN
+			iRolloMode := eRollo_Stop;
+		ELSE
+			iRolloMode := eRollo_Auto;
+		END_IF
+	ELSIF fbTaster.bKlick2 THEN
+		iRolloMode := eRollo_Schatten;
+	END_IF
+END_IF
+
+CASE iRolloMode OF
+eRollo_Stop:
+	IF (iActPos < 0) THEN
+		iActPos := 0;
+	END_IF
+
+eRollo_Manuell:
+	IF NOT bTaster THEN
+		iRolloMode := eRollo_Stop;
+	END_IF
+
+eRollo_Auto:
+	IF bRollo AND NOT bTaster THEN
+		IF bAbVorwi THEN
+			IF (iActPos > itGesamt) THEN
+				iRolloMode := eRollo_Stop;
+			END_IF
+		ELSE
+			IF (iActPos < -30) THEN
+				iRolloMode := eRollo_Stop;
+			END_IF
+		END_IF
+	END_IF
+
+eRollo_Schatten:
+	IF bRollo THEN
+		IF NOT bAbVorwi THEN
+			IF (iActPos < itSchatten) THEN
+				iRolloMode := eRollo_Stop;
+			END_IF
+		ELSE
+			IF (iActPos > itSchatten) THEN
+				iRolloMode := eRollo_Stop;
+			END_IF
+		END_IF
+	END_IF
+
+END_CASE
+
+IF (iActPos > itGesamt) THEN
+	iActPos := itGesamt;
+ELSIF (iActPos < -30) THEN
+	iActPos := -30;
+END_IF
+
+
+IF NOT bRollo AND (iRolloMode > eRollo_Stop) THEN
+	bRollo := TRUE;
+	bAbVorw := bTasterAb;
+	bAbVorwi := bAbVorw;
+ELSIF (bOutRollo AND (bAbVorwi <> bAb)) THEN
+	tofLock.IN := TRUE;
+	iRolloMode := eRollo_Stop;
+	bRollo := FALSE;
+ELSIF (bRollo AND (iRolloMode = eRollo_Stop)) THEN
+	tofLock.IN := TRUE;
+	iRolloMode := eRollo_Stop;
+	bRollo := FALSE;
+END_IF
+
+tonSwitch(IN:= bRollo);
+tonStart(IN:= tonSwitch.Q);
+
+IF tonSwitch.Q THEN
+	bAb := bAbVorw;
+END_IF
+bOutRollo := tonStart.Q;
+
+IF bOutRollo AND gbTakt100ms THEN
+	IF bAb THEN
+		iActPos := iActPos + 1;
+	ELSE
+		iActPos := iActPos - 1;
+	END_IF
+END_IF
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

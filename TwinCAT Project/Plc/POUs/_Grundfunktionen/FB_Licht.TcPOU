@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <POU Name="FB_Licht" Id="{7f37c4c1-ae20-4f41-bfff-98dfaf279b41}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Licht
+VAR_INPUT
+	bEinKurz				: BOOL;
+	bEinLang				: BOOL;
+	bAus 						: BOOL;
+	tKurz						: TIME := t#5m;
+	tLang 					: TIME := t#60m;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	bGruppeAus : BOOL;
+END_VAR
+VAR
+	bInit 			: BOOL := TRUE;
+	bInVisu			: BOOL;
+	bIn					: BOOL;
+
+	bKlickEnable	: BOOL;
+	bLangEnable		: BOOL;
+
+	(* %I / %Q ********************)
+	IbInTaster		AT %I* : BOOL;
+	QbOutLicht		AT %Q* : BOOL;
+
+	tofEin			: TOF;
+
+	fbTaster 		: FB_Taster;
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bInit THEN
+	bKlickEnable := (tkurz <> t#0s);
+	bLangEnable := (tLang <> t#0s);
+	bInit := FALSE;
+END_IF
+
+
+bIn := IbInTaster OR bInVisu;
+fbTaster(bIn:= bIn);
+
+IF bKlickEnable
+AND (fbTaster.bKlick
+		OR bEinKurz
+		OR gbLichtZentralEin)
+THEN
+	tofEin(IN:= TRUE, PT:= tkurz);
+ELSIF bLangEnable
+AND (fbTaster.bLang
+		OR bEinLang)
+THEN
+	tofEin(IN:= TRUE, PT:= tLang);
+END_IF
+tofEin(IN:= FALSE);
+
+IF fbTaster.bLang
+AND bKlickEnable
+AND bLangEnable
+OR bEinKurz
+OR bEinLang
+OR gbLichtZentralEin
+THEN
+	QbOutLicht := TRUE;
+END_IF
+
+IF (fbTaster.bKlick
+		AND bKlickEnable)
+OR (fbTaster.bLang
+		AND NOT bKlickEnable
+		AND bLangEnable)
+THEN
+	QbOutLicht := NOT QbOutLicht;
+END_IF
+
+IF QbOutLicht AND NOT tofEin.Q
+OR gbLichtZentralAus OR bAus THEN
+	QbOutLicht := FALSE;
+END_IF
+
+IF fbTaster.bKlick2 THEN
+	bGruppeAus := TRUE;
+END_IF
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

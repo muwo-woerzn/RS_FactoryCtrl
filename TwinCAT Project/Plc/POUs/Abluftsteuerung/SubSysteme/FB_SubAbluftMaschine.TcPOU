@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_SubAbluftMaschine" Id="{5ebd7c49-c907-4a87-8acb-c643c797f3ce}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SubAbluftMaschine
+VAR_INPUT
+	INbSchieberAuf						: BOOL;
+END_VAR
+VAR_OUTPUT
+	OUTbSchieber							: BOOL;
+END_VAR
+VAR_IN_OUT
+	IObVentilatorEin					: BOOL;
+END_VAR
+VAR
+	IbMaschineEin			AT %I*	: BOOL;
+	QbAbluftSchieber	AT %Q*	: BOOL;
+
+	bAbluftSchieber						: BOOL;
+	rtrigStart								: R_TRIG;
+
+	tofSchieber								: TOF := (PT:= T#10S); (* Abschaltverzoegerung, nachdem die Maschine ausgeschaltet wurde *)
+	tofAutoStop								: TOF := (PT:= T#120M); (* automatische Abschaltung nach maximaler Betriebsdauer (Maschine durchgehend aktiv) *)
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[rtrigStart(CLK:= IbMaschineEin);
+
+IF NOT IbMaschineEin
+OR (bAbluftSchieber
+		AND NOT tofAutoStop.Q)
+THEN
+	bAbluftSchieber := FALSE;
+
+ELSIF rtrigStart.Q THEN
+	bAbluftSchieber := TRUE;
+	tofAutoStop.IN := TRUE;
+
+END_IF
+
+tofAutoStop();
+tofAutoStop.IN := FALSE;
+
+tofSchieber(IN:= bAbluftSchieber);
+OUTbSchieber := tofSchieber.Q;
+QbAbluftSchieber := OUTbSchieber OR INbSchieberAuf;
+
+IF bAbluftSchieber THEN
+	IObVentilatorEin := TRUE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

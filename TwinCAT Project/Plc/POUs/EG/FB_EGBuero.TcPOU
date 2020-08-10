@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <POU Name="FB_EGBuero" Id="{1fd593b5-afbf-4a59-bd99-53e37dcca5fa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_EGBuero
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	
+END_VAR
+VAR
+	bInit					: BOOL := TRUE;
+
+  fbLichtBueroChef : FB_LichtBewegungsmelder;
+  fbLichtBueroAssist : FB_LichtBewegungsmelder;
+  fbLichtPausenraum : FB_LichtBewegungsmelder;
+
+  bGruppeAus : bool;
+	tKurz : TIME;
+	tLang : TIME;
+  
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+tKurz := DINT_TO_TIME(VnvdiLichtTofKurz * 60000);
+tLang := DINT_TO_TIME(VnvdiLichtTofLang * 60000);
+  
+fbLichtBueroChef(
+	tKurz:= tKurz, 
+	tLang:= tLang, 
+  bGruppeAus:= bGruppeAus,
+	IOstTimeSwitchTimes:= VnvstSwitchTimesLichtBWMtofLang);
+  
+fbLichtBueroAssist(
+	tKurz:= tKurz, 
+	tLang:= tLang, 
+  bGruppeAus:= bGruppeAus,
+	IOstTimeSwitchTimes:= VnvstSwitchTimesLichtBWMtofLang);
+  
+fbLichtPausenraum(
+	tKurz:= tKurz, 
+	tLang:= tLang, 
+  bGruppeAus:= bGruppeAus,
+	IOstTimeSwitchTimes:= VnvstSwitchTimesLichtBWMtofLang);
+  
+  
+(* FB END*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

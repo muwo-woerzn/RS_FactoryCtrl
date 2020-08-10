@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <DUT Name="ST_AnalogScaling" Id="{732041c3-6756-478d-9001-41ea83e2e7f5}">
+    <Declaration><![CDATA[TYPE ST_AnalogScaling :
+STRUCT
+	diXRef 	: DINT := 0;
+	diYRef	: DINT := 2100;
+	diFact	: DINT := 5000;
+
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

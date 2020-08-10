@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <POU Name="FB_EGHalle" Id="{b4c075ee-78f4-42af-967d-91c7c86a8bfe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_EGHalle
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	
+END_VAR
+VAR
+	bInit					: BOOL := TRUE;
+
+	(* %I / %Q ********************)
+	IbRolloWindmesser AT %I* : BOOL;
+	IbRolloZentralAuf AT %I* : BOOL;
+	IbRolloZentralAb AT %I* : BOOL;
+	QbRolloZentralAuf AT %Q* : BOOL;
+	QbRolloZentralAb AT %Q* : BOOL;
+
+
+  fbLichtHalleAltbau : FB_LichtBewegungsmelder;
+  fbLichtHalleNeubau : FB_LichtBewegungsmelder;
+  fbLichtHalleAnbau : FB_LichtBewegungsmelder;
+
+  bGruppeAus : bool;
+	tKurz : TIME;
+	tLang : TIME;
+  
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+tKurz := DINT_TO_TIME(VnvdiLichtTofKurz * 60000);
+tLang := DINT_TO_TIME(VnvdiLichtTofLang * 60000);
+
+fbLichtHalleAltbau(
+	tKurz:= tKurz, 
+	tLang:= tLang, 
+  bGruppeAus:= bGruppeAus,
+	IOstTimeSwitchTimes:= VnvstSwitchTimesLichtBWMtofLang);
+  
+fbLichtHalleNeubau(
+	tKurz:= tKurz, 
+	tLang:= tLang, 
+  bGruppeAus:= bGruppeAus,
+	IOstTimeSwitchTimes:= VnvstSwitchTimesLichtBWMtofLang);
+  
+fbLichtHalleAnbau(
+	tKurz:= tKurz, 
+	tLang:= tLang, 
+  bGruppeAus:= bGruppeAus,
+	IOstTimeSwitchTimes:= VnvstSwitchTimesLichtBWMtofLang);
+  
+ 
+(* FB END*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

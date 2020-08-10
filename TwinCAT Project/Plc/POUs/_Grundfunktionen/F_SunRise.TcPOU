@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="F_SunRise" Id="{873a9af8-cf5b-4844-b893-e7fc53d82cfe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_SunRise : REAL
+VAR_INPUT
+	dDate 				: DATE;
+END_VAR
+VAR CONSTANT
+ (* Offset, um wieviel Tage vor Jahreswechsel der früheste Sonnenuntergang stattfindet *)
+	idayOffset : INT := 25;
+END_VAR
+VAR
+	dwDate 		: DWORD;
+	dwTodRef 	: DWORD;
+	rYearDay 	: REAL;
+
+	rPi				: REAL;
+	rAlpha		: REAL;
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[rPi := LREAL_TO_REAL(ACOS(-1));
+
+dwDate := DATE_TO_DWORD(dDate);
+
+rYearDay := DWORD_TO_REAL((dwDate MOD 31557600) / 86400 + idayOffset);
+
+IF (rYearDay > 365) THEN
+	rYearDay := rYearDay - 365;
+END_IF
+
+(* der früheste Sonnenuntergang findet etwa mitte Dez. statt, der späteste ca. Anfang Juli.
+ Deshalb werden hier die ersten 210 Tage auf 180° skaliert und die restl. 155 Tage auf die 
+ zweiten 180°. *)
+IF (rYearDay < 210) THEN
+	rAlpha := rYearDay * rPi / 210;
+ELSE
+	rAlpha := (rYearDay - 210) * rPi / 155 + rPi;
+END_IF
+
+(* hier wird von rAlpha nochmals rPi subtrahiert, um den Cosinus um 180° zu verschieben *)
+F_SunRise := COS(rAlpha - rPi);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

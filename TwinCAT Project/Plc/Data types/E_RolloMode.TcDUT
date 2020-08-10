@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <DUT Name="E_RolloMode" Id="{d807219a-a737-4ff7-bb9e-10e735a825b7}">
+    <Declaration><![CDATA[TYPE E_RolloMode : (
+	eRollo_Stop,
+	eRollo_Manuell,
+	eRollo_Auto,
+	eRollo_Schatten);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

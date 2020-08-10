@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <DUT Name="ST_DMXRGBWCtrl" Id="{428b0aaa-7a6f-4d97-bbe3-08c4452830b5}">
+    <Declaration><![CDATA[TYPE ST_DMXRGBWCtrl :
+STRUCT
+	bTickManual		: BOOL; (* Zyklus-Ticks fuer manuelle Verstellung *)
+	bTickAuto			: BOOL; (* Zyklus-Ticks fuer automatische Programme *)
+	rBrightness		: REAL := 1.0; (* zentraler Helligkeits-Override *)
+	rRGBCtrl			: REAL; (* Steuerwert fuer den Farbton *)
+	byRed					: BYTE; (* Steuerwert fuer den Farbton rot *)
+	byGreen				: BYTE; (* Steuerwert fuer den Farbton grün *)
+	byBlue				: BYTE; (* Steuerwert fuer den Farbton blau *)
+	byWhite				: BYTE; (* Steuerwert fuer den Farbton weiss *)
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

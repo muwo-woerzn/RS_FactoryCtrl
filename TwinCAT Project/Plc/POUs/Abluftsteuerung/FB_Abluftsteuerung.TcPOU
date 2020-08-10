@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_Abluftsteuerung" Id="{10fe68d5-c860-4241-8131-4efbe8ae7b1d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Abluftsteuerung
+VAR CONSTANT
+	diAbluftLaufzeit_RuettlerStart : DINT := 14400; (* Nach 4h = 14400sek Lauftzeit der Abluft,
+																											wird der Ruettler gestartet *)
+END_VAR
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bInit					: BOOL := TRUE;
+	IbAbluft2_Aktiv						AT %I*	: BOOL;
+	IbAbluft3_Aktiv						AT %I*	: BOOL;
+
+	QbAbluftVentilator				AT %Q*	: BOOL;
+	QbRuettler								AT %Q*	: BOOL;
+
+	bVentilatorEin						: BOOL;
+	bRuettlerEin							: BOOL;
+
+	fbAblTaster1							: FB_SubAbluftTaster;
+
+	fbAblMasch01							: FB_SubAbluftMaschine;
+	fbAblMasch02							: FB_SubAbluftMaschine;
+	fbAblMasch03							: FB_SubAbluftMaschine;
+	fbAblMasch04							: FB_SubAbluftMaschine;
+
+
+
+	tonSekundenTakt						: TON := (PT:= t#1s);
+	bSekundenTakt							: BOOL;
+
+	tofAbluftVentilator				: TOF := (PT:= T#60S);
+	tofRuettlerSperrzeit			: TOF := (PT:= t#600s);
+	tofRuettlerLaufzeit				: TOF := (PT:= t#60s);
+
+END_VAR
+
+VAR PERSISTENT
+	diAbluftLaufzeit					: DINT; (* Laufzeit der Abluft in Sek. *)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bSekundenTakt := FALSE;
+IF tonSekundenTakt.Q THEN
+	tonSekundenTakt.IN := FALSE;
+	bSekundenTakt := TRUE;
+END_IF
+tonSekundenTakt();
+tonSekundenTakt.IN := TRUE;
+
+
+
+fbAblTaster1(
+	IObVentilatorEin:= bVentilatorEin,
+	IObRuettlerEin:= bRuettlerEin);
+
+fbAblMasch01(
+	IObVentilatorEin:= bVentilatorEin);
+	
+fbAblMasch02(
+	IObVentilatorEin:= bVentilatorEin);
+	
+fbAblMasch03(
+	IObVentilatorEin:= bVentilatorEin);
+
+fbAblMasch04(
+	IObVentilatorEin:= bVentilatorEin);
+
+	
+(* Abluftventilator-Steuerung ***************************************)
+tofAbluftVentilator(IN:= bVentilatorEin);
+QbAbluftVentilator := tofAbluftVentilator.Q;
+bVentilatorEin := FALSE;
+
+
+(* Ruettler-Steuerung ***************************************)
+tofRuettlerSperrzeit(
+	IN:= (QbAbluftVentilator
+				OR IbAbluft2_Aktiv
+				OR IbAbluft3_Aktiv));
+
+IF bSekundenTakt
+AND tofRuettlerSperrzeit.IN
+THEN
+	diAbluftLaufzeit := diAbluftLaufzeit + 1;
+END_IF
+
+IF NOT tofRuettlerSperrzeit.Q
+AND ((diAbluftLaufzeit
+			> diAbluftLaufzeit_RuettlerStart)
+		OR bRuettlerEin)
+THEN
+	tofRuettlerLaufzeit.IN := TRUE;
+	diAbluftLaufzeit := 0;
+END_IF
+bRuettlerEin := FALSE;
+
+tofRuettlerLaufzeit();
+tofRuettlerLaufzeit.IN := FALSE;
+
+QbRuettler := tofRuettlerLaufzeit.Q
+  AND NOT tofRuettlerSperrzeit.Q;
+
+(* END of FB **************************************)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

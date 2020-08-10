@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_Heizregler" Id="{bf6c3bfa-98de-4cd4-959d-388ed42dc90b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Heizregler
+VAR_INPUT
+	diTempSoll	: DINT;
+	diTempIst 	: DINT;
+	iTimeOffs 	: INT; (* 0..99 *)
+	iTimeGrp		: INT; (* Auswahl der Timer-Gruppe 0..9 *)
+	iPMin 			: INT := 25;
+	iPMax 			: INT := 100;
+	iPHeizIn		: INT := 0;
+	bNewData		: BOOL;
+END_VAR
+VAR_OUTPUT
+	iPHeizOut : INT;
+END_VAR
+VAR
+	bInitDone					 : BOOL;
+
+	(* %I / %Q ********************)
+	QbOutHeizSteller		AT %Q* : BOOL;
+	bOutHeizSteller		: BOOL;
+
+	dwPWMfast					: DWORD;
+
+	iPWMTimer					: INT;
+	iPHeiz						: INT;
+
+	adiTempIst 				: ARRAY[0..2] OF DINT;
+	diTempIstAend 		: DINT;
+
+	diTempSollOld 		: DINT;
+	diTempSollAend 		: DINT;
+
+	diTempDiff 				: DINT;
+
+	diResult_P				: DINT;
+	diResult_I				: DINT;
+	diResult_Dist			: DINT;
+	diResult_Dsoll		: DINT;
+	diResult					: DINT;
+END_VAR
+
+VAR PERSISTENT
+	bManuell	: BOOL;
+	iManPHeiz : INT;
+
+	dikP			: DINT := 300; (* P-Regler, 1000 = 1.000 *)
+	dikI			: DINT := 50; (* I-Regler, 1000 = 1.000 *)
+	dikDist		: DINT := 5; (* D-Regler auf Istwert *)
+	dikDsoll	: DINT := 5; (* D-Regler auf Sollwert => wirkt direkt auf I-Anteil *)
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bInitDone THEN
+	M_Init();
+END_IF
+
+M_Ctrl();
+M_PWM();
+M_PWMfast();
+]]></ST>
+    </Implementation>
+    <Action Name="M_Ctrl" Id="{0694d05f-4055-46a2-b273-ec628c37ed0f}">
+      <Implementation>
+        <ST><![CDATA[IF bNewData THEN
+	diTempSollAend :=
+			diTempSoll
+		- diTempSollOld;
+	diTempSollOld := diTempSoll;
+	diTempIstAend :=
+			diTempIst
+		- adiTempIst[2];
+	adiTempIst[2] := adiTempIst[1];
+	adiTempIst[1] := adiTempIst[0];
+	adiTempIst[0] := diTempIst;
+END_IF
+
+IF NOT bManuell
+AND NOT (iPHeizIn > 0)
+AND gbHeizGruppe[iTimeGrp]
+THEN
+	IF bNewData THEN
+		diResult_Dist :=
+				diTempIstAend
+			* dikDist;
+
+		diResult_Dsoll :=
+				diTempSollAend
+			* dikDsoll;
+
+		diTempDiff :=
+				diTempSoll
+			- diTempIst
+			+ diResult_Dist;
+
+		diResult_P :=
+				diTempDiff
+			* dikP;
+
+		diResult_I :=
+				diTempDiff
+			* dikI
+			+ diResult_Dsoll
+			+ diResult_I;
+		IF (diResult_I
+				> (100000 - diResult_P))
+		THEN
+			diResult_I :=
+				(100000 - diResult_P);
+		ELSIF (diResult_I < 0) THEN
+			diResult_I := 0;
+		END_IF
+
+		diResult :=
+				diResult_P
+			+ diResult_I;
+		iPHeiz := DINT_TO_INT(diResult / 1000);
+
+	END_IF
+
+ELSE
+	diResult_I := iManPHeiz * 1000;
+	iPHeiz := iManPHeiz;
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="M_PWMfast" Id="{1e63343a-a9c4-4d41-b466-b7b70118433f}">
+      <Implementation>
+        <ST><![CDATA[(* PWM im SPS-Zyklus *)
+IF bOutHeizSteller THEN
+	dwPWMfast := dwPWMfast + 1;
+	IF (dwPWMfast > gdwPWMfast_88) THEN
+		QbOutHeizSteller := TRUE;
+						(*	 dwPWMfast.1
+						OR dwPWMfast.2
+						OR dwPWMfast.3;*)
+	ELSIF (dwPWMfast > gdwPWMfast_75) THEN
+		QbOutHeizSteller :=
+							 dwPWMfast.1
+						OR dwPWMfast.2;
+	ELSE
+		QbOutHeizSteller :=
+							dwPWMfast.1;
+	END_IF
+	dwPWMfast := dwPWMfast AND 16#00FFFFFF;
+ELSE
+	QbOutHeizSteller := FALSE;
+	dwPWMfast := INT_TO_DWORD(iTimeOffs / 10);
+END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="M_PWM" Id="{288cdfec-e6a6-4f03-a629-3adf4b7473ca}">
+      <Implementation>
+        <ST><![CDATA[(* PWM-Funktion *)
+IF gbPWMTakt THEN
+	IF bManuell THEN
+		iPHeiz := iManPHeiz;
+	ELSIF (iPHeizIn > 0) THEN
+		iPHeiz := iPHeizIn;
+	END_IF
+	IF iPHeiz > iPMax THEN
+		iPHeiz := iPMax;
+	END_IF
+	IF (giPWMTimer = iTimeOffs) THEN
+		iPWMTimer := 0;
+		IF (iPHeiz > 0) AND gbHeizGruppe[iTimeGrp] THEN
+			bOutHeizSteller := TRUE;
+		END_IF
+	END_IF
+	IF bOutHeizSteller THEN
+		IF (iPWMTimer > (iPHeiz + iPMin)) THEN
+			bOutHeizSteller := FALSE;
+		END_IF
+		iPWMTimer := iPWMTimer + 1;
+	ELSE
+		iPWMTimer := 0;
+	END_IF
+END_IF
+iPHeizOut := iPHeiz;]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="M_Init" Id="{512b85a1-8a0a-43f3-8377-3621e1ad7b88}">
+      <Implementation>
+        <ST><![CDATA[IF bNewData THEN
+	diTempSollOld := diTempSoll;
+	adiTempIst[2] := diTempIst;
+	adiTempIst[1] := diTempIst;
+	adiTempIst[0] := diTempIst;
+	diResult_I := iManPHeiz * 1000;
+	bInitDone := TRUE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

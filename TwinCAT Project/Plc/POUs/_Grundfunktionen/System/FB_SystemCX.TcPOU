@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <POU Name="FB_SystemCX" Id="{cdfbd0ee-9708-49dd-b618-533912bc4b81}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SystemCX
+VAR_INPUT
+	INCFGDiagBK1250		: BOOL;
+	INstSysTimeDate	: TIMESTRUCT;
+	
+END_VAR
+VAR_OUTPUT
+	OUTbNewTime				: BOOL;
+	OUTbNewMinute     : BOOL;
+	OUTbNewDay				: BOOL;
+	OUTbSummerTime		: BOOL;
+	OUTstSysTimeDate	: TIMESTRUCT;
+	OUTdtDateClock		: DATE_AND_TIME;
+	OUTdDate					: DATE;
+	OUTtodClockBase		: TIME_OF_DAY;
+	OUTtodClock				: TIME_OF_DAY;
+	OUTszClock				: STRING;
+	OUTszDate					: STRING;
+	OUTeDayOfWeek			: E_WeekDay;
+	
+END_VAR
+VAR
+	bInit							: BOOL := TRUE;
+	bSummerTime				: BOOL;
+	tonStartUp				: ton := (PT:= T#180S);
+
+	fbUPS							: FB_S_UPS_CX51x0;
+	fbBK1250Diag			: FB_BK1250Diag;
+
+	tcRestart					: TC_Restart;
+	iofDeviceReset		: IOF_DeviceReset;
+	tonTcRestart			: ton := (PT:= T#3S);
+	tonSetTime : ton := (PT:= T#180S);
+	
+	IuiDeviceId_ECMAster AT %I* : UINT; (* Device-ID EtherCAT Master *)
+
+	(*local Windows NT time, via ADS*)
+	fbNtGetTime				: NT_GetTime;
+	fbNtSetTime				: NT_SetLocalTime;
+	tonGetTime				: ton := (PT:=T#300MS);
+	wSecond						: WORD;
+	wMinute						: WORD;
+	wDay							: WORD;
+	bTimeCorrectStart : BOOL;
+  
+	VbDeviceReset			: BOOL; // EC-Master-Reset manuell (Visu)
+	VbTCReset					: BOOL; // TwinCAT-Reset manuell (Visu)
+	VbSetTimeStart : BOOL;
+  VbSetTimeReturn : BOOL;
+  VbSetTimeError : BOOL;
+  
+END_VAR
+VAR PERSISTENT
+	nvbSummerTime			: BOOL;
+  nviTimeCorrectionSum : INT; // Summe Zeitkorrektur je Tag [msec]
+  VnviTimeCorrectionEachDay : INT; // Zeitkorrektur je Tag [msec]
+  
+	nviTcRestartCnt		: INT;
+	nviTcRestartId		: INT;
+	anvszTcRestartReason : ARRAY[0..10] OF STRING;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bInit THEN
+	M_Init();
+END_IF
+
+IF NOT tonStartUp.Q THEN
+	tonStartUp(IN:= TRUE);
+ELSE
+	A_TcRestart();
+END_IF
+
+(* Ansteuerung der Sekunden-USV, damit bei Spannungsausfall die persistenten Daten gesichert werden *)
+fbUPS();
+
+(* Uhrzeit auslesen *)
+fbNtGetTime();
+IF NOT fbNtGetTime.BUSY THEN
+	IF fbNtGetTime.START THEN
+		OUTstSysTimeDate := fbNtGetTime.TIMESTR;
+		fbNtGetTime.START := FALSE;
+	END_IF
+	tonGetTime(IN:= TRUE);
+	IF tonGetTime.Q THEN
+		fbNtGetTime.START := TRUE;
+	END_IF
+ELSE
+	tonGetTime(IN:= FALSE);
+END_IF
+
+IF (OUTstSysTimeDate.wSecond
+		<> wSecond)
+THEN
+	wSecond := OUTstSysTimeDate.wSecond;
+	OUTbNewTime := TRUE;
+	OUTdtDateClock := SYSTEMTIME_TO_DT(TIMESTR:= OUTstSysTimeDate);
+	OUTtodClockBase := DT_TO_TOD(OUTdtDateClock);
+	IF OUTbSummerTime THEN
+		(* waehrend der Sommerzeit eine Stunde addieren +3600s *)
+		OUTtodClock := DWORD_TO_TOD(TOD_TO_DWORD(OUTtodClockBase) + 3600000);
+	ELSE
+		OUTtodClock := OUTtodClockBase;
+	END_IF
+		
+	OUTszClock := MID(TOD_TO_STRING(OUTtodClock), 8, 5);
+	M_Summertime();
+ELSE
+	OUTbNewTime := FALSE;
+END_IF
+
+IF (OUTstSysTimeDate.wMinute <> wMinute) THEN
+  wMinute := OUTstSysTimeDate.wMinute;
+  OUTbNewMinute := TRUE;
+ELSE
+  OUTbNewMinute := FALSE;  
+END_IF
+
+
+IF (OUTstSysTimeDate.wDay
+		<> wDay)
+THEN
+	wDay := OUTstSysTimeDate.wDay;
+	OUTbNewDay := TRUE;
+	OUTeDayOfWeek := OUTstSysTimeDate.wDayOfWeek;
+	OUTdDate := DT_TO_DATE(OUTdtDateClock);
+	OUTszDate := MID(DATE_TO_STRING(OUTdDate), 10, 3);
+ELSE
+	OUTbNewDay := FALSE;
+END_IF
+
+
+// Datum Uhrzeit einstellen
+IF tonSetTime.Q THEN
+  VbSetTimeStart := FALSE;
+ELSIF VbSetTimeStart THEN
+  IF NOT tonSetTime.IN THEN
+    fbNtSetTime(START := FALSE);
+    INstSysTimeDate := OUTstSysTimeDate;
+    INstSysTimeDate.wSecond := 0;
+    INstSysTimeDate.wMilliseconds := 0;
+	END_IF
+  IF VbSetTimeReturn THEN
+    fbNtSetTime(START := TRUE, TIMESTR := INstSysTimeDate);
+    IF NOT fbNtSetTime.BUSY THEN
+      IF NOT fbNtSetTime.ERR THEN
+        VbSetTimeStart := FALSE;
+      ELSE
+        VbSetTimeError := TRUE;
+        VbSetTimeReturn := FALSE;
+      END_IF
+      fbNtSetTime(START := FALSE);
+    END_IF
+	END_IF
+ELSE
+  VbSetTimeReturn := FALSE;
+  VbSetTimeError := FALSE;
+END_IF
+tonSetTime(IN:= VbSetTimeStart);
+
+// automatische Uhrzeitkorrektur
+IF (VnviTimeCorrectionEachDay <> 0) THEN
+  IF OUTbNewDay THEN
+    nviTimeCorrectionSum := nviTimeCorrectionSum
+      + VnviTimeCorrectionEachDay;
+    fbNtSetTime(START := FALSE);
+	END_IF
+  IF OUTbNewMinute THEN
+    // Korrektur wird i.d.R. um 00:01Uhr durchgefuehrt
+    IF ABS(nviTimeCorrectionSum >= 10000) THEN
+      // Korrektur hat 10s erreicht
+      INstSysTimeDate := OUTstSysTimeDate;
+        IF (nviTimeCorrectionSum >= 10000) THEN
+          // Korrektur + 10s
+          INstSysTimeDate.wSecond := INstSysTimeDate.wSecond + 10;
+          IF (INstSysTimeDate.wSecond > 59) THEN
+            INstSysTimeDate.wSecond := 0;
+            INstSysTimeDate.wMinute := INstSysTimeDate.wMinute + 1;
+            IF (INstSysTimeDate.wMinute > 59) THEN
+              INstSysTimeDate.wMinute := 0;
+              INstSysTimeDate.wHour := INstSysTimeDate.wHour + 1;
+              IF (INstSysTimeDate.wHour > 23) THEN
+                INstSysTimeDate.wHour := 0;
+              END_IF
+            END_IF
+          END_IF
+        ELSE
+          // Korrektur - 10s
+          IF (INstSysTimeDate.wSecond >= 10) THEN
+            INstSysTimeDate.wSecond := INstSysTimeDate.wSecond - 10;
+          ELSIF (INstSysTimeDate.wMinute > 0) THEN
+            INstSysTimeDate.wSecond := INstSysTimeDate.wSecond + 60 - 10;
+            INstSysTimeDate.wMinute := INstSysTimeDate.wMinute - 1;
+          END_IF
+				END_IF
+        IF (INstSysTimeDate.wMinute >= 0) AND (INstSysTimeDate.wMinute < 60) THEN
+          // Korrektur nur bei gueltigem Zeitwert durchfuehren
+          bTimeCorrectStart := TRUE;
+        END_IF
+    END_IF
+	END_IF
+
+  IF bTimeCorrectStart THEN
+    fbNtSetTime(START := TRUE, TIMESTR := INstSysTimeDate);
+    IF NOT fbNtSetTime.BUSY THEN
+      bTimeCorrectStart := FALSE;
+      IF NOT fbNtSetTime.ERR THEN
+        IF (nviTimeCorrectionSum >= 10000) THEN
+          nviTimeCorrectionSum := nviTimeCorrectionSum - 10000;
+        ELSE
+          nviTimeCorrectionSum := nviTimeCorrectionSum + 10000;
+  			END_IF
+			END_IF
+      fbNtSetTime(START := FALSE);
+  	END_IF
+	END_IF
+ELSE
+  bTimeCorrectStart := FALSE;
+  nviTimeCorrectionSum := 0;
+END_IF
+
+
+(* END *****************************************)]]></ST>
+    </Implementation>
+    <Action Name="A_TcRestart" Id="{51f29931-c3f6-4b3d-93ac-cfd00a893605}">
+      <Implementation>
+        <ST><![CDATA[
+IF INCFGDiagBK1250 THEN
+	fbBK1250Diag();
+END_IF
+
+IF tcRestart.RESTART THEN
+	// TwinCAT-Restart durchführen
+	tcRestart();
+	IF NOT tcRestart.BUSY OR tcRestart.ERR THEN
+		tcRestart(RESTART:= FALSE);
+		tonTcRestart.IN := TRUE;
+	END_IF
+	
+ELSIF iofDeviceReset.RESET THEN
+	// EtherCAT-Master RESET durchführen
+	iofDeviceReset();
+	IF NOT iofDeviceReset.BUSY OR iofDeviceReset.ERR THEN
+		iofDeviceReset(RESET:= FALSE);
+		tonTcRestart.IN := TRUE;
+	END_IF
+	
+ELSIF NOT tonTcRestart.IN THEN
+	IF fbBK1250Diag.OUTbError THEN
+		M_SetRestartLog(
+			INszLogTxt:= CONCAT('EC-Master-Reset autom., BK1250-State= ', UINT_TO_STRING(fbBK1250Diag.OUTuiCouplterState)));
+		iofDeviceReset(RESET:= TRUE);
+	ELSIF VbDeviceReset THEN
+		M_SetRestartLog(
+			INszLogTxt:= CONCAT('EC-Master-Reset manuell, BK1250-State= ', UINT_TO_STRING(fbBK1250Diag.OUTuiCouplterState)));
+		iofDeviceReset(RESET:= TRUE);
+
+	ELSIF VbTCReset THEN
+		M_SetRestartLog(
+			INszLogTxt:= 'TwinCAT-Reset manuell');
+		tcRestart(RESTART:= TRUE);
+		
+	END_IF
+	
+END_IF
+
+tonTcRestart();
+IF tonTcRestart.Q THEN
+	VbTCReset := FALSE;
+	VbDeviceReset := FALSE;
+	tonTcRestart.IN := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="M_Init" Id="{54d96ba3-89e6-47a4-b6ef-697f711cf321}">
+      <Implementation>
+        <ST><![CDATA[bInit := FALSE;
+
+tcRestart(
+	NETID:= '', 
+	RESTART:= FALSE, 
+	TMOUT:= );
+
+iofDeviceReset(
+	NETID:= '',
+	DEVICEID:= IuiDeviceId_ECMAster, 
+	RESET:= FALSE,  
+	TMOUT:= );
+	
+(* Ansteuerung der Sekunden-USV, damit bei Spannungsausfall die persistenten Daten gesichert werden *)
+fbUPS(
+	sNetID:= '', 
+	iPLCPort:= 851, 
+	iUPSPort:= 16#588, 
+	tTimeout:= DEFAULT_ADS_TIMEOUT, 
+	eUpsMode:= eSUPS_WrPersistData_Shutdown, 
+	ePersistentMode:= SPDM_2PASS, 
+	tRecoverTime:= T#10S);
+
+fbNtGetTime.NETID := ''; (*local*)
+fbNtSetTime.NETID := ''; (*local*)
+
+tonStartUp(IN:= FALSE);
+
+OUTbSummerTime := nvbSummerTime;
+	
+(* END *****************************************)]]></ST>
+      </Implementation>
+    </Action>
+    <Method Name="M_SetRestartLog" Id="{5ca69cbb-8480-4dc1-b054-4cac44d151cd}">
+      <Declaration><![CDATA[METHOD PRIVATE M_SetRestartLog
+VAR_INPUT
+	INszLogTxt : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nviTcRestartCnt := nviTcRestartCnt + 1;
+nviTcRestartId := nviTcRestartId + 1;
+IF (nviTcRestartId > 10) THEN
+	nviTcRestartId := 1;
+END_IF
+anvszTcRestartReason[nviTcRestartId] := 
+	CONCAT(DT_TO_STRING(OUTdtDateClock),
+		CONCAT(' ', INszLogTxt));
+]]></ST>
+      </Implementation>
+    </Method>
+    <Action Name="M_Summertime" Id="{dd7bba39-e4b7-4a36-a6b4-d5109237b9fe}">
+      <Implementation>
+        <ST><![CDATA[
+IF (OUTstSysTimeDate.wDayOfWeek = Sonntag) THEN
+	IF nvbSummerTime THEN
+		IF (OUTtodClockBase = TOD#2:00) THEN
+			IF (OUTstSysTimeDate.wMonth = 10)
+			AND (OUTstSysTimeDate.wDay >= 25)
+			THEN
+				nvbSummerTime := FALSE;
+			END_IF
+		END_IF
+	ELSE
+		IF (OUTtodClockBase = TOD#2:00) THEN
+			IF (OUTstSysTimeDate.wMonth = 3)
+			AND (OUTstSysTimeDate.wDay >= 25)
+			THEN
+				nvbSummerTime := TRUE;
+			END_IF
+		END_IF
+	END_IF
+END_IF
+OUTbSummerTime := nvbSummerTime;
+
+(* END *****************************************)]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

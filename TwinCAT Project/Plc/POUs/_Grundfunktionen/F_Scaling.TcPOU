@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="F_Scaling" Id="{9bf93847-492f-4c8d-a970-417d937fd889}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Scaling : DINT
+VAR_INPUT
+	diInput 	: DINT;
+	diRef100 	: DINT;
+END_VAR
+
+
+VAR
+END_VAR
+(*All VAR_IN_OUT variables have been moved to the end of the declaration due to compatibility reasons*)
+VAR_IN_OUT
+	stScal 		: ST_AnalogScaling;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_Scaling :=
+		(diInput
+		- stScal.diXRef)
+	* stScal.diFact
+	/ diRef100
+	+ stScal.diYRef;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

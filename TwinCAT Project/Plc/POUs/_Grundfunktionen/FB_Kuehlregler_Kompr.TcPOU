@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_Kuehlregler_Kompr" Id="{65b81855-624f-417b-9188-7e84d94afce9}" SpecialFunc="None">
+    <Declaration><![CDATA[(* Heizregler fuer Fussbodenheizung ueber Schaltventil und 
+	Ruecklauftemperaturueberwachung (Schwallbetrie)
+*)
+FUNCTION_BLOCK FB_Kuehlregler_Kompr
+VAR_INPUT
+	INbEnable				: BOOL;
+	INrTempSoll			: REAL;
+	INrTempIst 			: REAL;
+
+	iPMin 					: INT := 25;
+	iPMax 					: INT := 100;
+	iPHeizIn				: INT := 0;
+END_VAR
+VAR_OUTPUT
+	OUTrResult				: REAL;
+END_VAR
+VAR
+	bInitDone					 : BOOL;
+
+	tonCtrlCycle			: TON := (PT:=T#5S);
+	bCtrlCycle				: BOOL;
+
+	arTempIst 				: ARRAY[0..2] OF REAL;
+	rTempIstAend 			: REAL;
+
+	rTempSollOld 			: REAL;
+	rTempSollAend 		: REAL;
+
+	rTempDiff 				: REAL;
+
+	rResult_P					: REAL;
+	rResult_I					: REAL;
+	rResult_Dist			: REAL;
+	rResult_Dsoll			: REAL;
+	rResult						: REAL;
+
+END_VAR
+
+VAR PERSISTENT
+	VnvbManuell				: BOOL;
+	VnvrResultManuell	: REAL;
+	iMaxCycleTime			: INT := 3600; (* maximale Heizzykluszeit [s] bei Heizleistung 1% *)
+
+	rkP								: REAL := 300; (* P-Regler, 1000 = 1.000 *)
+	rkI								: REAL := 50; (* I-Regler, 1000 = 1.000 *)
+	rkDist						: REAL := 5; (* D-Regler auf Istwert *)
+	rkDsoll						: REAL := 5; (* D-Regler auf Sollwert => wirkt direkt auf I-Anteil *)
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bInitDone THEN
+	A_Init();
+END_IF
+
+tonCtrlCycle(IN:= NOT bCtrlCycle);
+bCtrlCycle := tonCtrlCycle.Q;
+
+A_Ctrl();
+
+(* END *******************************)]]></ST>
+    </Implementation>
+    <Action Name="A_Init" Id="{6074d095-d895-4c56-be7b-943b4045ccc0}">
+      <Implementation>
+        <ST><![CDATA[rTempSollOld := INrTempSoll;
+arTempIst[2] := arTempIst[1];
+arTempIst[1] := arTempIst[0];
+arTempIst[0] := INrTempIst;
+rResult_I := VnvrResultManuell * 1000;
+bInitDone := TRUE;
+
+(* END *******************************)]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_Ctrl" Id="{89bce69f-8961-4c23-b39d-74c9b5f804fd}">
+      <Implementation>
+        <ST><![CDATA[IF bCtrlCycle THEN
+	rTempSollAend :=
+			rTempSollOld
+		- INrTempSoll;
+	rTempSollOld := INrTempSoll;
+	rTempIstAend :=
+			arTempIst[2]
+		- INrTempIst;
+	arTempIst[2] := arTempIst[1];
+	arTempIst[1] := arTempIst[0];
+	arTempIst[0] := INrTempIst;
+END_IF
+
+IF VnvbManuell THEN
+	rResult_I := VnvrResultManuell * 1000;
+	OUTrResult := VnvrResultManuell;
+	
+ELSIF INbEnable
+AND NOT (iPHeizIn > 0)
+THEN
+	IF bCtrlCycle THEN
+		rResult_Dist :=
+				rTempIstAend
+			* rkDist;
+
+		rResult_Dsoll :=
+				rTempSollAend
+			* rkDsoll;
+	END_IF
+
+	rTempDiff :=
+			INrTempIst
+		- INrTempSoll
+		+ rResult_Dist;
+
+	rResult_P :=
+			rTempDiff
+		* rkP;
+
+	IF bCtrlCycle THEN
+		rResult_I :=
+				rTempDiff
+			* rkI
+			+ rResult_Dsoll
+			+ rResult_I;
+		IF (rResult_I
+				> (100000 - rResult_P))
+		THEN
+			rResult_I :=
+				(100000 - rResult_P);
+		ELSIF (rResult_I < 0) THEN
+			rResult_I := 0;
+		END_IF
+	END_IF
+
+	rResult :=
+			rResult_P
+		+ rResult_I;
+	OUTrResult := rResult / 1000;
+END_IF
+
+(* END *******************************)]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

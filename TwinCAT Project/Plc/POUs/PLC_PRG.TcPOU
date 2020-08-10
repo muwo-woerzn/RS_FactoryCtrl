@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <POU Name="PLC_PRG" Id="{59431c92-fc1b-4474-86c9-7986e9c43fbd}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PLC_PRG
+VAR
+	bInit							: BOOL := TRUE;
+
+	tonCount : TON := (PT:= t#200ms);
+
+	bSetClock  				: BOOL;
+	bCopyToClockSet 	: BOOL := TRUE;
+	bTimeCalc  				: BOOL;
+	dtClockSet 				: DATE_AND_TIME := DT#2008-01-01-00:00;
+	dwSysTimeSet			: DWORD;
+
+	rtrigRolloAb	: R_TRIG;
+	rtrigRolloAuf : R_TRIG;
+	bVisuRolloAb 	: BOOL;
+	bVisuRolloAuf : BOOL;
+
+	tonTakt100ms	: TON := (PT:= t#100ms);
+	tonTaktPWM	: TON := (PT:= t#5s);
+	bTakt200ms	: BOOL;
+
+	todRolloAb_i		: TIME_OF_DAY;
+
+	dwdNacht_i			: DWORD;
+	todNacht_i			: TIME_OF_DAY;
+	todTag_i				: TIME_OF_DAY;
+
+	bIn										: BOOL;
+	fbTasterZentral1 			: FB_Taster;
+	IbZentral1  	 AT %I* : BOOL;
+	bInVisuZentral1				: BOOL;
+
+	bVisuLichtZentralAus 	: BOOL;
+	bVisuLichtZentralEin 	: BOOL;
+
+	bLichtZentralAus 	: BOOL;
+	bLichtZentralEin 	: BOOL;
+
+(*
+	fbTasterZentral2 		: FB_Taster;
+	IbZentral2  AT %I*3.1	: BOOL;
+	bInVisuZentral2			: BOOL;*)
+
+	iHGr	: INT;
+	iHTi	: INT;
+	
+	(* Funktionsbausteine ************************************)
+
+	(* Kompressorsteuerung ***********************************)
+	fbKompressorSteuerung		: FB_KompressorSteuerung;
+
+	(* Abluft bzw. Absaugung *********************************)
+	fbAbluftsteuerung1			: FB_Abluftsteuerung;
+	fbAbluftsteuerung2			: FB_Abluftsteuerung;
+	
+	(* EG-Raeume *)
+  fbEGHalle : FB_EGHalle;
+  fbEGBuero : FB_EGBuero;
+  
+	(* KG-Raeume *)
+	fbWCDamen								: FB_WCRaum();
+	fbWCHerren							: FB_WCRaum();
+	
+	
+END_VAR
+
+VAR PERSISTENT
+	bSummerTime		: BOOL;
+
+	todRolloAuf		: TIME_OF_DAY := TOD#7:30;
+	todRolloAb		: TIME_OF_DAY := TOD#18:55;
+	dwRolloAbMinFact_neg	: DWORD := 115;
+	dwRolloAbMinFact_pos	: DWORD := 135;
+
+
+	todHeizEin		: ARRAY[0..gciHeizGr,0..gciHeizTimer] OF TIME_OF_DAY :=[ TOD#0:00];
+	todHeizAus		: ARRAY[0..gciHeizGr,0..gciHeizTimer] OF TIME_OF_DAY :=[ TOD#0:00];
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bInit THEN
+	A_Init();
+END_IF
+gfbSystemCX();
+
+
+(* Systemuhr ***************************)
+IF gfbSystemCX.OUTbNewDay
+OR bTimeCalc
+THEN
+	(* Datum hat sich geaendert (neuer Tag) *)
+	A_TimeCalculation();
+	bTimeCalc := FALSE;
+END_IF
+
+(* Rollo-Timer *)
+IF (todRolloAb <> TOD#00:00) THEN
+	rtrigRolloAb(CLK:= (gfbSystemCX.OUTtodClockBase = todRolloAb_i));
+	gbTimeRolloAb := rtrigRolloAb.Q OR bVisuRolloAb;
+ELSE
+	gbTimeRolloAb := FALSE;
+END_IF
+IF (todRolloAuf <> TOD#00:00) THEN
+	rtrigRolloAuf(CLK:= (gfbSystemCX.OUTtodClock = todRolloAuf));
+	gbTimeRolloAuf := rtrigRolloAuf.Q OR bVisuRolloAuf;
+ELSE
+	gbTimeRolloAuf := FALSE;
+END_IF
+
+
+(* Tag/Nacht-Timer *)
+gbTimeNacht := FALSE;
+gbTimeTag := FALSE;
+IF (gfbSystemCX.OUTtodClockBase = todTag_i) THEN
+	gbTimeTag := TRUE;
+	gbTag := TRUE;
+	gbNacht := FALSE;
+ELSIF (gfbSystemCX.OUTtodClockBase = todNacht_i) THEN
+	gbTimeNacht := TRUE;
+	gbTag := FALSE;
+	gbNacht := TRUE;
+END_IF
+
+
+
+(* Heizgruppen-Timer *)
+FOR iHGr := 0 TO gciHeizGr DO
+	gbHeizGruppe[iHGr] := FALSE;
+	FOR iHTi := 0 TO gciHeizTimer DO
+		IF (todHeizAus[iHGr,iHTi] <> TOD#00:00)
+		AND (todHeizEin[iHGr,iHTi] <> TOD#00:00)
+		AND (gfbSystemCX.OUTtodClock >= todHeizEin[iHGr,iHTi])
+		AND (gfbSystemCX.OUTtodClock < todHeizAus[iHGr,iHTi])
+		THEN
+			gbHeizGruppe[iHGr] := TRUE;
+		END_IF
+	END_FOR
+END_FOR
+
+(* Taktgeber *)
+gbTakt100ms := FALSE;
+tonTakt100ms(IN:=TRUE);
+IF 	tonTakt100ms.Q THEN
+	tonTakt100ms(IN:=FALSE);
+	gbTakt100ms := TRUE;
+END_IF;
+
+
+gbPWMTakt := FALSE;
+tonTaktPWM(IN:=TRUE);
+IF 	tonTaktPWM.Q THEN
+	tonTaktPWM(IN:=FALSE);
+	gbPWMTakt := TRUE;
+	giPWMTimer := giPWMTimer + 1;
+	IF giPWMTimer >= giPWMMax THEN
+		giPWMTimer := 0;
+	END_IF
+END_IF
+
+
+(* Zentraltaster *)
+bIn := IbZentral1 OR bInVisuZentral1;
+fbTasterZentral1(bIn:= bIn);
+
+IF fbTasterZentral1.bKlick THEN
+	bLichtZentralAus := TRUE;
+ELSIF fbTasterZentral1.bLang THEN
+	bLichtZentralAus := TRUE;
+ELSE
+	bLichtZentralAus := FALSE;
+END_IF
+
+gbLichtZentralAus :=
+		 bLichtZentralAus
+	OR bVisuLichtZentralAus;
+gbLichtZentralEin :=
+		 bLichtZentralEin
+	OR bVisuLichtZentralEin;
+
+
+
+gbLichtZentralAus :=
+		 bLichtZentralAus
+	OR bVisuLichtZentralAus;
+gbLichtZentralEin :=
+		 bLichtZentralEin
+	OR bVisuLichtZentralEin;
+
+
+
+gbLichtZentralAus :=
+		 bLichtZentralAus
+	OR bVisuLichtZentralAus;
+gbLichtZentralEin :=
+		 bLichtZentralEin
+	OR bVisuLichtZentralEin;
+
+
+(*************************************************************************)
+PRG_Temperaturen();
+A_FBCalls();
+
+
+
+(* END of FB ******************************************)]]></ST>
+    </Implementation>
+    <Action Name="A_TimeCalculation" Id="{2c127049-ee08-42dd-a6bf-86a7ba322023}">
+      <Implementation>
+        <ST><![CDATA[grSunRiseFact := F_SunRise(gfbSystemCX.OUTdDate);
+todRolloAb_i := F_RolDownTime(
+									rSunRise:= grSunRiseFact,
+									todRef:= todRolloAb,
+									dwMinFact_neg:= dwRolloAbMinFact_neg,
+									dwMinFact_pos:= dwRolloAbMinFact_pos);
+
+dwdNacht_i :=
+		TOD_TO_DWORD(todRolloAb_i)
+	- 3600000; (* ms = TOD#01:00 *)
+
+todNacht_i := DWORD_TO_TOD(dwdNacht_i);
+todTag_i :=
+		DWORD_TO_TOD(
+				88200000 (* ms = TOD#24:30 *)
+			- dwdNacht_i);
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_FBCalls" Id="{6b311567-2df2-49e2-8e3b-eb8bde732d3d}">
+      <Implementation>
+        <ST><![CDATA[(* hier werden alle FB-Instanzen aufgerufen *)
+
+fbKompressorSteuerung();
+
+(* Abluftsteuerung *)
+fbAbluftsteuerung1();
+fbAbluftsteuerung2();
+
+(* EG-Raeume *)
+fbEGHalle();
+fbEGBuero();
+
+(* Kellerraeume *)
+fbWCDamen(
+	IOfbTemperaturRaum := gfbTemp33_WCDamen_Raum);
+fbWCHerren(
+	IOfbTemperaturRaum := gfbTemp34_WCHerren_Raum);
+
+(* END of ACTION *******************************)]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_Init" Id="{bf4e9a6f-7d39-4aa7-8679-be5dd70e1af9}">
+      <Implementation>
+        <ST><![CDATA[bInit := FALSE;
+bTimeCalc := TRUE;
+tonTakt100ms(IN:=FALSE);
+
+(* Heizungstimer intialisieren *)
+IF (todHeizEin[0,0] = TOD#0:00)
+AND (todHeizAus[0,0] = TOD#0:00)
+THEN
+	todHeizEin[0,0] := TOD#4:45;
+	todHeizAus[0,0] := TOD#12:00;
+	todHeizEin[0,1] := TOD#14:00;
+	todHeizAus[0,1] := TOD#19:00;
+
+	todHeizEin[1,0] := TOD#4:50;
+	todHeizAus[1,0] := TOD#20:30;
+
+	todHeizEin[2,0] := TOD#8:00;
+	todHeizAus[2,0] := TOD#12:00;
+	todHeizEin[2,1] := TOD#13:00;
+	todHeizAus[2,1] := TOD#17:00;
+
+	todHeizEin[3,0] := TOD#7:30;
+	todHeizAus[3,0] := TOD#11:00;
+	todHeizEin[3,1] := TOD#12:45;
+	todHeizAus[3,1] := TOD#18:00;
+
+	todHeizEin[4,0] := TOD#10:00;
+	todHeizAus[4,0] := TOD#13:00;
+	todHeizEin[4,1] := TOD#14:00;
+	todHeizAus[4,1] := TOD#19:00;
+
+END_IF
+
+(* END ***********************)]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

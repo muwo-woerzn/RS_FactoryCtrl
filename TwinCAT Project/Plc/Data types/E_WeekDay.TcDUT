@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <DUT Name="E_WeekDay" Id="{9ab8993b-f235-4fe6-b386-882cfcdf8c38}">
+    <Declaration><![CDATA[TYPE E_WeekDay :(
+	Sonntag,
+	Montag,
+	Dienstag,
+	Mittwoch,
+	Donnerstag,
+	Freitag,
+	Samstag,
+
+// folgende Eintraege sind nur zur Moduloberechnung
+	Sonntag2,
+	Montag2,
+	Dienstag2,
+	Mittwoch2,
+	Donnerstag2,
+	Freitag2,
+	Samstag2
+	);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

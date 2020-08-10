@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_BK1250Diag" Id="{f1acd314-2dc1-411d-bfe6-df94bdf6d9e3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_BK1250Diag
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	OUTbStateOK : BOOL;
+	OUTbError : BOOL;
+	OUTuiCouplterState : UINT;
+	
+END_VAR
+VAR
+	IuiCouplterState AT %I* : UINT;
+	IbWcState AT %I* : BOOL;
+	
+	tonError : ton := (PT:=T#100ms);
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[OUTuiCouplterState := IuiCouplterState;
+
+IF OUTuiCouplterState > 0 THEN
+	tonError.IN := TRUE;
+ELSIF IbWcState THEN
+	tonError.IN := TRUE;
+ELSE
+	tonError.IN := FALSE;
+END_IF
+
+OUTbStateOK := NOT tonError.IN;
+tonError();
+OUTbError := tonError.Q;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

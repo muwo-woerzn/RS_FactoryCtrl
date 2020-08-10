@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <DUT Name="ST_TimeSwitchTimes" Id="{25c32f70-20fe-4a28-bf44-13e1833ceaed}">
+    <Declaration><![CDATA[TYPE ST_TimeSwitchTimes :
+STRUCT
+	todHeizEin		: ARRAY[0..iTIMESWITCH_NUMOFTIMES] OF TIME_OF_DAY;
+	todHeizAus		: ARRAY[0..iTIMESWITCH_NUMOFTIMES] OF TIME_OF_DAY;
+	eDayOfWeekStart : ARRAY[0..iTIMESWITCH_NUMOFTIMES] OF E_WeekDay := [iTIMESWITCH_NUMOFTIMES(Montag)];
+	eDayOfWeekEnd : ARRAY[0..iTIMESWITCH_NUMOFTIMES] OF E_WeekDay := [iTIMESWITCH_NUMOFTIMES(Sonntag)];
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

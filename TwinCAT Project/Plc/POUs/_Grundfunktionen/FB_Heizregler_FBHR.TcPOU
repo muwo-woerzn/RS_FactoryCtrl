@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_Heizregler_FBHR" Id="{4dc50fb4-78e4-4be3-9212-48f84d894c7c}" SpecialFunc="None">
+    <Declaration><![CDATA[(* Heizregler fuer Fussbodenheizung ueber Schaltventil und 
+	Ruecklauftemperaturueberwachung (Schwallbetrie)
+*)
+FUNCTION_BLOCK FB_Heizregler_FBHR
+VAR_INPUT
+	INbEnable				: BOOL;
+	INrTempSoll			: REAL;
+	INrTempIst 			: REAL;
+	INrTempVorlauf	: REAL; (* Temperatur, Heizung Vorlauf *)
+	INrTempFBHR			: REAL; (* Temperatur, Fussbodenheizung Ruecklauf*)
+
+	iTimeGrp				: INT; (* Auswahl der Timer-Gruppe 0..9 *)
+	iPMin 					: INT := 25;
+	iPMax 					: INT := 100;
+	iPHeizIn				: INT := 0;
+END_VAR
+VAR_OUTPUT
+	iPHeizOut : INT;
+END_VAR
+VAR
+	bInitDone					 : BOOL;
+
+	(* %I / %Q ********************)
+	QbOutHeizSteller		AT %Q* : BOOL;
+	bOutHeizSteller		: BOOL;
+
+
+	tonCtrlCycle			: TON := (PT:=T#5S);
+	bCtrlCycle				: BOOL;
+	rPHeiz						: REAL;
+
+	arTempIst 				: ARRAY[0..2] OF REAL;
+	rTempIstAend 			: REAL;
+
+	rTempSollOld 			: REAL;
+	rTempSollAend 		: REAL;
+
+	rTempDiff 				: REAL;
+
+	rResult_P					: REAL;
+	rResult_I					: REAL;
+	rResult_Dist			: REAL;
+	rResult_Dsoll			: REAL;
+	rResult						: REAL;
+	
+	iOutputState			: INT; (* Status der Ausgangssteuerung *)
+	iOutputCycleTime	: INT; (* Zeit [s] seit dem letzten Heizvorgang *)
+	rOutputCycleTime	: REAL; (* Zeit [%] seit dem letzten Heizvorgang *)
+	tonTimeCycle						: TON := (PT:= T#1S); (* Zeittakt *)
+	tofWasserHeizung				: TOF := (PT:= T#3S); (* Mindest-Einschaltzeit *)
+	tonVorlaufTemp					: TON := (PT:= T#5M); (* maximale Wartezeit auf Vorlauftemperatur *)
+	tonVorlaufTempStop			: TON := (PT:= T#15M); (* Wartezeit, wenn Vorlauftemperatur zu gering war *)
+	tonMinWartezeit					: TON := (PT:= T#3M); (* Mindest-Wartezeit nach einem Heizyklus bis zum naechsten Start *)
+
+	rRueckTempStart		: REAL; (* Ruecklauftemperatur beim Start des akt. Heizzyklusses *)
+
+END_VAR
+
+VAR PERSISTENT
+	bManuell					: BOOL;
+	iManPHeiz 				: INT;
+	iMaxCycleTime			: INT := 3600; (* maximale Heizzykluszeit [s] bei Heizleistung 1% *)
+
+	rkP								: REAL := 300; (* P-Regler, 1000 = 1.000 *)
+	rkI								: REAL := 50; (* I-Regler, 1000 = 1.000 *)
+	rkDist						: REAL := 5; (* D-Regler auf Istwert *)
+	rkDsoll						: REAL := 5; (* D-Regler auf Sollwert => wirkt direkt auf I-Anteil *)
+
+	rVorlTempDiffMin	: REAL := 5.0; (* Mindestdifferenz zwischen Vorlauf- und Raumtemperatur *)
+	rRueckTempDiffMax	: REAL := 5.0; (* Maximaler Temperaturanstieg im Ruecklauf zum Schliessen des Heizventils *)
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bInitDone THEN
+	A_Init();
+END_IF
+
+tonCtrlCycle(IN:= NOT bCtrlCycle);
+bCtrlCycle := tonCtrlCycle.Q;
+
+A_Ctrl();
+A_Output();
+
+(* END *******************************)]]></ST>
+    </Implementation>
+    <Action Name="A_Init" Id="{1dae5bb7-425b-4069-b2ef-fa8bc6b1fd99}">
+      <Implementation>
+        <ST><![CDATA[rTempSollOld := INrTempSoll;
+arTempIst[2] := arTempIst[1];
+arTempIst[1] := arTempIst[0];
+arTempIst[0] := INrTempIst;
+rResult_I := iManPHeiz * 1000;
+bInitDone := TRUE;
+
+(* END *******************************)]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_Output" Id="{7553df5a-70b7-4d25-b0e9-3b4250f7d203}">
+      <Implementation>
+        <ST><![CDATA[(* Zeittakt für Heizzyklus *)
+tonTimeCycle(IN:= TRUE);
+IF tonTimeCycle.Q THEN
+	tonTimeCycle(IN:= FALSE);
+	IF (iOutputCycleTime > 0) THEN
+		iOutputCycleTime := iOutputCycleTime - 1;
+	END_IF
+END_IF
+rOutputCycleTime :=
+	iOutputCycleTime * 100
+	/ iMaxCycleTime;
+	
+
+CASE iOutputState OF
+0:
+	QbOutHeizSteller := FALSE; 
+	IF (rOutputCycleTime 
+			< rPHeiz)
+	AND (rPHeiz > 1.0) 
+	THEN
+		tofWasserHeizung(IN:= FALSE);
+		tonVorlaufTemp(IN:= FALSE);
+		tonVorlaufTempStop(IN:= FALSE);
+		tonMinWartezeit(IN:= FALSE);
+		rRueckTempStart :=
+				INrTempFBHR;
+		iOutputState := iOutputState + 1;
+	END_IF
+
+1: (* Heizzyklus aktiv, Ventil offen *)
+	QbOutHeizSteller := TRUE; 
+	tofWasserHeizung(IN:= TRUE);
+	tonVorlaufTemp(IN:= TRUE);
+	IF (INrTempFBHR
+			> (rRueckTempStart + rRueckTempDiffMax))
+	THEN (* Ruecklauftemperatur steigt an => Ventil schliessen *)
+		iOutputState := iOutputState + 1;
+	ELSIF tonVorlaufTemp.Q THEN
+		IF (INrTempVorlauf
+				< (INrTempFBHR
+					+ rVorlTempDiffMin))
+		THEN (* Vorlauftemperatur zu gering *)
+			iOutputState := 10;
+		ELSE (* max. Vorlaufzeit erreicht *)
+			iOutputState := iOutputState + 1;
+		END_IF
+	END_IF
+
+2: (* Heizzyklus beendet, Ventil schliessen *)
+	QbOutHeizSteller := FALSE; 
+	tonMinWartezeit(IN:= TRUE);
+	IF tonMinWartezeit.Q THEN
+		iOutputState := iOutputState + 1;
+	END_IF
+
+10: (* Vorlauftemperatur war zu gering *)
+	QbOutHeizSteller := FALSE; 
+	tonVorlaufTempStop(IN:= TRUE);
+	IF tonVorlaufTempStop.Q THEN
+		iOutputState := iOutputState + 1;
+	END_IF
+
+ELSE
+	iOutputCycleTime := 
+			iMaxCycleTime;
+	iOutputState := 0;
+
+END_CASE
+
+
+(* END *******************************)]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_Ctrl" Id="{c74dd3c1-603e-499c-bdd6-1b343dce8a0f}">
+      <Implementation>
+        <ST><![CDATA[IF bCtrlCycle THEN
+	rTempSollAend :=
+			INrTempSoll
+		- rTempSollOld;
+	rTempSollOld := INrTempSoll;
+	rTempIstAend :=
+			INrTempIst
+		- arTempIst[2];
+	arTempIst[2] := arTempIst[1];
+	arTempIst[1] := arTempIst[0];
+	arTempIst[0] := INrTempIst;
+END_IF
+
+IF bManuell THEN
+	rResult_I := iManPHeiz * 1000;
+	rPHeiz := iManPHeiz;
+	
+ELSIF INbEnable
+AND NOT (iPHeizIn > 0)
+AND gbHeizGruppe[iTimeGrp]
+THEN
+	IF bCtrlCycle THEN
+		rResult_Dist :=
+				rTempIstAend
+			* rkDist;
+
+		rResult_Dsoll :=
+				rTempSollAend
+			* rkDsoll;
+
+		rTempDiff :=
+				INrTempSoll
+			- INrTempIst
+			+ rResult_Dist;
+
+		rResult_P :=
+				rTempDiff
+			* rkP;
+
+		rResult_I :=
+				rTempDiff
+			* rkI
+			+ rResult_Dsoll
+			+ rResult_I;
+		IF (rResult_I
+				> (100000 - rResult_P))
+		THEN
+			rResult_I :=
+				(100000 - rResult_P);
+		ELSIF (rResult_I < 0) THEN
+			rResult_I := 0;
+		END_IF
+
+		rResult :=
+				rResult_P
+			+ rResult_I;
+		rPHeiz := rResult / 1000;
+
+	END_IF
+END_IF
+
+(* END *******************************)]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

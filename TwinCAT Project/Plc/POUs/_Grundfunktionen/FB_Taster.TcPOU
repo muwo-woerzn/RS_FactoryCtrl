@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_Taster" Id="{5ee9baf7-a56d-403b-8488-4c1599d9e2f0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Taster
+VAR_INPUT
+	bIn 		: BOOL;
+END_VAR
+
+VAR_OUTPUT
+	bOut	: BOOL;
+	bKlick			: BOOL;
+	bKlick2			: BOOL;
+	bKlick3			: BOOL;
+	bLang				: BOOL;
+	iKlick			: INT;
+END_VAR
+VAR
+	bKlick_i		: BOOL;
+
+	iKlickCnt		: INT;
+
+	tofPrell 		: TOF := (PT:= t#30ms);
+	tofKlick 		: TOF := (PT:= t#400ms);
+	tonLang 		: TON := (PT:= t#700ms);
+
+	rtrigTast	 	: R_TRIG;
+	ftrigKlick 	: F_TRIG;
+	rtrigLang  	: R_TRIG;
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[tofPrell(IN:= bIn);
+bOut := tofPrell.Q;
+rtrigTast(CLK:= tofPrell.Q);
+bKlick_i := rtrigTast.Q AND NOT tofKlick.Q;
+
+tofKlick(IN:= rtrigTast.Q);
+ftrigKlick(CLK:= tofKLick.Q);
+
+IF rtrigTast.Q THEN
+	iKlickCnt := iKlickCnt + 1;
+END_IF
+
+tonLang(IN:= bOut);
+rtrigLang(CLK:= tonLang.Q);
+
+
+
+(* Ausgabe *)
+bKlick := bKlick_i;
+IF ftrigKlick.Q THEN
+	iKlick := iKlickCnt;
+	bKlick2 := iKlick = 2;
+	bKlick3 := iKlick = 3;
+	iKlickCnt := 0;
+ELSE
+	iKlick := 0;
+	bKlick2 := FALSE;
+	bKlick3 := FALSE;
+END_IF
+
+bLang := rtrigLang.Q;
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_AnalogOutput" Id="{34adebff-7554-4020-939c-756937823863}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AnalogOutput
+VAR CONSTANT
+	iMAX_VALUE         				: INT   := 32760;
+	iMIN_VALUE         				: INT   := 0; 
+END_VAR
+VAR_INPUT
+	INrCalibFactor						: REAL := 1.0; (* Kalibrierungs-Faktor *)
+	INrCalibOffset						: REAL := 0.0; (* Kalibrierungs-Offset *)
+	
+	INbEnable									: BOOL;
+	INrMinValue								: REAL := 0.0;
+	INrMaxValue								: REAL := 1.0;
+	INrValue									: REAL; (* Ausgabewert -1.0 ... +1.0 *)
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bInit											: BOOL := TRUE;
+	
+	IusiState					AT %I*	: USINT;
+	IiDataIn 					AT %I*	: INT;
+	QusiCtrl 					AT %Q*	: USINT;
+	QiDataOut					AT %Q*	: INT;
+
+	rValue										: REAL; (* Ausgabewert -1.0 ... +1.0 *)
+	rMinValue									: REAL;
+	rMaxValue									: REAL;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF INbEnable THEN
+	rMinValue := LIMIT(-1.0, INrMinValue, 1.0);
+	rMaxValue := LIMIT(rMinValue, INrMaxValue, 1.0);
+	
+	rValue := 
+			INrValue
+		* INrCalibFactor
+		+ INrCalibOffset;
+	
+	QiDataOut :=
+		REAL_TO_INT(
+			LIMIT(rMinValue, rValue, rMaxValue)
+			* iMAX_VALUE
+		);
+ELSE
+	QiDataOut := 0;
+	
+END_IF
+
+(* END ****************************************)	]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

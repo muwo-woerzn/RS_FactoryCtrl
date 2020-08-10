@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="F_RolDownTime" Id="{c282c80e-87dc-4d47-8e6e-0d5647a66846}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_RolDownTime : TOD
+VAR_INPUT
+	rSunRise			: REAL;
+	todRef				: TOD; (* mittlere Referenzzeit *)
+	dwMinFact_neg	: DWORD;
+	dwMinFact_pos	: DWORD;
+END_VAR
+VAR
+	dwDate 		: DWORD;
+	dwTodRef 	: DWORD;
+	rTodRef 	: REAL;
+	dwYearDay : DWORD;
+
+	rPi				: REAL;
+	rResult		: REAL;
+	dwResult	: DWORD;
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (rSunRise > 0) THEN
+	rResult := rSunRise * DWORD_TO_REAL(dwMinFact_pos) * 60000;
+ELSE
+	rResult := rSunRise * DWORD_TO_REAL(dwMinFact_neg) * 60000;
+END_IF
+
+rTodRef := TOD_TO_REAL(todRef);
+dwResult := REAL_TO_DWORD(rTodRef + rResult) / 1000 * 1000;
+
+F_RolDownTime := DWORD_TO_TOD(dwResult);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

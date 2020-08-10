@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <DUT Name="E_StateAnalog" Id="{35c75778-9546-44a3-8d03-c2169abcf5e1}">
+    <Declaration><![CDATA[TYPE E_StateAnalog : (
+	eAnalog_Init,
+	eAnalog_Start,
+	eAnalog_LimitLow,
+	eAnalog_LimitHigh,
+	eAnalog_End
+	);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

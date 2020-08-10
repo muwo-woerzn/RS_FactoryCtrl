@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="F_diColorOfTemperature" Id="{0e4f6268-14de-4ef5-87da-d032791fcb3c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_diColorOfTemperature : DINT
+VAR_INPUT
+	INrTempActual				: REAL;
+	INrTempMin					: REAL;
+	INrTempMax					: REAL;
+END_VAR
+VAR
+	rColorFactor				: REAL;
+	diColor							: DINT;
+	diGreen							: DINT;
+	diBlue							: DINT;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[rColorFactor := 
+	16#200 / (INrTempMax - INrTempMin);
+
+diColor :=
+	REAL_TO_DINT(
+		(INrTempMax 
+		- INrTempActual) 
+		* rColorFactor);
+
+diGreen := LIMIT(0, diColor * 16#100, 16#FF00);
+diBlue := LIMIT(0, diColor - 16#FF, 16#FF);
+
+F_diColorOfTemperature := 16#FF0000 + diGreen + diBlue;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

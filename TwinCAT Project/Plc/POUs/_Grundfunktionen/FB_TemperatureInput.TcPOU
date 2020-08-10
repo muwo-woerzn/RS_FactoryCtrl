@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="FB_TemperatureInput" Id="{70541838-d43c-4d49-91df-df2145d6525b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TemperatureInput
+VAR CONSTANT
+	iMAX_VALUE         				: INT   := 32767; (* Drahtbruch *)
+	iMIN_VALUE         				: INT   := 0; 
+END_VAR
+VAR_INPUT
+	INrCalibFactor								: REAL := 1.0; (* Kalibrierungs-Faktor *)
+	INrCalibOffset								: REAL := 0.0; (* Kalibrierungs-Offset *)
+END_VAR
+VAR_OUTPUT
+	OUTbRangeMin 			   			: BOOL;
+	OUTbRangeMax	  		   		: BOOL;
+	OUTbValueOk								: BOOL;
+	OUTrValue									: REAL;
+END_VAR
+VAR
+	bInit											: BOOL := TRUE;
+	
+	IusiState					AT %I*	: USINT;
+	IiDataIn 					AT %I*	: INT;
+	QusiCtrl 					AT %Q*	: USINT;
+	QiDataOut					AT %Q*	: INT;
+
+	tonValueOk								: TON := (PT:= T#100MS);
+
+	VdiColourOfTemperature		: DINT;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[OUTbRangeMax := 
+	IusiState.1
+	OR (IiDataIn > iMAX_VALUE);
+OUTbRangeMin := 
+	IusiState.0
+	OR (IiDataIn < iMIN_VALUE);
+
+tonValueOk(
+	IN:= NOT OUTbRangeMin
+			AND NOT OUTbRangeMax); 	
+OUTbValueOk := 
+	tonValueOk.Q;
+
+IF OUTbValueOk THEN
+	OUTrValue :=
+		INT_TO_REAL(IiDataIn) / 10
+		* INrCalibFactor
+		+ INrCalibOffset;
+END_IF
+
+VdiColourOfTemperature :=
+	F_diColorOfTemperature(
+		INrTempActual:= OUTrValue, 
+		INrTempMin:= 20, 
+		INrTempMax:= 75);
+	
+(* END ****************************************)	]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

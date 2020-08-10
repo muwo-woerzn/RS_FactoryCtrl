@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <POU Name="PRG_Temperaturen" Id="{ba260830-5044-417e-bd94-86f0cbbbded0}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_Temperaturen
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[gfbTemp11_Puffer4000_Brauchw();
+gfbTemp12_Puffer4000_oben();
+gfbTemp13_Puffer4000_mitte();
+gfbTemp14_Puffer4000_unten();
+gfbTemp21_PufferWohnh_oben();
+gfbTemp22_PufferWohnh_unten();
+gfbTemp23_PufferWerkst_oben();
+gfbTemp24_PufferWerkst_unten();
+gfbTemp31_KomprWRG_Ruecklauf();
+gfbTemp32_KomprWRG_Vorlauf();
+gfbTemp33_WCDamen_Raum();
+gfbTemp34_WCHerren_Raum();
+gfbTemp41_Schluckbrunnen();
+gfbTemp42_Res();
+gfbTemp43_Res();
+gfbTemp44_Res();
+	
+	
+(* END of PRG *)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <POU Name="FB_TimeSwitch" Id="{79997d22-83f2-48e2-9c10-f319b610bd31}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TimeSwitch
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	OUTbOn				: BOOL;
+	OUTbOn_RTrig	: BOOL;
+	OUTbOn_FTrig	: BOOL;
+	
+END_VAR
+VAR_IN_OUT
+	IOstTimeSwitchTimes : ST_TimeSwitchTimes;
+END_VAR
+VAR
+	iCh						: INT;
+	bOn						: BOOL;
+	eDayOfWeekEnd : E_WeekDay;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bOn := FALSE;
+FOR iCh := 0 TO iTIMESWITCH_NUMOFTIMES DO
+	IF (IOstTimeSwitchTimes.todHeizAus[iCh] <> TOD#00:00)
+	AND (IOstTimeSwitchTimes.todHeizEin[iCh] <> TOD#00:00)
+	THEN
+		IF (gfbSystemCX.OUTtodClock 
+				>= IOstTimeSwitchTimes.todHeizEin[iCh])
+		AND (gfbSystemCX.OUTtodClock 
+					< IOstTimeSwitchTimes.todHeizAus[iCh])
+		THEN
+      IF (IOstTimeSwitchTimes.eDayOfWeekEnd[iCh] < IOstTimeSwitchTimes.eDayOfWeekStart[iCh]) THEN
+        // Modulokorrektur
+        eDayOfWeekEnd := IOstTimeSwitchTimes.eDayOfWeekEnd[iCh] + 7;
+      ELSE
+        eDayOfWeekEnd := IOstTimeSwitchTimes.eDayOfWeekEnd[iCh];
+      END_IF
+      IF (gfbSystemCX.OUTeDayOfWeek >= IOstTimeSwitchTimes.eDayOfWeekStart[iCh]) 
+      AND (gfbSystemCX.OUTeDayOfWeek <= eDayOfWeekEnd) 
+      THEN 
+        bOn := TRUE;
+      END_IF
+		END_IF
+	END_IF
+END_FOR
+
+OUTbOn_RTrig := FALSE;
+OUTbOn_FTrig := FALSE;
+IF NOT bOn
+AND OUTbOn
+THEN
+	OUTbOn_FTrig := TRUE;
+ELSIF bOn
+AND NOT OUTbOn
+THEN
+	OUTbOn_RTrig := TRUE;
+END_IF
+OUTbOn := bOn;
+
+(* FB END *)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

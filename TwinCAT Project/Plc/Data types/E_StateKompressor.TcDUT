@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <DUT Name="E_StateKompressor" Id="{92d2eecc-4978-44ab-8abc-70d68f967281}">
+    <Declaration><![CDATA[TYPE E_StateKompressor :
+(
+	eStateKompr_AUS,
+	eStateKompr_START,
+	eStateKompr_AKTIV,
+	eStateKompr_STOP,
+	eStateKompr_STOERUNG
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
