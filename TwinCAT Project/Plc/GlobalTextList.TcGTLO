@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <GlobalTextList Name="GlobalTextList" Id="{2b594680-be5a-47ff-9602-b7a574301995}">
     <XmlArchive>
       <Data>
@@ -51,6 +51,21 @@ Notkompressor"</v>
 			3: Puffer4000_oben
 			4: Puffer4000_Brauchw *)
  "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"242"</v>
+              <v n="TextDefault">"   Filter black list:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"247"</v>
+              <v n="TextDefault">"   Filter white list:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"237"</v>
+              <v n="TextDefault">"   Meldungen:"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -229,6 +244,13 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"279"</v>
+              <v n="TextDefault">" Auswahl des Temperatursensors 
+ zur Steuerung der Pufferumwaelzpumpe 
+ zum Wohnhaus/Werkstatt :"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"201"</v>
               <v n="TextDefault">" Auswahl des Temperatursensors 
  zur Steuerung der Pufferumwaelzpumpe 
@@ -240,6 +262,28 @@ Notkompressor"</v>
               <v n="TextDefault">" Auswahl des Temperatursensors 
  zur Steuerung der Pufferumwaelzpumpen 
  zum Wohnhaus/Werkstatt "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"283"</v>
+              <v n="TextDefault">" Auswahl des Temperatursensors zur Steuerung der 
+Pufferumwaelzpumpe zum Wohnhaus/Werkstatt"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"281"</v>
+              <v n="TextDefault">" Auswahl des Temperatursensors zur Steuerung der 
+Pufferumwaelzpumpe zum Wohnhaus/Werkstatt :"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"280"</v>
+              <v n="TextDefault">" Auswahl des Temperatursensors zur Steuerung der Pufferumwaelzpumpe zum Wohnhaus/Werkstatt :"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"258"</v>
+              <v n="TextDefault">" Auswertung gestartet ab Logeintrag: %s"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -255,8 +299,18 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"259"</v>
+              <v n="TextDefault">" Filter:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"191"</v>
               <v n="TextDefault">" IN_Title:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"278"</v>
+              <v n="TextDefault">" Kellerräume:"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -275,13 +329,38 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"270"</v>
+              <v n="TextDefault">" Letzter Logeintrag in Datei: %s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"257"</v>
+              <v n="TextDefault">" Letzter Logeintrag: %s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"265"</v>
+              <v n="TextDefault">" Log-Datei: %s_ n.csv"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"57"</v>
               <v n="TextDefault">" Manuell"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"256"</v>
+              <v n="TextDefault">" Message (Datum, Uhrzeit, Pfad, Text)"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"187"</v>
               <v n="TextDefault">" Nachlaufzeit Abluftventilator"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"271"</v>
+              <v n="TextDefault">" Nicht gespeicherte Logeinträge: %s"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -402,6 +481,11 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"241"</v>
+              <v n="TextDefault">"%s "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"219"</v>
               <v n="TextDefault">"%s min"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -417,6 +501,21 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"263"</v>
+              <v n="TextDefault">"&amp;"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"252"</v>
+              <v n="TextDefault">"'black list: Begriff1[;Begriff2[;Begriff3]]'"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"248"</v>
+              <v n="TextDefault">"'whitelist: Begriff1[;Begriff2[;Begriff3]]'"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"123"</v>
               <v n="TextDefault">"+"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -424,6 +523,16 @@ Notkompressor"</v>
             <o>
               <v n="TextID">"124"</v>
               <v n="TextDefault">"-"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"253"</v>
+              <v n="TextDefault">"..."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"262"</v>
+              <v n="TextDefault">"/"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -437,8 +546,18 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"284"</v>
+              <v n="TextDefault">"2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"204"</v>
               <v n="TextDefault">"2: "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"285"</v>
+              <v n="TextDefault">"3"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -447,8 +566,18 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"286"</v>
+              <v n="TextDefault">"4"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"206"</v>
               <v n="TextDefault">"4: "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"287"</v>
+              <v n="TextDefault">"5"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -457,8 +586,23 @@ Notkompressor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"288"</v>
+              <v n="TextDefault">"6"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"208"</v>
               <v n="TextDefault">"6: "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"289"</v>
+              <v n="TextDefault">"7"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"290"</v>
+              <v n="TextDefault">"8"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -504,6 +648,28 @@ Notkompressor"</v>
             <o>
               <v n="TextID">"95"</v>
               <v n="TextDefault">"Alarm"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"296"</v>
+              <v n="TextDefault">"ALARM"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"306"</v>
+              <v n="TextDefault">"Alarm quittieren"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"307"</v>
+              <v n="TextDefault">"Alarm quittieren
+und Transoren
+starten"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"249"</v>
+              <v n="TextDefault">"Alle"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -584,8 +750,45 @@ zum Wohnhaus/Werkstatt "</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"264"</v>
+              <v n="TextDefault">"black"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"11"</v>
               <v n="TextDefault">"Dachgeschoss"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"273"</v>
+              <v n="TextDefault">"Das Klemmen-Bus-System
+wird neu gestartet!
+
+Es werden für wenige Sekunden
+ alle Ausgänge abgeschaltet
+(z.B. Lichter...)."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"269"</v>
+              <v n="TextDefault">"Daten sofort speichern"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"268"</v>
+              <v n="TextDefault">"Daten speichern"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"267"</v>
+              <v n="TextDefault">"Daten werden automatisch gespeichert,
+wenn eine Mindestanzahl ungespeicherter
+Meldungen vorhanden ist."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"266"</v>
+              <v n="TextDefault">"Datenspeicherung aktivieren"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -633,6 +836,11 @@ RGB"</v>
             <o>
               <v n="TextID">"133"</v>
               <v n="TextDefault">"Decke Süd WEISS"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"244"</v>
+              <v n="TextDefault">"del"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -701,6 +909,21 @@ RGB"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"260"</v>
+              <v n="TextDefault">"Error"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"274"</v>
+              <v n="TextDefault">"Es wird ein Neustart
+der Steuerung durchgeführt!
+
+Die Steuerung wird während
+des Neustarts für ca. 1 Minute
+nicht erreichbar sein."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"142"</v>
               <v n="TextDefault">"Farbe"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -718,6 +941,11 @@ RGB"</v>
             <o>
               <v n="TextID">"88"</v>
               <v n="TextDefault">"FBHeiz.Rücklauf"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"251"</v>
+              <v n="TextDefault">"Fehlermeldungen"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -776,6 +1004,11 @@ RGB"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"255"</v>
+              <v n="TextDefault">"Id"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"192"</v>
               <v n="TextDefault">"IN_Title"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -791,6 +1024,16 @@ RGB"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"282"</v>
+              <v n="TextDefault">"Kellerräume"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"277"</v>
+              <v n="TextDefault">"Kellerräume:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"77"</v>
               <v n="TextDefault">"KG"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -798,6 +1041,24 @@ RGB"</v>
             <o>
               <v n="TextID">"185"</v>
               <v n="TextDefault">"KG WC-Räume:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"310"</v>
+              <v n="TextDefault">"Klemmen-
+Bus-System 
+neu starten"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"309"</v>
+              <v n="TextDefault">"Klemmen-Bus-System 
+neu starten"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"236"</v>
+              <v n="TextDefault">"Klemmen-Bus-System neu starten"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -836,6 +1097,16 @@ RGB"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"297"</v>
+              <v n="TextDefault">"Liquiphanten"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"291"</v>
+              <v n="TextDefault">"Liquiphanten Konfiguration"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"160"</v>
               <v n="TextDefault">"Lufttrockner"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -844,6 +1115,11 @@ RGB"</v>
               <v n="TextID">"161"</v>
               <v n="TextDefault">"Lufttrockner
 "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"245"</v>
+              <v n="TextDefault">"löschen"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -877,6 +1153,11 @@ RGB"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"275"</v>
+              <v n="TextDefault">"Monitoring"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"229"</v>
               <v n="TextDefault">"Montag"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -894,13 +1175,33 @@ eingestellte Zeit nach"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"294"</v>
+              <v n="TextDefault">"Name"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"36"</v>
               <v n="TextDefault">"Neue Uhrzeit setzen"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"298"</v>
+              <v n="TextDefault">"Not-Aus"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"159"</v>
               <v n="TextDefault">"Notkompressor"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"292"</v>
+              <v n="TextDefault">"Nr"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"295"</v>
+              <v n="TextDefault">"Nr %s"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -1034,6 +1335,16 @@ Wohnhaus
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"303"</v>
+              <v n="TextDefault">"Rückmeldekont.1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"304"</v>
+              <v n="TextDefault">"Rückmeldekont.2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"226"</v>
               <v n="TextDefault">"Sa"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -1056,6 +1367,11 @@ Wohnhaus
             <o>
               <v n="TextID">"215"</v>
               <v n="TextDefault">"Schaltzeiten fuer lange Ausschaltverzögerung "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"302"</v>
+              <v n="TextDefault">"Schlüsselschalter"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -1099,6 +1415,11 @@ bad"</v>
             <o>
               <v n="TextID">"109"</v>
               <v n="TextDefault">"Schwimmbad Soll-Temperatur"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"300"</v>
+              <v n="TextDefault">"Sensor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -1148,8 +1469,24 @@ Vorlauf"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"272"</v>
+              <v n="TextDefault">"Speichern auf Netzwerkpfad"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"254"</v>
+              <v n="TextDefault">"speichern/laden"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"177"</v>
               <v n="TextDefault">"Start"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"301"</v>
+              <v n="TextDefault">"Start/
+Quit"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -1160,6 +1497,17 @@ Vorlauf"</v>
             <o>
               <v n="TextID">"108"</v>
               <v n="TextDefault">"Startseite"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"308"</v>
+              <v n="TextDefault">"Steuerung 
+neu starten"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"235"</v>
+              <v n="TextDefault">"Steuerung neu starten"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -1175,6 +1523,11 @@ Vorlauf"</v>
             <o>
               <v n="TextID">"75"</v>
               <v n="TextDefault">"szUeberschrift"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"239"</v>
+              <v n="TextDefault">"TcRestart:"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -1228,6 +1581,21 @@ offen"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"305"</v>
+              <v n="TextDefault">"Transor Start"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"293"</v>
+              <v n="TextDefault">"Transorauswahl"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"299"</v>
+              <v n="TextDefault">"Transoren"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"100"</v>
               <v n="TextDefault">"V"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -1253,6 +1621,11 @@ offen"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"250"</v>
+              <v n="TextDefault">"Warnungen"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"85"</v>
               <v n="TextDefault">"Wasser"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -1264,8 +1637,33 @@ offen"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"261"</v>
+              <v n="TextDefault">"white"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"243"</v>
+              <v n="TextDefault">"whitelist: Begriff1[;Begriff2[;Begriff3]]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"238"</v>
+              <v n="TextDefault">"X"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"121"</v>
               <v n="TextDefault">"ZURÜCK"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"246"</v>
+              <v n="TextDefault">"zurück"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"240"</v>
+              <v n="TextDefault">"Zähler:"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -1276,6 +1674,11 @@ offen"</v>
             <o>
               <v n="TextID">"150"</v>
               <v n="TextDefault">"Übersicht"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"276"</v>
+              <v n="TextDefault">"Überwachungen"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="FB_KompressorSteuerung" Id="{cf4cb4e1-0bd0-4cb2-9cf2-fe1b4b72f8a0}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_KompressorSteuerung
 VAR_INPUT
@@ -11,7 +11,6 @@ VAR_IN_OUT
 END_VAR
 VAR
 	bInit															: BOOL := TRUE;
-	bblink														: BOOL;
 
 	eState														: E_StateKompressor;
 	
@@ -31,7 +30,6 @@ VAR
 	fbAnalogOutUmwaelzpumpeWRG				: FB_AnalogOutput;
 	fbKuehlregler_Kompr								: FB_Kuehlregler_Kompr;
 	
-	tonBlinkTakt											: TON := (PT:= T#350MS);
 	tonKompressorStart								: TON := (PT:= T#300S); (* Kompressor-Startverzoegerung nach Lufttrockner *)
 	tonLufttrocknerStop								: TON := (PT:= T#240S); (* Lufttrocker Nachlaufzeit nach Kompressorabschaltung *)
 	tofUmwaelzpumpe										: TOF := (PT:= T#15M); (* Umwaelzpumpem Nachlaufzeit *)
@@ -48,6 +46,7 @@ VAR
 	bWRGPufferTemperatur_ValueOk			: BOOL;
 	rWRGPufferTemperatur_Value				: REAL;
 	
+  fbLog : FB_LoggerSetMsg;
 END_VAR
 VAR PERSISTENT
 	VrUmwaelzpumpeWRGSollwert					: REAL := 30; (* Sollwert in % *)
@@ -100,21 +99,25 @@ CASE eState OF
 		IF NOT bStop
 		AND rtrigStart.Q
 		THEN
+      fbLog.M_AddMsgHint('Kompressor START Lufttrockner');
 			eState := eStateKompr_START;
 		END_IF
 	
 	eStateKompr_START:
 		QbLufttrockner := TRUE;
-		QbLMStatus := bblink;
+		QbLMStatus := gdwBlink.2;
 		tonKompressorStart(IN:= TRUE);
 	
 		IF bStop THEN
+      fbLog.M_AddMsgHint('Kompressor STOP');
 			eState := eStateKompr_AUS;
 		ELSIF tonKompressorStart.Q THEN
 			(* Kompressor-Startverzoegerung nach Lufttrockner *)
+      fbLog.M_AddMsgHint('Kompressor aktivieren');
 			eState := eStateKompr_AKTIV;
 		ELSIF tonStartLang.Q THEN
 			(* Kompressor direkt starten, wenn Start-Taster dauerhaft betätigt wird *)
+      fbLog.M_AddMsgHint('Kompressor aktivieren (schnellstart)');
 			eState := eStateKompr_AKTIV;
 		END_IF
 	
@@ -124,6 +127,7 @@ CASE eState OF
 		QbLMStatus := TRUE;
 	
 		IF bStop THEN
+      fbLog.M_AddMsgHint('Kompressor STOP');
 			eState := eStateKompr_STOP;
 		END_IF
 	
@@ -152,13 +156,6 @@ END_CASE
 (* Kompressor-Kuehlung (Waermerueckgewinnung WRG) *)
 A_Kuehlung();
 
-
-IF NOT tonBlinkTakt.Q THEN
-	tonBlinkTakt(IN:= TRUE);
-ELSE
-	tonBlinkTakt(IN:= FALSE);
-	bblink := NOT bblink;
-END_IF
 
 (* FB END*)]]></ST>
     </Implementation>

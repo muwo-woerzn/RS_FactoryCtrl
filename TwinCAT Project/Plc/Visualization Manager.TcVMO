@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <VisuManager Name="Visualization Manager" Id="{072bef36-14e3-44c1-8339-d66bb7400aea}">
     <XmlArchive>
       <Data>
@@ -34,10 +34,10 @@
             <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
               <v>FB_Init</v>
               <v>985775fc-34b1-4287-aa43-b746437c769c</v>
-              <v>FB_Reinit</v>
-              <v>52b2cb69-4083-4dfa-ac00-6fded0090bb9</v>
               <v>FB_Exit</v>
               <v>1fb6e6a6-9a79-40fc-925c-793dc5a32ad4</v>
+              <v>FB_Reinit</v>
+              <v>52b2cb69-4083-4dfa-ac00-6fded0090bb9</v>
             </d>
             <v n="FbName">"__VisuInitInstantiation_Fb"</v>
             <v n="FbGuid">{dc910631-18f9-447a-b71e-8af2c5219c34}</v>
@@ -455,20 +455,22 @@
             <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
               <v>ExecuteLooseCapture</v>
               <v>22ad8d4a-2c6d-42ec-9650-d733d893a938</v>
+              <v>ExecuteMouseUp</v>
+              <v>4a8c3492-0248-4955-8c09-ae7dc45fc417</v>
               <v>Init</v>
               <v>03e1baa4-44ef-4274-bd40-efad065f685c</v>
               <v>FB_Exit</v>
               <v>1b18c58c-c399-4659-9287-a168ff72b4cd</v>
               <v>ExecuteMouseDblClick</v>
               <v>f7a721f8-2d25-4ae1-8079-5e40821e236d</v>
-              <v>ExecuteMouseDown</v>
-              <v>7bfcdbe1-d866-4de7-9cf0-8e85d2a9d01f</v>
-              <v>ExecuteMouseUp</v>
-              <v>4a8c3492-0248-4955-8c09-ae7dc45fc417</v>
-              <v>FB_Reinit</v>
-              <v>bd83d7d5-147d-46b4-b017-94e9df9e2c57</v>
               <v>GetElementInfo</v>
               <v>28acd1ac-9a9e-4390-802d-06463ba97a99</v>
+              <v>ExecuteMouseDown</v>
+              <v>7bfcdbe1-d866-4de7-9cf0-8e85d2a9d01f</v>
+              <v>FB_Reinit</v>
+              <v>bd83d7d5-147d-46b4-b017-94e9df9e2c57</v>
+              <v>Initialize</v>
+              <v>ea2bcb04-59f7-4402-83b1-5e13be2b6fd6</v>
               <v>ExecuteMouseMove</v>
               <v>e52688ee-8bcb-449e-9948-cddc48e05109</v>
               <v>ExecuteDialogClosed</v>
@@ -479,8 +481,6 @@
               <v>380f46e7-a10d-46c0-9151-dfd535a36448</v>
               <v>abstrGetDefaultCursor</v>
               <v>c31be5ce-8363-469d-888d-a6627002d5ae</v>
-              <v>Initialize</v>
-              <v>ea2bcb04-59f7-4402-83b1-5e13be2b6fd6</v>
               <v>ExecuteMouseEnter</v>
               <v>2ca7360d-3301-4731-b416-cbdac2bf0f57</v>
               <v>ExecuteMouseLeave</v>

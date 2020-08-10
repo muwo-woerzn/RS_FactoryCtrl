@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <DUT Name="ST_LogMessageVisu" Id="{401d2128-1a9e-487c-bdce-494226469461}">
+    <Declaration><![CDATA[TYPE ST_LogMessageVisu :
+STRUCT
+	iLogId : INT;
+	iTyp : INT;
+	szLogMsg : STRING(160);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

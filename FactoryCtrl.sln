@@ -1,10 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{B1E792BE-AA5F-4E3C-8C82-674BF9C0715B}") = "TwinCAT Project", "TwinCAT Project\TwinCAT Project.tsproj", "{9E0E82D1-36A0-418D-B0B1-D56B12B075F7}"
-EndProject
-Project("{FD9F1D59-E000-42F3-8744-88DE1BE93C06}") = "TwinCAT Measurement Project2", "TwinCAT Measurement Project2\TwinCAT Measurement Project2.tcmproj", "{C2AEFCCD-6675-4A56-A344-B9C2EB01DCC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,12 +26,6 @@ Global
 		{9E0E82D1-36A0-418D-B0B1-D56B12B075F7}.Release|TwinCAT RT (x64).Build.0 = Release|TwinCAT RT (x64)
 		{9E0E82D1-36A0-418D-B0B1-D56B12B075F7}.Release|TwinCAT RT (x86).ActiveCfg = Release|TwinCAT RT (x86)
 		{9E0E82D1-36A0-418D-B0B1-D56B12B075F7}.Release|TwinCAT RT (x86).Build.0 = Release|TwinCAT RT (x86)
-		{C2AEFCCD-6675-4A56-A344-B9C2EB01DCC1}.Debug|TwinCAT CE7 (ARMV7).ActiveCfg = Debug|TwinCAT CE7 (ARMV7)
-		{C2AEFCCD-6675-4A56-A344-B9C2EB01DCC1}.Debug|TwinCAT RT (x64).ActiveCfg = Debug|TwinCAT RT (x64)
-		{C2AEFCCD-6675-4A56-A344-B9C2EB01DCC1}.Debug|TwinCAT RT (x86).ActiveCfg = Debug|TwinCAT RT (x86)
-		{C2AEFCCD-6675-4A56-A344-B9C2EB01DCC1}.Release|TwinCAT CE7 (ARMV7).ActiveCfg = Release|TwinCAT CE7 (ARMV7)
-		{C2AEFCCD-6675-4A56-A344-B9C2EB01DCC1}.Release|TwinCAT RT (x64).ActiveCfg = Release|TwinCAT RT (x64)
-		{C2AEFCCD-6675-4A56-A344-B9C2EB01DCC1}.Release|TwinCAT RT (x86).ActiveCfg = Release|TwinCAT RT (x86)
 		{54FD8FBE-9F63-4D13-A32D-547B3DAEAEDC}.Debug|TwinCAT CE7 (ARMV7).ActiveCfg = Debug|TwinCAT CE7 (ARMV7)
 		{54FD8FBE-9F63-4D13-A32D-547B3DAEAEDC}.Debug|TwinCAT CE7 (ARMV7).Build.0 = Debug|TwinCAT CE7 (ARMV7)
 		{54FD8FBE-9F63-4D13-A32D-547B3DAEAEDC}.Debug|TwinCAT RT (x64).ActiveCfg = Debug|TwinCAT RT (x64)

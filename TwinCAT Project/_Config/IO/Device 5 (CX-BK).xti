@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.27" ClassName="CDevBeckhoffCx1100Def" SubType="120">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.57" ClassName="CDevBeckhoffCx1100Def" SubType="120">
 	<Device Id="5" Disabled="true" DevType="120">
 		<Name>__FILENAME__</Name>
 		<DevData>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-		<Image Id="6" AddrType="5" ImageType="3">
+		<Image Id="6" AddrType="1" ImageType="3">
 			<Name>Image</Name>
 		</Image>
 		<Box File="Box 5 (CX-BK).xti" Id="5"/>

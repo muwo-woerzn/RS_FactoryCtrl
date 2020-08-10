@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
   <POU Name="FB_RolloGruppe" Id="{5e030dd8-760d-4ec3-a668-4f17f48a934d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_RolloGruppe
 VAR_INPUT
@@ -36,6 +36,9 @@ VAR
 	fbRollo 		: ARRAY[1..3] OF FB_Rollo;
 	tonRolloAb	: TON := (PT:= t#30s);
 
+  fbLog : FB_LoggerSetMsg;
+	bLogMsgAuf : BOOL;
+	bLogMsgAb : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF bInit THEN
@@ -84,6 +87,24 @@ tonRolloAb(IN:= QbOutRolloAb AND NOT (QbOutRollo1 OR QbOutRollo2 OR QbOutRollo3)
 IF tonRolloAb.Q THEN
 	bAbVorw := FALSE;
 	bAb := FALSE;
+END_IF
+
+// Log Meldungen
+IF NOT bLogMsgAuf AND bInAuf AND NOT QbOutRolloAb
+AND (QbOutRollo1 OR QbOutRollo2 OR QbOutRollo3)
+THEN
+  fbLog.M_AddMsgHint('Rollo AUF Taster');
+  bLogMsgAuf := TRUE;
+ELSE
+  bLogMsgAuf := FALSE;
+END_IF
+IF NOT bLogMsgAb AND bInAb AND QbOutRolloAb
+AND (QbOutRollo1 OR QbOutRollo2 OR QbOutRollo3)
+THEN
+  fbLog.M_AddMsgHint('Rollo AB Taster');
+  bLogMsgAb := TRUE;
+ELSE
+  bLogMsgAb := FALSE;
 END_IF
 ]]></ST>
     </Implementation>

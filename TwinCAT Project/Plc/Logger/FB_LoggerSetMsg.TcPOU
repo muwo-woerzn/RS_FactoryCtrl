@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
+  <POU Name="FB_LoggerSetMsg" Id="{72667e0e-01eb-4a1f-be54-613beac0881c}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  ***************************************************************************
+  ***************************************************************************
+  Module owner:                 ST_EW_SW_SY, woerz 
+  Keyword:                      keyword, <Feature-ID> 
+  
+  Description (summary): FB to add messages to the FB_Logger
+
+  ***************************************************************************
+  #IMPORT G_Logger
+*)
+{attribute 'reflection'}
+FUNCTION_BLOCK FB_LoggerSetMsg
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+  OUTszPath : STRING;
+
+END_VAR
+VAR
+  bInit : BOOL := TRUE;
+
+  {attribute 'instance-path'}
+  {attribute 'no_init'}
+  szPath  : STRING;
+ 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[;
+]]></ST>
+    </Implementation>
+    <Method Name="M_AddMsgHint" Id="{83f97248-80fd-4510-9154-9f57ddb982de}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AddMsgHint
+VAR_INPUT
+	INszTxt : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+M_AddMsg(0, INszTxt);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Init" Id="{c0c7c67a-2042-4c4a-9336-3889186259fd}">
+      <Declaration><![CDATA[METHOD PRIVATE M_Init
+VAR_INPUT
+END_VAR
+VAR
+  iMaxCutRight : INT := 10; // max num of char cutting out at end of string
+  iLen : INT;
+  iPosLeft : INT;
+  iPosRight : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// cut out project name (left side) and FB_LoggerSetMsg instance name (right side)
+iPosLeft := FIND(szPath, '.') + 1;
+iPosRight := LEN(szPath) - iMaxCutRight + FIND(RIGHT(szPath, iMaxCutRight), '.');
+iLen := iPosRight - iPosLeft;
+OUTszPath := MID(szPath, iLen, iPosLeft);
+
+bInit := FALSE;
+ ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AddMsg" Id="{ca3c259a-a738-4718-9053-66bbc8e20115}">
+      <Declaration><![CDATA[METHOD PRIVATE M_AddMsg
+VAR_INPUT
+  INiTyp : INT;
+END_VAR
+VAR_IN_OUT
+	IOszTxt : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF bInit THEN
+  M_Init();
+END_IF
+
+gfbLogger.M_SetMessage(INiTyp, OUTszPath, IOszTxt);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AddMsgError" Id="{d9e6348b-1c17-4a08-82b1-0697ff975b88}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AddMsgError
+VAR_INPUT
+	INszTxt : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+M_AddMsg(2, INszTxt);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AddMsgWarning" Id="{e953b245-3d02-41c8-8451-996066773798}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AddMsgWarning
+VAR_INPUT
+	INszTxt : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+M_AddMsg(1, INszTxt);
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

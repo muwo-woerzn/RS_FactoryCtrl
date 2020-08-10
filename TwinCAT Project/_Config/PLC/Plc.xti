@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.47" ClassName="CNestedPlcProjDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4018.57" ClassName="CNestedPlcProjDef">
 	<Project GUID="{54FD8FBE-9F63-4D13-A32D-547B3DAEAEDC}" Name="Plc" PrjFilePath="..\..\Plc\Plc.plcProj" TmcFilePath="..\..\Plc\Plc.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e">
 		<Instance Id="#x01010010" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
 			<Name>Plc Instance</Name>
@@ -92,6 +92,109 @@
 				</Var>
 				<Var>
 					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch04.IbMaschineEin</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[1].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[2].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[3].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[4].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[5].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[6].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[7].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[8].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[9].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[10].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[11].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[12].IbLiquidSensor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.IbStartQuit</Name>
+					<Comment>
+						<![CDATA[ %I / %Q *********************************************************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.IbKeySwitch</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.IbContactorResponse1</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.IbContactorResponse2</Name>
 					<Type>BOOL</Type>
 				</Var>
 				<Var>
@@ -319,6 +422,28 @@
 					<Name>.gfbTemp44_Res.IiDataIn</Name>
 					<Type>INT</Type>
 				</Var>
+				<Var>
+					<Name>.gfbSystemCX.fbBK1250Diag.IuiCouplterState</Name>
+					<Type>UINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbSystemCX.fbBK1250Diag.IbWcState</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>.gfbSystemCX.IuiDeviceId_ECMAster</Name>
+					<Comment>
+						<![CDATA[ Device-ID EtherCAT Master ]]>
+					</Comment>
+					<Type>UINT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbSystemCX.IuiDevState_ECMAster</Name>
+					<Comment>
+						<![CDATA[ EtherCAT Master ]]>
+					</Comment>
+					<Type>UINT</Type>
+				</Var>
 			</Vars>
 			<Vars VarGrpType="2">
 				<Name>PlcTaskMain Outputs</Name>
@@ -440,6 +565,98 @@
 				</Var>
 				<Var>
 					<Name>PLC_PRG.fbAbluftsteuerung2.fbAblMasch04.QbAbluftSchieber</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[1].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[2].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[3].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[4].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[5].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[6].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[7].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[8].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[9].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[10].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[11].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[12].QbLMStatus</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbTransor[1].QbTransor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbTransor[2].QbTransor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbTransor[3].QbTransor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.fbTransor[4].QbTransor</Name>
+					<Comment>
+						<![CDATA[ %I / %Q ********************]]>
+					</Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.QbLMStartQuit</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.QbLMStatusAlarm</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.QbLMStatusOK</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PLC_PRG.fbLiquidMonitoring.QbStartTransor</Name>
 					<Type>BOOL</Type>
 				</Var>
 				<Var>
@@ -625,6 +842,13 @@
 				<Var>
 					<Name>.gfbTemp44_Res.QiDataOut</Name>
 					<Type>INT</Type>
+				</Var>
+				<Var>
+					<Name>.gfbSystemCX.QuiDevCtrl_ECMAster</Name>
+					<Comment>
+						<![CDATA[ EtherCAT Master ]]>
+					</Comment>
+					<Type>UINT</Type>
 				</Var>
 			</Vars>
 			<UnrestoredVarLinks ImportTime="2016-04-01T06:56:55">
@@ -926,6 +1150,45 @@
 				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCHerren.QbAbluftventilator" VarB="DO03 (KL2408)^Channel 6^Output"/>
 				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCHerren.QbLMHeizungAktiv" VarB="DO03 (KL2408)^Channel 4^Output"/>
 				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbWCHerren.QbStellventilHeizkoerper" VarB="DO03 (KL2408)^Channel 5^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)">
+				<Link VarA="PlcTaskMain Inputs^.gfbSystemCX.IuiDevState_ECMAster" VarB="Inputs^DevState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 1 (BK1150)">
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.IbContactorResponse1" VarB="DI12 (KL1408)^Channel 2^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.IbContactorResponse2" VarB="DI12 (KL1408)^Channel 3^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.IbStartQuit" VarB="DI12 (KL1408)^Channel 1^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[10].IbLiquidSensor" VarB="DI13 (KL1408)^Channel 5^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[11].IbLiquidSensor" VarB="DI13 (KL1408)^Channel 6^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[12].IbLiquidSensor" VarB="DI13 (KL1408)^Channel 7^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[1].IbLiquidSensor" VarB="DI12 (KL1408)^Channel 4^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[2].IbLiquidSensor" VarB="DI12 (KL1408)^Channel 5^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[3].IbLiquidSensor" VarB="DI12 (KL1408)^Channel 6^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[4].IbLiquidSensor" VarB="DI12 (KL1408)^Channel 7^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[5].IbLiquidSensor" VarB="DI12 (KL1408)^Channel 8^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[6].IbLiquidSensor" VarB="DI13 (KL1408)^Channel 1^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[7].IbLiquidSensor" VarB="DI13 (KL1408)^Channel 2^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[8].IbLiquidSensor" VarB="DI13 (KL1408)^Channel 3^Input"/>
+				<Link VarA="PlcTaskMain Inputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[9].IbLiquidSensor" VarB="DI13 (KL1408)^Channel 4^Input"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.QbLMStartQuit" VarB="DO12 (KL2408)^Channel 7^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.QbLMStatusOK" VarB="DO12 (KL2408)^Channel 6^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.QbStartTransor" VarB="DO12 (KL2408)^Channel 1^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[10].QbLMStatus" VarB="DO14 (KL2408)^Channel 2^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[11].QbLMStatus" VarB="DO14 (KL2408)^Channel 3^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[12].QbLMStatus" VarB="DO14 (KL2408)^Channel 4^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[1].QbLMStatus" VarB="DO13 (KL2408)^Channel 1^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[2].QbLMStatus" VarB="DO13 (KL2408)^Channel 2^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[3].QbLMStatus" VarB="DO13 (KL2408)^Channel 3^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[4].QbLMStatus" VarB="DO13 (KL2408)^Channel 4^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[5].QbLMStatus" VarB="DO13 (KL2408)^Channel 5^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[6].QbLMStatus" VarB="DO13 (KL2408)^Channel 6^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[7].QbLMStatus" VarB="DO13 (KL2408)^Channel 7^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[8].QbLMStatus" VarB="DO13 (KL2408)^Channel 8^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbLiquidSensor[9].QbLMStatus" VarB="DO14 (KL2408)^Channel 1^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbTransor[1].QbTransor" VarB="DO12 (KL2408)^Channel 2^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbTransor[2].QbTransor" VarB="DO12 (KL2408)^Channel 3^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbTransor[3].QbTransor" VarB="DO12 (KL2408)^Channel 4^Output"/>
+				<Link VarA="PlcTaskMain Outputs^PLC_PRG.fbLiquidMonitoring.fbTransor[4].QbTransor" VarB="DO12 (KL2408)^Channel 5^Output"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

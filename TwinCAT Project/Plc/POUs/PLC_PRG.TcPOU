@@ -56,6 +56,9 @@ VAR
 	fbAbluftsteuerung1			: FB_Abluftsteuerung;
 	fbAbluftsteuerung2			: FB_Abluftsteuerung;
 	
+  // Monitoring
+  fbLiquidMonitoring : FB_LiquidMonitoring;
+
 	(* EG-Raeume *)
   fbEGHalle : FB_EGHalle;
   fbEGBuero : FB_EGBuero;
@@ -65,6 +68,7 @@ VAR
 	fbWCHerren							: FB_WCRaum();
 	
 	
+  fbLog : FB_LoggerSetMsg;
 END_VAR
 
 VAR PERSISTENT
@@ -99,13 +103,23 @@ END_IF
 (* Rollo-Timer *)
 IF (todRolloAb <> TOD#00:00) THEN
 	rtrigRolloAb(CLK:= (gfbSystemCX.OUTtodClockBase = todRolloAb_i));
-	gbTimeRolloAb := rtrigRolloAb.Q OR bVisuRolloAb;
+  IF rtrigRolloAb.Q OR bVisuRolloAb THEN
+    IF NOT gbTimeRolloAb THEN
+      fbLog.M_AddMsgHint('Rollo AB zentral');
+    END_IF
+	  gbTimeRolloAb := TRUE;
+	END_IF
 ELSE
 	gbTimeRolloAb := FALSE;
 END_IF
 IF (todRolloAuf <> TOD#00:00) THEN
 	rtrigRolloAuf(CLK:= (gfbSystemCX.OUTtodClock = todRolloAuf));
-	gbTimeRolloAuf := rtrigRolloAuf.Q OR bVisuRolloAuf;
+  IF rtrigRolloAuf.Q OR bVisuRolloAuf THEN
+    IF NOT gbTimeRolloAuf THEN
+      fbLog.M_AddMsgHint('Rollo AUF zentral');
+    END_IF
+	  gbTimeRolloAuf := TRUE;
+	END_IF
 ELSE
 	gbTimeRolloAuf := FALSE;
 END_IF
@@ -146,6 +160,7 @@ tonTakt100ms(IN:=TRUE);
 IF 	tonTakt100ms.Q THEN
 	tonTakt100ms(IN:=FALSE);
 	gbTakt100ms := TRUE;
+  gdwBlink := gdwBlink + 1;
 END_IF;
 
 
@@ -166,9 +181,15 @@ bIn := IbZentral1 OR bInVisuZentral1;
 fbTasterZentral1(bIn:= bIn);
 
 IF fbTasterZentral1.bKlick THEN
-	bLichtZentralAus := TRUE;
+  IF NOT bLichtZentralAus THEN
+    fbLog.M_AddMsgHint('Licht Zentral Aus');
+	  bLichtZentralAus := TRUE;
+  END_IF
 ELSIF fbTasterZentral1.bLang THEN
-	bLichtZentralAus := TRUE;
+  IF NOT bLichtZentralAus THEN
+    fbLog.M_AddMsgHint('Licht Zentral Aus');
+    bLichtZentralAus := TRUE;
+  END_IF
 ELSE
 	bLichtZentralAus := FALSE;
 END_IF
@@ -205,6 +226,8 @@ A_FBCalls();
 
 
 
+gfbLogger();
+
 (* END of FB ******************************************)]]></ST>
     </Implementation>
     <Action Name="A_TimeCalculation" Id="{2c127049-ee08-42dd-a6bf-86a7ba322023}">
@@ -237,6 +260,9 @@ fbKompressorSteuerung();
 (* Abluftsteuerung *)
 fbAbluftsteuerung1();
 fbAbluftsteuerung2();
+
+// Monitoring
+fbLiquidMonitoring();
 
 (* EG-Raeume *)
 fbEGHalle();

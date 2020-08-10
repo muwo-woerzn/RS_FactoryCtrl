@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <Visu Name="V_WCRaum" Id="{a5e33bf6-8bfe-469f-abba-979aef687749}">
     <XmlArchive>
       <Data>
@@ -602,10 +602,10 @@ eingestellte Zeit nach"</v>
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>d056ee63-6571-4bcd-b100-d3011e1b57a7</v>
-                <v>FB_Exit</v>
-                <v>93b1368b-1282-4fae-904e-864185ca19b0</v>
                 <v>FB_Reinit</v>
                 <v>aab635ea-12d4-461a-91a5-3cc00eaf9a5e</v>
+                <v>FB_Exit</v>
+                <v>93b1368b-1282-4fae-904e-864185ca19b0</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{214ee27f-54bb-448c-a715-eb3e81e21e04}</v>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="F_SunRise" Id="{873a9af8-cf5b-4844-b893-e7fc53d82cfe}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION F_SunRise : REAL
 VAR_INPUT
@@ -23,7 +23,7 @@ END_VAR]]></Declaration>
 
 dwDate := DATE_TO_DWORD(dDate);
 
-rYearDay := DWORD_TO_REAL((dwDate MOD 31557600) / 86400 + idayOffset);
+rYearDay := DINT_TO_REAL((DWORD_TO_DINT(dwDate) MOD 31557600) / 86400 + idayOffset);
 
 IF (rYearDay > 365) THEN
 	rYearDay := rYearDay - 365;

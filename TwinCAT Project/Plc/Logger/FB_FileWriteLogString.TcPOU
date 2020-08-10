@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
+  <POU Name="FB_FileWriteLogString" Id="{742a3c84-52fd-42a0-8c41-381fb36d5212}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  ***************************************************************************
+  ***************************************************************************
+  Module owner:                 Woerz 
+  
+  Description (summary): Function block for writing strings to logger files.
+
+  Description (detailed):
+  =======================  
+
+  ***************************************************************************
+*)
+
+FUNCTION_BLOCK FB_FileWriteLogString
+VAR CONSTANT
+  tADSTIMEOUT : TIME := T#5S;	// ads timeout
+
+END_VAR
+VAR_INPUT
+  // configuration inputs, no change after init
+  INiMaxLogFiles : INT := 2;
+  INdiMaxLogItems : DINT := 500;
+  INszNetId : T_AmsNetId; // TwinCAT network address of the source file
+  INszFileName : T_MaxString; // source file path and name
+  INszFileNameExtension : STRING(5) := '.csv';
+
+  // control inputs
+  INbSimulation : BOOL;
+	INbWrite : BOOL;
+	INbClose : BOOL;
+  INszHeadLine : T_MaxString;
+  INszWriteLine : T_MaxString;
+
+END_VAR
+
+VAR_OUTPUT
+  OUTbBusy : BOOL;
+	OUTbError : BOOL;
+	OUTbDone : BOOL;
+	OUTiStateError : INT;
+	OUTudiErrId : UDINT;
+
+END_VAR
+
+VAR
+  iState : INT;
+  iStateTemp : INT;
+	bWriteDone : BOOL;
+	bCloseDone : BOOL;
+	bPutHeadline : BOOL;
+
+  uiDestFile : UINT;
+  
+  tonWriteTime : TON;
+  
+  fbFileOpen : FB_FileOpen;
+  fbFileClose : FB_FileClose;
+  fbFilePuts : FB_FilePuts;
+
+END_VAR
+
+VAR PERSISTENT
+  nvbFileNotComplete : BOOL;
+  nviFileNameIndex : INT;
+  nvdiLinePos : DINT;
+  
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+CASE iState OF
+  
+0: // init
+  A_Reset();
+  IF (nviFileNameIndex <= 0)
+  OR (nviFileNameIndex > INiMaxLogFiles) 
+  THEN
+    nviFileNameIndex := 0;
+    nvbFileNotComplete := FALSE;
+	END_IF
+  OUTbBusy := FALSE;
+  OUTbError := FALSE;
+  OUTbDone := FALSE;
+  OUTudiErrId := 0;
+  uiDestFile := 0;
+  iState := 1;
+
+1: // wait for command  
+  IF INbClose THEN
+    IF NOT (uiDestFile = 0) THEN
+      OUTiStateError := 0;
+      iState := 80;
+    END_IF
+    
+  ELSIF INbWrite THEN
+    OUTbBusy := TRUE;
+    OUTiStateError := 0;
+    IF (uiDestFile = 0) THEN
+      iState := 10; // file open
+    ELSE
+      iState := 20; // put string line to file
+    END_IF
+  END_IF
+
+
+10:
+  IF NOT fbFileOpen.bExecute THEN
+    fbFileOpen.sNetId := INszNetId;
+    IF nvbFileNotComplete THEN
+      // actual file-index not complete => append to file
+      fbFileOpen.nMode := FOPEN_MODEAPPEND OR FOPEN_MODEPLUS OR FOPEN_MODETEXT;
+    ELSE
+      // open new file or overwrite existing
+      fbFileOpen.nMode := FOPEN_MODEWRITE OR FOPEN_MODEPLUS OR FOPEN_MODETEXT;
+      nviFileNameIndex := nviFileNameIndex + 1;
+      IF (nviFileNameIndex > INiMaxLogFiles) THEN
+        nviFileNameIndex := 1;
+			END_IF
+      nvdiLinePos := 0;
+    END_IF
+    fbFileOpen.sPathName := CONCAT(INszFileName, CONCAT('_', CONCAT(INT_TO_STRING(nviFileNameIndex), INszFileNameExtension)));
+    fbFileOpen.ePath := PATH_GENERIC;
+    fbFileOpen.tTimeout := tAdsTimeout;
+  END_IF
+
+  fbFileOpen(bExecute := TRUE);
+  IF NOT fbFileOpen.bBusy THEN
+    IF fbFileOpen.bError THEN
+      OUTudiErrId := fbFileOpen.nErrId;
+      OUTiStateError := iState;
+      nvbFileNotComplete := FALSE;
+      iState := 90;
+    ELSE
+      uiDestFile := fbFileOpen.hFile;
+      fbFilePuts.hFile := fbFileOpen.hFile;
+      bPutHeadline := NOT nvbFileNotComplete AND NOT (INszHeadLine = '');
+      iState := 20;
+    END_IF
+  END_IF
+
+
+20: // put string line to file ************************************
+  IF NOT fbFilePuts.bExecute THEN
+    fbFilePuts.sNetId := fbFileOpen.sNetId;
+    fbFilePuts.hFile := uiDestFile;
+    IF bPutHeadline THEN
+      fbFilePuts.sLine := CONCAT(INszHeadLine, '$N'); // new file => put headline first
+    ELSE
+      fbFilePuts.sLine := CONCAT(INszWriteLine, '$N');
+    END_IF
+    fbFilePuts.tTimeout := tAdsTimeOut;
+  END_IF
+
+  fbFilePuts(bExecute := TRUE);
+  IF NOT fbFilePuts.bBusy THEN
+    IF fbFilePuts.bError THEN
+      OUTudiErrId := fbFilePuts.nErrId;
+      OUTiStateError := iState;
+      iState := 80;
+    ELSE
+      bWriteDone := TRUE;
+      IF INbClose THEN
+        iState := 80;
+      ELSE
+        nvbFileNotComplete := TRUE;
+        nvdiLinePos := nvdiLinePos + 1;
+        IF bPutHeadline THEN
+          bPutHeadline := FALSE;
+          fbFilePuts(bExecute := FALSE);
+        ELSE
+          iState := 100;
+        END_IF
+			END_IF
+    END_IF
+  END_IF
+
+  
+80: // close file ***********************************************
+  IF NOT fbFileClose.bExecute THEN
+    fbFileClose.sNetId := fbFileOpen.sNetId;
+    fbFileClose.hFile := uiDestFile;
+    fbFileClose.tTimeout := tAdsTimeOut;
+  END_IF
+
+  fbFileClose(bExecute := TRUE);
+  IF NOT fbFileClose.bBusy THEN
+    uiDestFile := 0;
+    bCloseDone := TRUE;
+    IF fbFileClose.bError THEN
+      OUTudiErrId := fbFileClose.nErrId;
+      OUTiStateError := iState;
+      iState := 90;
+    ELSE
+      iState := 100;
+    END_IF
+  END_IF
+
+
+90: // error ***********************************************
+  OUTbBusy := FALSE;
+  OUTbDone := FALSE;
+  OUTbError := TRUE;
+  IF NOT INbClose AND NOT INbWrite THEN
+    OUTbError := FALSE;
+    OUTiStateError := 0;
+    iState := 1;
+  END_IF
+  
+100:
+  OUTbBusy := FALSE;
+  OUTbDone := TRUE;
+
+  IF (uiDestFile > 0) AND (nvdiLinePos >= INdiMaxLogItems) THEN
+    // max num of logitems reached => close file
+    nvbFileNotComplete := FALSE;
+    iState := 80;
+    
+  ELSIF (uiDestFile > 0) AND INbClose AND NOT bCloseDone THEN
+    iState := 80; // close file
+    
+	ELSIF NOT INbClose AND NOT INbWrite THEN
+    OUTbDone := FALSE;
+    iState := 1;
+  END_IF
+    
+END_CASE
+
+IF (iState > 1) AND (iState < 90) THEN
+  OUTbBusy := TRUE;
+  OUTbDone := FALSE;
+  bCloseDone := FALSE;
+END_IF
+
+IF (iState <> iStateTemp) THEN
+  iStateTemp := iState;
+  A_Reset();
+END_IF
+]]></ST>
+    </Implementation>
+    <Action Name="A_Reset" Id="{4ec33fac-179b-46d5-a670-b401afb4149f}">
+      <Implementation>
+        <ST><![CDATA[
+fbFileOpen(bExecute := FALSE);
+fbFileClose(bExecute := FALSE);
+fbFilePuts(bExecute := FALSE);
+]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

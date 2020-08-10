@@ -1,15 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
-  <Visu Name="V_WeekDay" Id="{b0cb990e-efcd-445b-82d2-537f29c1a9e0}">
+  <Visu Name="V_dwBitToggle" Id="{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}">
     <XmlArchive>
       <Data>
         <o xml:space="preserve" t="VisualObject">
           <n n="LastVisuLanguageModelEntry" />
-          <v n="UniqueIdGenerator">"3"</v>
+          <v n="UniqueIdGenerator">"8"</v>
           <o n="VisualElemList" t="VisualElemList">
             <l n="VisualElementList" t="VisualElemCollection" cet="GenericVisualElem">
               <o>
-                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.1"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -132,7 +147,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"Mo"</v>
+                      <v n="Value">"1"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -140,11 +155,15 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"eWeekDay = 1"</v>
+                      <v n="Value">"dwVar.1"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 1"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"221"</v>
+                      <v n="Value">"89"</v>
                     </o>
                   </l>
                 </o>
@@ -154,23 +173,31 @@
                 <v n="VisualElementIdentifier">"GenElemInst_1"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
-                  <v>OnMouseUp</v>
-                  <a cet="STSnippetInputAction">
-                    <o>
-                      <v n="STSnippet">"eWeekDay := 1;"</v>
-                    </o>
-                  </a>
-                </d>
+                <d n="VisualElementInputActions" t="Hashtable" />
                 <v n="VisualElementIdentification">{e158a070-95f8-47f7-811e-1e0ef0a601ec}</v>
-                <v n="VisualElementOwningObjectGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
                 <v n="VisualElementId">0</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
               <o>
-                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.2"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -293,7 +320,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"Di"</v>
+                      <v n="Value">"2"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -301,37 +328,49 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"eWeekDay = 2"</v>
+                      <v n="Value">"dwVar.2"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 2"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"222"</v>
+                      <v n="Value">"284"</v>
                     </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Rectangle"</v>
                 <v n="VisualElementTypeName">"VisuFbElemSimple"</v>
                 <v n="VisualElementIsRectangle">true</v>
-                <v n="VisualElementIdentifier">"GenElemInst_3"</v>
+                <v n="VisualElementIdentifier">"GenElemInst_17"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
-                  <v>OnMouseUp</v>
-                  <a cet="STSnippetInputAction">
-                    <o>
-                      <v n="STSnippet">"eWeekDay := 2;"</v>
-                    </o>
-                  </a>
-                </d>
-                <v n="VisualElementIdentification">{41e9e266-0275-4b86-9517-7ec7bcf695ec}</v>
-                <v n="VisualElementOwningObjectGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{1a078de1-5ca1-45c2-a632-d038373dcd20}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
-                <v n="VisualElementId">3</v>
+                <v n="VisualElementId">18</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
               <o>
-                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.3"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -454,7 +493,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"Mi"</v>
+                      <v n="Value">"3"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -462,37 +501,49 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"eWeekDay = 3"</v>
+                      <v n="Value">"dwVar.3"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 3"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"223"</v>
+                      <v n="Value">"285"</v>
                     </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Rectangle"</v>
                 <v n="VisualElementTypeName">"VisuFbElemSimple"</v>
                 <v n="VisualElementIsRectangle">true</v>
-                <v n="VisualElementIdentifier">"GenElemInst_5"</v>
+                <v n="VisualElementIdentifier">"GenElemInst_19"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
-                  <v>OnMouseUp</v>
-                  <a cet="STSnippetInputAction">
-                    <o>
-                      <v n="STSnippet">"eWeekDay := 3;"</v>
-                    </o>
-                  </a>
-                </d>
-                <v n="VisualElementIdentification">{bf562fe7-ea20-4fb0-bf23-d0b24f73a606}</v>
-                <v n="VisualElementOwningObjectGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{f857c3e7-d9c0-47bb-8dc9-93c78fa64782}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
-                <v n="VisualElementId">5</v>
+                <v n="VisualElementId">20</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
               <o>
-                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.4"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -615,7 +666,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"Do"</v>
+                      <v n="Value">"4"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -623,37 +674,49 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"eWeekDay = 4"</v>
+                      <v n="Value">"dwVar.4"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 4"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"224"</v>
+                      <v n="Value">"286"</v>
                     </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Rectangle"</v>
                 <v n="VisualElementTypeName">"VisuFbElemSimple"</v>
                 <v n="VisualElementIsRectangle">true</v>
-                <v n="VisualElementIdentifier">"GenElemInst_7"</v>
+                <v n="VisualElementIdentifier">"GenElemInst_21"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
-                  <v>OnMouseUp</v>
-                  <a cet="STSnippetInputAction">
-                    <o>
-                      <v n="STSnippet">"eWeekDay := 4;"</v>
-                    </o>
-                  </a>
-                </d>
-                <v n="VisualElementIdentification">{a664f0f5-e743-4241-a252-d79303ec20f6}</v>
-                <v n="VisualElementOwningObjectGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{f74a07dc-e422-4e07-b113-115560c1e5b1}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
-                <v n="VisualElementId">7</v>
+                <v n="VisualElementId">22</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
               <o>
-                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.5"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -776,7 +839,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"Fr"</v>
+                      <v n="Value">"5"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -784,37 +847,49 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"eWeekDay = 5"</v>
+                      <v n="Value">"dwVar.5"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 5"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"225"</v>
+                      <v n="Value">"287"</v>
                     </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Rectangle"</v>
                 <v n="VisualElementTypeName">"VisuFbElemSimple"</v>
                 <v n="VisualElementIsRectangle">true</v>
-                <v n="VisualElementIdentifier">"GenElemInst_9"</v>
+                <v n="VisualElementIdentifier">"GenElemInst_23"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
-                  <v>OnMouseUp</v>
-                  <a cet="STSnippetInputAction">
-                    <o>
-                      <v n="STSnippet">"eWeekDay := 5;"</v>
-                    </o>
-                  </a>
-                </d>
-                <v n="VisualElementIdentification">{ff69c83c-b671-4c60-a488-98e3d629d124}</v>
-                <v n="VisualElementOwningObjectGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{97b63cba-dfcd-4b42-95f5-f35d41736fd9}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
-                <v n="VisualElementId">9</v>
+                <v n="VisualElementId">24</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
               <o>
-                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.6"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -937,7 +1012,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"Sa"</v>
+                      <v n="Value">"6"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -945,37 +1020,49 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"eWeekDay = 6"</v>
+                      <v n="Value">"dwVar.6"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 6"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"226"</v>
+                      <v n="Value">"288"</v>
                     </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Rectangle"</v>
                 <v n="VisualElementTypeName">"VisuFbElemSimple"</v>
                 <v n="VisualElementIsRectangle">true</v>
-                <v n="VisualElementIdentifier">"GenElemInst_11"</v>
+                <v n="VisualElementIdentifier">"GenElemInst_25"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
-                  <v>OnMouseUp</v>
-                  <a cet="STSnippetInputAction">
-                    <o>
-                      <v n="STSnippet">"eWeekDay := 6;"</v>
-                    </o>
-                  </a>
-                </d>
-                <v n="VisualElementIdentification">{73f49851-43df-44d3-9ee8-f49953fbe9ae}</v>
-                <v n="VisualElementOwningObjectGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{45c8311b-fe46-4495-9258-a85dfeea6936}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
-                <v n="VisualElementId">11</v>
+                <v n="VisualElementId">26</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
               <o>
-                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.7"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -1098,7 +1185,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"So"</v>
+                      <v n="Value">"7"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -1106,33 +1193,203 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"eWeekDay = 0"</v>
+                      <v n="Value">"dwVar.7"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 7"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"227"</v>
+                      <v n="Value">"289"</v>
                     </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Rectangle"</v>
                 <v n="VisualElementTypeName">"VisuFbElemSimple"</v>
                 <v n="VisualElementIsRectangle">true</v>
-                <v n="VisualElementIdentifier">"GenElemInst_13"</v>
+                <v n="VisualElementIdentifier">"GenElemInst_27"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
-                  <v>OnMouseUp</v>
-                  <a cet="STSnippetInputAction">
-                    <o>
-                      <v n="STSnippet">"eWeekDay := 0;"</v>
-                    </o>
-                  </a>
-                </d>
-                <v n="VisualElementIdentification">{e1c55632-92f0-4fba-a8b9-85b335b68343}</v>
-                <v n="VisualElementOwningObjectGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{ee105dad-9275-4147-99f4-68092a19d34c}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
-                <v n="VisualElementId">13</v>
+                <v n="VisualElementId">28</v>
+                <l n="UserManagementAccessRights" t="ArrayList" />
+              </o>
+              <o>
+                <a n="ConfiguredComplexInputs" cet="ComplexInput">
+                  <o>
+                    <n n="DescriptionTree" />
+                    <o n="VisualElemMemberList" t="VisualElemMemberList">
+                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                        <o>
+                          <v n="Id">1186196937L</v>
+                          <v n="Value">"dwVar.8"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <v n="SignatureName">"Visu_ToggleInput"</v>
+                    <v n="Name">"Toggle"</v>
+                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
+                  </o>
+                </a>
+                <l n="Elements" t="ArrayList" />
+                <n n="VisualElementDescription" />
+                <o n="VisualElemMemberList" t="VisualElemMemberList">
+                  <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                    <o>
+                      <v n="Id">571893170L</v>
+                      <v n="Value">""</v>
+                    </o>
+                    <o>
+                      <v n="Id">494569607L</v>
+                      <l n="Value" t="ArrayList" cet="NamedStyleColor">
+                        <o>
+                          <v n="Color">-5658199</v>
+                          <v n="CanonicalName">"Gray"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <o>
+                      <v n="Id">2812299069L</v>
+                      <l n="Value" t="ArrayList" cet="NamedStyleColor">
+                        <o>
+                          <v n="Color">-2830136</v>
+                          <v n="CanonicalName">"Lightgray"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <o>
+                      <v n="Id">135947015L</v>
+                      <l n="Value" t="ArrayList" cet="NamedStyleColor">
+                        <o>
+                          <v n="Color">-16777216</v>
+                          <v n="CanonicalName">"Black"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <o>
+                      <v n="Id">493260384L</v>
+                      <l n="Value" t="ArrayList" cet="NamedStyleColor">
+                        <o>
+                          <v n="Color">-16711936</v>
+                          <v n="CanonicalName">"Green"</v>
+                        </o>
+                      </l>
+                    </o>
+                    <o>
+                      <v n="Id">2340015797L</v>
+                      <v n="Value">"HCENTER"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2565699834L</v>
+                      <v n="Value">"VCENTER"</v>
+                    </o>
+                    <o>
+                      <v n="Id">1603690730L</v>
+                      <v n="Value">"Arial"</v>
+                    </o>
+                    <o>
+                      <v n="Id">4253639993L</v>
+                      <v n="Value" t="Int16">12</v>
+                    </o>
+                    <o>
+                      <v n="Id">2729990903L</v>
+                      <v n="Value">0U</v>
+                    </o>
+                    <o>
+                      <v n="Id">1213979116L</v>
+                      <v n="Value">0U</v>
+                    </o>
+                    <o>
+                      <v n="Id">3488306084L</v>
+                      <v n="Value">4278190080U</v>
+                    </o>
+                    <o>
+                      <v n="Id">1649127785L</v>
+                      <v n="Value" t="Int16">211</v>
+                    </o>
+                    <o>
+                      <v n="Id">357335551L</v>
+                      <v n="Value" t="Int16">1</v>
+                    </o>
+                    <o>
+                      <v n="Id">2422045748L</v>
+                      <v n="Value" t="Int16">28</v>
+                    </o>
+                    <o>
+                      <v n="Id">2134141914L</v>
+                      <v n="Value" t="Int16">18</v>
+                    </o>
+                    <o>
+                      <v n="Id">3729828405L</v>
+                      <l n="Value" t="ArrayList" cet="NamedStyleFont">
+                        <o>
+                          <v n="FontStyle">0</v>
+                          <v n="ExplicitColor">-16777216</v>
+                          <v n="CanonicalName">"Font-Standard"</v>
+                          <v n="FontName">"Arial"</v>
+                          <v n="FontSize">12</v>
+                          <o n="NamedColor" t="NamedStyleColor">
+                            <v n="Color">-16777216</v>
+                            <v n="CanonicalName">"Font-Default-Color"</v>
+                          </o>
+                        </o>
+                      </l>
+                    </o>
+                    <o>
+                      <v n="Id">550940142L</v>
+                      <v n="Value">225</v>
+                    </o>
+                    <o>
+                      <v n="Id">1473355128L</v>
+                      <v n="Value">10</v>
+                    </o>
+                    <o>
+                      <v n="Id">2678395525L</v>
+                      <v n="Value">1U</v>
+                    </o>
+                    <o>
+                      <v n="Id">564465120L</v>
+                      <v n="Value">"VISU_ST_RECTANGLE"</v>
+                    </o>
+                    <o>
+                      <v n="Id">390574330L</v>
+                      <v n="Value">"8"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2597686782L</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">1999528970L</v>
+                      <v n="Value">"dwVar.8"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"iNumOfCh &lt; 8"</v>
+                    </o>
+                    <o>
+                      <v n="Id">823443203L</v>
+                      <v n="Value">"290"</v>
+                    </o>
+                  </l>
+                </o>
+                <v n="VisualElementName">"Rectangle"</v>
+                <v n="VisualElementTypeName">"VisuFbElemSimple"</v>
+                <v n="VisualElementIsRectangle">true</v>
+                <v n="VisualElementIdentifier">"GenElemInst_29"</v>
+                <n n="VisualElementOfflinePaintCommands" />
+                <n n="VisualElementFrameInformation" />
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{c4786ac9-76aa-4bb5-8e7c-001c46713f1c}</v>
+                <v n="VisualElementOwningObjectGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
+                <a n="LMGuids" et="Guid" />
+                <d n="SubElements" t="Hashtable" />
+                <v n="VisualElementId">30</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
             </l>
@@ -1152,148 +1409,163 @@
             <o n="GeneratedVisuFbDescription" t="GenericFbDescription">
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>HasVisibilityAccess</v>
-                <v>b2f4b4a6-1d6b-4163-bf9d-4ef6147efda5</v>
+                <v>02abdd5a-1150-4771-b316-b8b9f784067f</v>
                 <v>ContainsPoint</v>
-                <v>d308eaa2-b652-4fbe-9345-d9404afe8ab2</v>
+                <v>31aafa6a-68f1-4545-a1fc-b6aae49154f6</v>
                 <v>HasInputAccess</v>
-                <v>76cdb2fc-a74f-4051-ae5b-9f4e1922e38b</v>
+                <v>f86b3630-1a8d-4d8c-b05b-d324f8aa5bf6</v>
                 <v>HasInputAccessIntern</v>
-                <v>f0fb88ac-d11b-4bfa-b762-d766512a1641</v>
+                <v>6cb43780-6728-4331-bf5d-2e68ae695036</v>
                 <v>GetTooltip</v>
-                <v>a58d8586-8c41-4ce4-b24c-45d85ad39157</v>
+                <v>5ac6fb1e-6d0e-4270-89fc-865df4cd3da5</v>
                 <v>GetDialogInterfaceSize</v>
-                <v>bb73d540-1e28-4a07-93b9-ba0d5d9ede5b</v>
+                <v>9d6f9b23-eea6-4ef2-9f0e-9e296fd449f3</v>
                 <v>GetUpdateRects</v>
-                <v>81ddcdf6-a14a-41ff-84ba-68b54c0b5378</v>
+                <v>7efc236c-0af1-43c6-8249-004a9acb2ac8</v>
                 <v>GetNamespace</v>
-                <v>897780e5-c817-4d6a-beb1-f20dc035dc45</v>
+                <v>eb3ec059-09a3-4ff5-84a5-74858b05a693</v>
                 <v>SetResult</v>
-                <v>0ae24ab6-c128-4b5a-949d-74de35a91273</v>
+                <v>6b3fa425-25fc-4bc6-b9e8-1ed5e1804abf</v>
                 <v>GetTranslator</v>
-                <v>57226d03-0db6-4e6c-8cf3-5ab058f6ac42</v>
+                <v>b38bd3ac-f1af-4e1d-956a-2fe6a68b6250</v>
                 <v>Update</v>
-                <v>83801bcb-076f-4d18-82b5-8b7bcf28c5f7</v>
+                <v>ee662020-ed80-4ff0-a879-86be19e06858</v>
                 <v>SetClientData</v>
-                <v>34c0520a-9b7e-4cc1-bcfb-bb59263df4e0</v>
+                <v>1ef5fe64-ed20-4107-b9f3-3925b1d0f595</v>
                 <v>HasVisibilityAccessIntern</v>
-                <v>063b499a-ea77-462b-a4e7-8522047d849d</v>
+                <v>5ae8938f-c497-4f14-a1e0-841934da2b45</v>
                 <v>GetInstance</v>
-                <v>f80b9ae4-d8c3-483c-9d3b-af15df38109b</v>
+                <v>28703b55-969b-4782-9951-de1d3e7c61f0</v>
                 <v>GetClientData</v>
-                <v>dcb14bd3-cdc6-4261-b2bc-f5baf9a42e22</v>
+                <v>dd2592d0-23ad-42f8-9298-9a621dab646a</v>
                 <v>Paint</v>
-                <v>a6aaaa9e-7f76-487f-bcbf-b1d2b1db1d18</v>
+                <v>a64abb70-ab0d-4065-bb14-c0342ff3a18b</v>
                 <v>GetElementArray</v>
-                <v>84e094cf-cef3-4473-b4af-55c62f192f85</v>
+                <v>9f87f301-94d6-41dd-af2e-dc74929c4aea</v>
                 <v>SetVisuFlagsInternal</v>
-                <v>3dd6b4c1-5fb5-449e-b1a0-bd6127cdf74c</v>
+                <v>e6d2d700-1f3f-4d38-af64-9759b176b7c9</v>
                 <v>GetText</v>
-                <v>3d12d56b-7a2b-48db-b363-de14a40298af</v>
+                <v>157a77d4-eb31-4155-9079-074041c81952</v>
                 <v>GetTextProperties</v>
-                <v>53f9fb1f-998a-45c3-a3dc-ae8e510c95a3</v>
+                <v>64dc4494-3d33-4148-8e6f-e8d3ddc71996</v>
                 <v>Initialize</v>
-                <v>bd149fea-6e65-4451-8f98-6c60c86f15d4</v>
+                <v>ae8d6545-ad09-410a-8e53-f2a7b165cc3c</v>
                 <v>Destruct</v>
-                <v>2dbbc753-3834-40ab-b788-0fcd45c1d9c2</v>
+                <v>7b0b87c6-e80a-4556-aa16-aee43ab725be</v>
                 <v>SetStaticState</v>
-                <v>da96e5fb-9daa-433c-99c6-d92f9dd43627</v>
+                <v>40084c17-1c8f-4e19-940b-736e34f6161f</v>
                 <v>GetSurroundingRect</v>
-                <v>0f4b84b7-7487-4a75-a9f3-7bff82c9c69f</v>
+                <v>35128720-54b4-45b0-902c-2b6dec57fa1e</v>
                 <v>GetResult</v>
-                <v>b6f6d5aa-d76c-4729-9ddd-5afd0bbd4b21</v>
+                <v>3710a7e4-0ff8-4a3d-95d3-82276b37f179</v>
                 <v>GetLocalUsergroup</v>
-                <v>4e520763-f540-4d23-a209-349ca62e42e1</v>
+                <v>ed609cc7-8010-4ba3-aa2e-40da96cb01ba</v>
                 <v>GetName</v>
-                <v>12c59938-8247-45fa-9fdf-4c8359c31b60</v>
+                <v>d5066a59-5958-4471-9f23-078a7601c386</v>
                 <v>GetSize</v>
-                <v>d28699bc-9ef1-4792-8f3d-f0b07139921f</v>
+                <v>8c605481-6746-4df5-a026-16900367ae6c</v>
                 <v>SetDialogInterface</v>
-                <v>65212e99-1b2e-449e-9537-5c67b8d8fee7</v>
+                <v>da1c3a38-a7b6-419e-bca0-7686e18e6444</v>
                 <v>FB_Reinit</v>
-                <v>6f632137-6cdc-41f8-8e1a-cf1971508301</v>
+                <v>688ab293-be77-4a7e-8bde-be534b805912</v>
                 <v>FB_Exit</v>
-                <v>b5d1fae9-cfde-4394-93aa-1e8a12e61be7</v>
+                <v>2d822869-b009-49e7-8851-3fa0b40d44de</v>
                 <v>GetInitializeVersion</v>
-                <v>ceec5fa8-1c56-4f64-bc28-cb0ba1f14e92</v>
+                <v>2209da7f-c54d-46f8-8d1c-6e436fbe567e</v>
                 <v>GetDialogInterface</v>
-                <v>01940049-f55c-4726-a02c-24e69d944458</v>
+                <v>9e6eee61-cd26-4161-b3ec-c708579718c7</v>
                 <v>GetElementIdArray</v>
-                <v>05bed01b-65de-4684-829b-230afd252670</v>
+                <v>326c5c4c-b283-4430-8ec3-38116e119c37</v>
                 <v>HandleInput</v>
-                <v>103d7a41-a663-465f-b660-1e52e4219f13</v>
+                <v>5581e45b-fe7f-4896-93ed-cfe0d6a0d351</v>
                 <v>ElementInfo</v>
-                <v>291ff90a-c602-4368-9382-18fee09d6435</v>
+                <v>c8dcd232-affa-4984-b7e1-68844930d3bb</v>
               </d>
               <v n="FbName">"NotImportant"</v>
-              <v n="FbGuid">{b0cb990e-efcd-445b-82d2-537f29c1a9e0}</v>
+              <v n="FbGuid">{5d46a79c-28a8-4ae9-ab64-1f3a7a18cdbe}</v>
             </o>
-            <v n="GeneratedGlobalVisuVarsGuid">{d8c340a1-dbca-407f-9be3-a6054d185768}</v>
-            <v n="GeneratedGlobalTheVisuVarlistGuid">{da4b1dd9-a304-467a-914d-6ef0d39659ab}</v>
-            <v n="GeneratedGlobalVisuConstants">{49cd1a15-9596-48c0-8b56-3166852ca0c4}</v>
+            <v n="GeneratedGlobalVisuVarsGuid">{7d14ccd5-0444-4036-b612-a59d9b5021d4}</v>
+            <v n="GeneratedGlobalTheVisuVarlistGuid">{b5258db4-7fd4-4521-bfb6-e93895fdf5f5}</v>
+            <v n="GeneratedGlobalVisuConstants">{5297eed9-1517-4316-9ddb-b3ad05276ece}</v>
             <d n="GeneratedAllElementsEntries" t="Hashtable" />
             <o n="VisuRegDesc" t="GenericFbDescription">
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
-                <v>733c62f2-674f-4082-9b43-1732555b3e90</v>
-                <v>FB_Exit</v>
-                <v>341dfdcc-5455-4554-b511-a0e8cde81bd9</v>
+                <v>7a7042af-23fc-4c8d-a6a2-fbf62cc50bf1</v>
                 <v>FB_Reinit</v>
-                <v>74a94bc6-80cb-4747-ae35-b35ae5b2903f</v>
+                <v>9ff4155d-80d4-4652-afd9-97f8c857a920</v>
+                <v>FB_Exit</v>
+                <v>44af4a0d-daff-406d-aeaf-32f35eadfcd0</v>
               </d>
               <v n="FbName">"NotImportant"</v>
-              <v n="FbGuid">{c307b72b-da6c-4c0d-a9e4-109cef7a1d66}</v>
+              <v n="FbGuid">{c57d2b60-4614-461a-bb6f-4f986d2883d8}</v>
             </o>
-            <v n="VisuRegisterGvl">{91e02c86-3e92-4002-8b9f-a2c328ede0a4}</v>
+            <v n="VisuRegisterGvl">{678dea63-47ae-438e-8104-3a6fb7a75347}</v>
             <n n="SettingsPou" />
             <n n="MemManPou" />
             <o n="InputsPou" t="GenericFbDescription">
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>ExecuteLooseCapture</v>
-                <v>13da9a4f-78b0-48b9-8bc5-35cbd74ecd00</v>
+                <v>cce9e847-9616-4822-a81b-7dd54e3762e0</v>
                 <v>ExecuteMouseDblClick</v>
-                <v>a87560d6-cfbf-4e1d-bba0-3bc0a2489d87</v>
+                <v>2c00b645-f23e-404c-a58c-aaa2558ad301</v>
                 <v>ExecuteMouseDown</v>
-                <v>27f8914e-c66c-4d5f-9905-1339ceee1faf</v>
+                <v>7f23d627-d254-4061-bd2c-6f8945f2698d</v>
                 <v>ExecuteMouseUp</v>
-                <v>0a808558-45ec-45d1-a6a7-c65a417a9a73</v>
+                <v>e05de152-a0f5-4053-916c-cd40732f2775</v>
                 <v>GetElementInfo</v>
-                <v>39ba2989-36af-4075-aab4-455c2ef0ce7f</v>
+                <v>90cdf79e-2329-42de-b993-3fa8556d8911</v>
                 <v>abstrGetDefaultCursor</v>
-                <v>9e794b1c-e500-461e-97f8-6613a8bb8c84</v>
+                <v>983393c0-020d-414b-ad23-6692ed2f3a50</v>
                 <v>ExecuteDialogClosed</v>
-                <v>0b7c6b19-19a0-4765-9eaf-d18eef110083</v>
+                <v>aaba52d3-e9ec-4fc5-a941-d6e815ef0eb1</v>
                 <v>ExecuteKeyUp</v>
-                <v>234cf8ea-3f6a-40c6-8f27-ce8fff771ed3</v>
+                <v>549faf5a-8888-4edc-91d5-09d2e8430308</v>
                 <v>ExecuteKeyDown</v>
-                <v>1be8046f-29ef-4ebd-97b8-014d32ea343b</v>
+                <v>b35070f0-f0bc-495f-834a-c9598feadce9</v>
                 <v>ExecuteMouseMove</v>
-                <v>cb4b311a-435c-4cee-b859-5bef85909fc9</v>
+                <v>d587de8e-e323-4e83-b23a-e2109af6670e</v>
                 <v>Initialize</v>
-                <v>1f953491-c69f-45ec-8722-07d5a96267fd</v>
+                <v>c046aacd-fb35-40a3-9278-998598d21b0c</v>
                 <v>ExecuteMouseEnter</v>
-                <v>186a8e7e-a409-4432-ae02-abc31a6ff05f</v>
+                <v>d6224f0a-a27b-4faf-b036-a88579b497e5</v>
                 <v>ExecuteMouseLeave</v>
-                <v>674ee172-cff2-4f4b-a07b-ca8291644a57</v>
+                <v>83c93ccb-5096-4d6e-9605-27e2e470b6a4</v>
                 <v>ExecuteMouseClick</v>
-                <v>9fb257ed-614b-43f6-bf2c-f79082a91ef0</v>
+                <v>3af3f2ac-22ec-47e0-81a2-70e512b77edc</v>
               </d>
               <v n="FbName">"NotImportant"</v>
-              <v n="FbGuid">{c277e949-e89b-41b9-9fb7-84cf1e2e4f1b}</v>
+              <v n="FbGuid">{fdbc945f-200c-4d3a-9fd3-1f1537660897}</v>
             </o>
-            <v n="DialogDut">{406dd04c-45ef-4b95-8d23-4cf2a5bd45a1}</v>
+            <v n="DialogDut">{e579851e-f848-45b3-a0e2-681dcf061676}</v>
           </o>
-          <v n="LastUsedIdForIdentifier">13</v>
+          <v n="LastUsedIdForIdentifier">29</v>
           <o n="TextDocument" t="TextDocument">
             <a n="TextLines" cet="TextLine">
+              <o>
+                <v n="Id">6L</v>
+                <n n="Tag" />
+                <v n="Text">"VAR_INPUT"</v>
+              </o>
+              <o>
+                <v n="Id">8L</v>
+                <n n="Tag" />
+                <v n="Text">"  iNumOfCh : INT;"</v>
+              </o>
+              <o>
+                <v n="Id">5L</v>
+                <n n="Tag" />
+                <v n="Text">"END_VAR"</v>
+              </o>
               <o>
                 <v n="Id">2L</v>
                 <n n="Tag" />
                 <v n="Text">"VAR_IN_OUT"</v>
               </o>
               <o>
-                <v n="Id">3L</v>
+                <v n="Id">4L</v>
                 <n n="Tag" />
-                <v n="Text">"	eWeekDay : E_WeekDay;"</v>
+                <v n="Text">"	dwVar : DWORD;"</v>
               </o>
               <o>
                 <v n="Id">1L</v>
@@ -1335,8 +1607,6 @@
         <Type n="NamedStyleColor">{fa491db2-51ff-4bc1-9cd0-ce8c94ff6216}</Type>
         <Type n="NamedStyleFont">{9e842eb2-1463-4af2-b605-4fbb17044f94}</Type>
         <Type n="String">System.String</Type>
-        <Type n="STSnippetInputAction">{6302d3fe-6ea5-4c42-819a-a9734a133b3d}</Type>
-        <Type n="STSnippetInputAction[]">_3S.CoDeSys.VisualElem.STSnippetInputAction[], VisualElem.plugin, Version=3.5.6.10, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="TextDocument">{f3878285-8e4f-490b-bb1b-9acbb7eb04db}</Type>
         <Type n="TextLine">{a5de0b0b-1cb5-4913-ac21-9d70293ec00d}</Type>
         <Type n="UInt32">System.UInt32</Type>

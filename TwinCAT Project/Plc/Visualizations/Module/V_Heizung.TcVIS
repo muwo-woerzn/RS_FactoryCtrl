@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <Visu Name="V_Heizung" Id="{97f3489a-4654-4f32-b531-4e0917a3a6db}">
     <XmlArchive>
       <Data>
@@ -938,7 +938,7 @@ END_IF"</v>
                 <v n="VisualElementIdentifier">"GenElemInst_15"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="STSnippetInputAction">
                     <o>
@@ -1059,10 +1059,10 @@ END_IF"</v>
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>40da96fc-bcfc-4066-8edb-92eeada54d0e</v>
-                <v>FB_Reinit</v>
-                <v>0231f5fc-32b0-4b87-9bbc-0764a93973d7</v>
                 <v>FB_Exit</v>
                 <v>006e1cef-6398-42b2-b44c-e4b99cf16a06</v>
+                <v>FB_Reinit</v>
+                <v>0231f5fc-32b0-4b87-9bbc-0764a93973d7</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{2097c9ea-6f54-415d-b7bb-3a2cbd0e2c3c}</v>
@@ -1159,7 +1159,6 @@ END_IF"</v>
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
-        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.6.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="InputBoxInputAction">{e8e7e747-f76f-4dee-ab1c-b9637e41ac26}</Type>
         <Type n="InputBoxInputAction[]">_3S.CoDeSys.VisualElem.InputBoxInputAction[], VisualElem.plugin, Version=3.5.6.10, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>

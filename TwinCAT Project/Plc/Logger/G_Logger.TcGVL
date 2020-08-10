@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
+  <GVL Name="G_Logger" Id="{3b920ef4-61d1-475c-be62-8319137a794e}">
+    <Declaration><![CDATA[(*
+  ***************************************************************************
+  ***************************************************************************
+  Module owner:                 ST_EW_SW_SY, woerz 
+  Keyword:                      keyword, <Feature-ID> 
+  
+  Description (summary): PLC Message logger
+
+  ***************************************************************************
+*)
+VAR_GLOBAL CONSTANT
+  iMAXNUMOFMSGPERSISTENT : INT := 500; // maximum num of messages in persistent array
+  iMINNUMOFMSGWRITETOFILE : INT := 100; // writing to file will start, if this num of messages are present
+  iMINTIMEAFTERFILEWRITING : TIME := T#10M; // minimum waiting time, after writing to file
+  iMAXNUMOFLOGFILES : INT := 3; // maximum num of log files
+  diMAXNUMOFLOGITEMSPERFILE : DINT := 5000; // maximum num of log items per file
+  
+   // file path/name on target system (IPC)
+  szLOGFILEPATH_TARGETSYSTEM : T_MaxString := 'C:\PlcLogger\'; ; 
+  szLOGFILEPATH_NETWORK : T_MaxString := 'S:\Dokumente\PlcLogger\';
+  
+END_VAR
+VAR_GLOBAL
+  gfbLogger : FB_Logger;
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

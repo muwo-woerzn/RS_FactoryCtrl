@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
+  <POU Name="FB_LiquidMonitoring" Id="{68ed3101-2939-4685-ae22-96efd5d4b3cd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_LiquidMonitoring
+VAR CONSTANT
+  iNUM_OF_LIQUIDSENSORS : SINT := 12;
+  iNUM_OF_TRANSORS : SINT := 4;
+  
+END_VAR
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+  bInit : BOOL := TRUE;
+  iId : SINT;
+  
+  fbLiquidSensor : ARRAY[1..iNUM_OF_LIQUIDSENSORS] OF FB_LiquidSensor;
+  fbTransor : ARRAY[1..iNUM_OF_TRANSORS] OF FB_Transor;
+	dwSensorState : DWORD;
+	dwTransorCtrl : DWORD;
+
+  VbStartQuit : BOOL;
+  bStartQuit : BOOL;
+  rtrigStartQuit : R_TRIG;
+	bLMStartQuit  : BOOL;
+  tonStartTransor : TON := (PT:= T#1S);
+  
+	// %I / %Q *********************************************************
+	IbStartQuit           AT %I* : BOOL;
+	IbKeySwitch           AT %I* : BOOL;
+	IbContactorResponse1  AT %I* : BOOL;
+	IbContactorResponse2  AT %I* : BOOL;
+	QbLMStartQuit         AT %Q* : BOOL;
+  QbLMStatusAlarm       AT %Q* : BOOL;
+	QbLMStatusOK          AT %Q* : BOOL;
+	QbStartTransor        AT %Q* : BOOL;
+  
+  fbLog : FB_LoggerSetMsg;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bInit THEN
+  A_Init();
+END_IF
+
+rtrigStartQuit(CLK:= IbStartQuit OR VbStartQuit);
+bStartQuit := rtrigStartQuit.Q AND NOT IbKeySwitch AND NOT IbContactorResponse1 AND NOT IbContactorResponse2;
+
+dwTransorCtrl := 16#0000;
+FOR iId := 1 TO iNUM_OF_LIQUIDSENSORS DO
+  fbLiquidSensor[iId](
+    INbQuit:= bStartQuit,
+    IOdwState:= dwSensorState,
+    IOdwTransorCtrl := dwTransorCtrl);
+END_FOR
+
+FOR iId := 1 TO iNUM_OF_TRANSORS DO
+  fbTransor[iId](
+    IOdwCtrl:= dwTransorCtrl);
+END_FOR
+
+IF (dwSensorState <> 0) THEN
+  bLMStartQuit := FALSE;
+  tonStartTransor.IN := FALSE;
+ELSIF bLMStartQuit THEN
+  IF bStartQuit THEN
+    bLMStartQuit := FALSE;
+    IF NOT tonStartTransor.IN THEN
+      fbLog.M_AddMsgHint('Alarm quittiert, Transoren START');
+      tonStartTransor.IN := TRUE;
+    END_IF
+	END_IF
+ELSIF (dwTransorCtrl <> 0) THEN
+  bLMStartQuit := TRUE;
+ELSE
+  IF bStartQuit THEN
+    IF NOT tonStartTransor.IN THEN
+      fbLog.M_AddMsgHint('Transoren START');
+      tonStartTransor.IN := TRUE;
+    END_IF
+  END_IF
+END_IF
+
+tonStartTransor();
+QbStartTransor := tonStartTransor.IN;
+IF tonStartTransor.Q THEN
+  tonStartTransor.IN := FALSE;
+END_IF
+
+QbLMStartQuit := bLMStartQuit AND gdwBlink.2;
+QbLMStatusAlarm := bLMStartQuit OR (dwSensorState <> 0) OR (dwTransorCtrl <> 0);
+QbLMStatusOK := NOT QbLMStatusAlarm;
+
+// end of fb
+]]></ST>
+    </Implementation>
+    <Action Name="A_Init" Id="{16713635-499a-4a16-9216-d9a1262b0aeb}">
+      <Implementation>
+        <ST><![CDATA[
+
+FOR iId := 1 TO iNUM_OF_LIQUIDSENSORS DO
+  fbLiquidSensor[iId].PiChannel := iId;
+END_FOR
+
+FOR iId := 1 TO iNUM_OF_TRANSORS DO
+  fbTransor[iId].PiChannel := iId;
+END_FOR
+
+
+bInit := FALSE;
+
+// end of action
+]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

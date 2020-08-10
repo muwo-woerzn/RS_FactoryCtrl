@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <DUT Name="ST_LogMessage" Id="{259e617e-3a06-4b53-b74e-3e74400c9fee}">
+    <Declaration><![CDATA[TYPE ST_LogMessage :
+STRUCT
+  iTyp : INT; // 0=hint 1=warning 2=error
+  dtDateTime : DATE_AND_TIME;
+  szPath : STRING(60);
+  szMessage : STRING(80);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

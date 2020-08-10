@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
+  <POU Name="FB_Logger" Id="{9187dff8-319a-467f-b9cc-0516ee07f57c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Logger
+VAR CONSTANT
+  iMAXNUMOFMSGVISU : INT := 11; // maximum num of messges in PLC-Visu list 
+  iMAXNUMOFFILTER : INT := 3; // maximum num of terms in filter text
+  iMAXNUMOFFILTERSTORE : INT := 10;
+
+  aszMSGTYP : ARRAY[0..2] OF STRING(5) := ['Hint', 'Warn', 'Error'];
+  
+END_VAR
+VAR_INPUT
+  INbFileWritingEnable : BOOL := TRUE;
+  INbWriteToFileAndClose : BOOL;
+  INbCloseFile : BOOL;
+  
+END_VAR
+VAR_OUTPUT
+  OUTbFileOpen : BOOL;
+  
+END_VAR
+VAR
+  bInit : BOOL := TRUE;
+  bSetInitMessage : BOOL;
+  iPathLenMax : INT := 30;
+  iProgVersion : INT;
+
+  fbLog : FB_LoggerSetMsg;
+  
+  // Write to File
+  bInitFileWriter : BOOL := TRUE;
+  bInitPathNetwork : BOOL := FALSE;
+  iStateFileWriter : INT;
+  fbFileWriteLogString : FB_FileWriteLogString;
+  szFileName : STRING;
+  tonWaitFileWriting : TON;
+  iFileWriterNumOfMsgsOpen : INT;
+  iFileWriterErrorState : INT;
+	iLogIdFileWriter : INT;
+  bWriteToFileStart : BOOL;
+  bCloseFileAndWait : BOOL;
+  bWriteToFileStartVisible : BOOL; // Button bVisuWriteToFileStart anzeigen
+  bVisuInitPathNetwork : BOOL;
+ 	bVisuWriteToFileStart : BOOL := FALSE;
+
+  
+  // PLC-Visu
+  iVisuState : INT;
+  bVisuStart : BOOL;
+  bVisuAutoStart : BOOL;
+  bVisuPrevPage : BOOL;
+  bVisuPrevPageInVisible : BOOL;
+  bVisuNextPage : BOOL;
+  bVisuNextPageInVisible : BOOL;
+  bVisuDone : BOOL;
+  bVisuError : BOOL;
+  iVisuLogId : INT;
+  iVisuLogIdStart : INT;
+  iVisuLogIdIsLastMsg : INT; // LogId im Visu-Array entspricht der letzten Meldung
+  iVisuGetMsgId : INT;
+  iVisuCnt : INT;
+  tonVisu : TON := (PT:=T#3M);
+  bVisuFilterResult : BOOL;
+  bVisuNothingFound : BOOL;
+  iVisuFilterListVisible : INT;
+  bVisuFilterWhiteEnable : BOOL;
+  bVisuFilterBlackEnable : BOOL;
+  bVisuFilterWhiteMode_OR : BOOL := TRUE; // combine filterterms with AND/OR (0/1)
+	szVisuFilterWhite : STRING(80);
+	szVisuFilterBlack : STRING(80);
+  astVisuFilterWhite : ARRAY[1..iMAXNUMOFFILTER] OF ST_LogFilter;
+  astVisuFilterBlack : ARRAY[1..iMAXNUMOFFILTER] OF ST_LogFilter;
+  iVisuFilterMsgTypInput : INT;
+  iVisuFilterMsgTyp : INT;
+
+  szVisuString : STRING(120);
+  astVisuLogMsg : ARRAY[1..iMAXNUMOFMSGVISU] OF ST_LogMessageVisu;
+  
+END_VAR
+VAR PERSISTENT
+	nviLogId : INT;
+	nviLogIdFileWriter : INT;
+	anvstLogMsg : ARRAY[0..G_Logger.iMAXNUMOFMSGPERSISTENT] OF ST_LogMessage;
+
+	anvszVisuFilter : ARRAY[0..iMAXNUMOFFILTERSTORE] OF STRING(80);
+  nvstVisuActualMessage : ST_LogMessageVisu;
+  
+  nvbVisuFileWritingEnable : BOOL := TRUE;
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bInit THEN
+  M_Init();
+END_IF
+IF bSetInitMessage THEN
+  M_SetInitMessage();
+END_IF
+
+
+// file writer *********************************************
+A_FileWriting();
+
+
+// visualisation list **************************************
+tonVisu();
+CASE iVisuState OF
+0: // off
+  bVisuDone := FALSE;
+  bVisuPrevPageInVisible := TRUE;
+  bVisuNextPageInVisible := TRUE;
+  iVisuFilterListVisible := 0;
+  IF bVisuStart THEN
+    tonVisu(IN:= FALSE);
+    iVisuState := iVisuState + 1;
+	END_IF
+  
+1: // init page
+  tonVisu.IN := TRUE;
+  iVisuLogId := 0;
+  iVisuCnt := -1; // search direction backward
+  iVisuLogIdIsLastMsg := 0;
+  bVisuDone := FALSE;
+  bVisuPrevPage := FALSE;
+  bVisuNextPage := FALSE;
+  bVisuPrevPageInVisible := TRUE;
+  bVisuNextPageInVisible := TRUE;
+  iVisuFilterListVisible := 0;
+  bVisuError := FALSE;
+  bVisuAutoStart := TRUE;
+  iVisuLogIdStart := nviLogId;
+  iVisuGetMsgId := nviLogId;
+  iVisuFilterMsgTyp := iVisuFilterMsgTypInput;  
+  M_ParseFilter(szVisuFilterWhite, astVisuFilterWhite);
+  M_ParseFilter(szVisuFilterBlack, astVisuFilterBlack);
+  bVisuNothingFound := TRUE;
+  iVisuState := iVisuState + 1;
+
+2: // clear page
+  iVisuLogId := 0;
+  iVisuState := iVisuState + 1;
+
+3: // clear page
+  bVisuPrevPageInVisible := TRUE;
+  bVisuNextPageInVisible := TRUE;
+  iVisuLogId := iVisuLogId + 1;
+  IF (iVisuLogId <= iMAXNUMOFMSGVISU) THEN
+    astVisuLogMsg[iVisuLogId].iLogId := 0;
+    astVisuLogMsg[iVisuLogId].iTyp := 0;
+    astVisuLogMsg[iVisuLogId].szLogMsg := '';
+  ELSE
+    IF (iVisuCnt > 0) THEN
+      iVisuLogId := iMAXNUMOFMSGVISU;
+    ELSE
+      iVisuLogId := 1;
+		END_IF
+    iVisuState := iVisuState + 1;
+  END_IF
+
+4: // create page
+  IF (iVisuLogId > 0) AND (iVisuLogId <= iMAXNUMOFMSGVISU) THEN
+    IF (iVisuGetMsgId < 1) AND (iVisuGetMsgId > G_Logger.iMAXNUMOFMSGPERSISTENT) THEN
+      iVisuState := 90;
+    ELSE
+      
+      IF (anvstLogMsg[iVisuGetMsgId].iTyp >= iVisuFilterMsgTyp) THEN
+        // FilterMsgTyp TRUE
+        
+        IF M_GetMsgString(INiLogId:= iVisuGetMsgId, IOszTarget:= szVisuString) THEN
+          bVisuFilterResult := TRUE;
+          IF bVisuFilterWhiteEnable THEN
+            IF NOT M_CheckFilter(0, szVisuString, astVisuFilterWhite) THEN
+              bVisuFilterResult := FALSE;
+            END_IF
+          END_IF
+          IF bVisuFilterBlackEnable THEN
+            IF NOT M_CheckFilter(1, szVisuString, astVisuFilterBlack) THEN
+              bVisuFilterResult := FALSE;
+            END_IF
+          END_IF
+  
+          IF bVisuFilterResult THEN
+            // copy message to Visu list
+            bVisuNothingFound := FALSE;
+            astVisuLogMsg[iVisuLogId].iLogId := iVisuGetMsgId;
+            astVisuLogMsg[iVisuLogId].iTyp := anvstLogMsg[iVisuGetMsgId].iTyp;
+            astVisuLogMsg[iVisuLogId].szLogMsg := szVisuString;
+            IF (iVisuGetMsgId = nviLogId) THEN
+              iVisuLogIdIsLastMsg := iVisuLogId;
+            END_IF
+            iVisuLogId := iVisuLogId - iVisuCnt;
+          END_IF
+        END_IF
+      END_IF
+
+      // check, if search complete or next entry
+      IF (iVisuCnt > 0) AND ((iVisuGetMsgId = nviLogId)) THEN
+        // forward search complete
+        bVisuPrevPageInVisible := FALSE;
+        bVisuAutoStart := TRUE;
+        iVisuState := 100;
+    
+      ELSE
+        iVisuGetMsgId := iVisuGetMsgId + iVisuCnt;
+        IF (iVisuGetMsgId < 1) THEN
+          iVisuGetMsgId := G_Logger.iMAXNUMOFMSGPERSISTENT;
+        ELSIF (iVisuGetMsgId > G_Logger.iMAXNUMOFMSGPERSISTENT) THEN
+          iVisuGetMsgId := 1;
+        END_IF
+        IF (iVisuCnt < 0) AND ((iVisuGetMsgId = nviLogId)) THEN
+          // backward search complete
+          IF NOT bVisuAutoStart THEN
+            bVisuNextPageInVisible := FALSE;
+          END_IF
+          iVisuState := 100;
+        END_IF
+      END_IF
+  
+		END_IF
+  ELSE
+    // visu list full 
+    bVisuPrevPageInVisible := FALSE;
+    bVisuNextPageInVisible := FALSE;
+    iVisuState := 100;
+	END_IF
+
+90: // error
+  bVisuError := TRUE;
+  bVisuStart := FALSE;
+  iVisuState := 0;
+
+
+100: // done
+  bVisuStart := FALSE;
+  bVisuDone := TRUE;
+  bVisuPrevPage := FALSE;
+  bVisuNextPage := FALSE;
+  IF bVisuNothingFound OR (iVisuLogIdIsLastMsg > 0) THEN
+    bVisuNextPageInVisible := TRUE;
+	END_IF
+  iVisuState := iVisuState + 1;
+
+101: // select command
+  IF tonVisu.Q THEN
+    iVisuState := 0;
+	END_IF
+  
+  IF bVisuPrevPage AND (astVisuLogMsg[iMAXNUMOFMSGVISU].iLogId > 0) THEN
+    iVisuCnt := -1; // search direction backwards
+    iVisuGetMsgId := astVisuLogMsg[iMAXNUMOFMSGVISU].iLogId;
+    iVisuState := 102;
+  ELSIF bVisuNextPage AND (astVisuLogMsg[1].iLogId > 0) THEN
+    iVisuCnt := 1; // search direction forward
+    iVisuGetMsgId := astVisuLogMsg[1].iLogId;
+    iVisuState := 102;
+    
+  ELSIF bVisuStart THEN
+    // page refresh
+    iVisuState := 0;
+
+  ELSIF bVisuAutoStart THEN
+    IF (iVisuLogIdStart <> nviLogId) THEN
+      // new messages available => page refresh
+      bVisuStart := TRUE;
+      iVisuState := 1;
+    ELSIF (iVisuFilterMsgTyp <> iVisuFilterMsgTypInput) THEN
+      // filter message typ changed => page refresh
+      bVisuStart := TRUE;
+      iVisuState := 0;
+  	END_IF
+	END_IF
+  
+102: // select next/prev page
+  iVisuLogIdIsLastMsg := 0;
+  bVisuDone := FALSE;
+  bVisuAutoStart := FALSE;
+  iVisuState := 2;
+
+END_CASE
+]]></ST>
+    </Implementation>
+    <Method Name="M_GetMsgStringCSV" Id="{39187013-7856-433b-95e1-63da6795a5ad}">
+      <Declaration><![CDATA[METHOD PRIVATE M_GetMsgStringCSV : BOOL
+VAR_INPUT
+  INiLogId : INT;
+END_VAR
+VAR_IN_OUT
+  IOszTarget : STRING(120);
+END_VAR
+VAR
+  szTyp : STRING(5);
+  
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+M_GetMsgStringCSV := FALSE;
+IF (INiLogId > 0) AND (INiLogId <= G_Logger.iMAXNUMOFMSGPERSISTENT) THEN
+  IF NOT (anvstLogMsg[INiLogId].szMessage = '') THEN
+    IF (anvstLogMsg[INiLogId].iTyp >= 0) AND (anvstLogMsg[INiLogId].iTyp <= 2) THEN
+      szTyp := aszMSGTYP[anvstLogMsg[INiLogId].iTyp];
+    ELSE
+      szTyp := INT_TO_STRING(anvstLogMsg[INiLogId].iTyp);
+    END_IF
+  
+    IOszTarget :=
+      CONCAT(szTyp,
+        CONCAT(';',
+          CONCAT(MID(DT_TO_STRING(anvstLogMsg[INiLogId].dtDateTime), 19, 4),
+            CONCAT(';',
+              CONCAT(anvstLogMsg[INiLogId].szPath,
+                CONCAT(';', anvstLogMsg[INiLogId].szMessage))))));
+    M_GetMsgStringCSV := TRUE;
+  END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Action Name="A_FileWriting" Id="{3c185221-9651-43c7-8157-1aa5bc02478b}">
+      <Implementation>
+        <ST><![CDATA[
+IF bInitFileWriter THEN
+  fbFileWriteLogString.INiMaxLogFiles := G_Logger.iMAXNUMOFLOGFILES;
+  fbFileWriteLogString.INdiMaxLogItems := G_Logger.diMAXNUMOFLOGITEMSPERFILE; 
+  fbFileWriteLogString.INszNetId := ''; // HMIAgstMachineInfo.szAMS_Net_Id;
+  szFileName := 'PlcLog';
+  IF bInitPathNetwork THEN
+    fbFileWriteLogString.INszFileName := CONCAT(G_Logger.szLOGFILEPATH_NETWORK, szFileName);
+  ELSE
+    fbFileWriteLogString.INszFileName := CONCAT(G_Logger.szLOGFILEPATH_TARGETSYSTEM, szFileName);
+  END_IF
+  bVisuInitPathNetwork := bInitPathNetwork;
+
+  fbFileWriteLogString.INszHeadLine := 'Typ;Date and Time;PLC path;Message';
+  tonWaitFileWriting(IN:= FALSE, PT:= G_Logger.iMINTIMEAFTERFILEWRITING);
+  iStateFileWriter := 0;
+  
+  bInitFileWriter := FALSE;
+END_IF
+
+
+// close file by INPUT 
+IF (iStateFileWriter > 0) THEN
+  iFileWriterNumOfMsgsOpen := nviLogId - nviLogIdFileWriter;
+  IF (iFileWriterNumOfMsgsOpen < 0) THEN
+    iFileWriterNumOfMsgsOpen := iFileWriterNumOfMsgsOpen + G_Logger.iMAXNUMOFMSGPERSISTENT;
+	END_IF
+
+  IF (iStateFileWriter < 120) THEN
+    IF INbCloseFile OR NOT INbFileWritingEnable OR NOT nvbVisuFileWritingEnable THEN
+      iStateFileWriter := 120;
+    END_IF
+    bWriteToFileStart := bVisuWriteToFileStart OR INbWriteToFileAndClose;
+  END_IF
+END_IF
+
+CASE iStateFileWriter OF
+0: // enabled ?
+  fbFileWriteLogString.INbWrite := FALSE;
+  fbFileWriteLogString.INbClose := FALSE;
+  bWriteToFileStartVisible := FALSE;
+  bVisuWriteToFileStart := FALSE;
+
+  IF INbFileWritingEnable AND nvbVisuFileWritingEnable THEN
+    iStateFileWriter := iStateFileWriter + 1;
+	END_IF
+
+1: // init
+  tonWaitFileWriting(IN:= FALSE);
+  iStateFileWriter := iStateFileWriter + 1;
+
+2: // wait min time after last write process
+  bWriteToFileStartVisible := TRUE;
+
+  bCloseFileAndWait := INbCloseFile OR INbWriteToFileAndClose
+      OR (bVisuInitPathNetwork XOR bInitPathNetwork);
+  
+  tonWaitFileWriting(IN:= TRUE);
+  IF tonWaitFileWriting.Q OR bWriteToFileStart THEN
+    IF (iFileWriterNumOfMsgsOpen >= G_Logger.iMINNUMOFMSGWRITETOFILE) THEN
+      bWriteToFileStartVisible := FALSE;
+      iStateFileWriter := 10;
+    ELSIF (iFileWriterNumOfMsgsOpen > 1) AND bWriteToFileStart THEN
+      iStateFileWriter := 10;
+    ELSIF bCloseFileAndWait THEN
+      iStateFileWriter := 120;
+    END_IF
+	END_IF
+
+10: // start writing to file
+  OUTbFileOpen := TRUE;
+  IF fbFileWriteLogString.OUTbError THEN
+    iStateFileWriter := 90;
+
+  ELSIF NOT fbFileWriteLogString.OUTbBusy THEN
+    iLogIdFileWriter := nviLogIdFileWriter + 1;
+    IF (iLogIdFileWriter > G_Logger.iMAXNUMOFMSGPERSISTENT) THEN
+      iLogIdFileWriter := 1;
+    END_IF
+    IF M_GetMsgStringCSV(iLogIdFileWriter, fbFileWriteLogString.INszWriteLine) THEN
+      fbFileWriteLogString.INbWrite := TRUE;
+      iStateFileWriter := iStateFileWriter + 1;
+    END_IF
+	END_IF
+
+11: // write busy
+  IF NOT fbFileWriteLogString.OUTbBusy THEN
+    IF fbFileWriteLogString.OUTbError THEN
+      iStateFileWriter := 90;
+    ELSE
+      nviLogIdFileWriter := iLogIdFileWriter;
+      IF (nviLogIdFileWriter <> nviLogId) THEN
+        iStateFileWriter := 10; // next message
+      ELSE
+        // all messages written
+        iStateFileWriter := 100;
+      END_IF
+   	END_IF
+    fbFileWriteLogString.INbWrite := FALSE;
+	END_IF
+
+  
+90: // error
+  iFileWriterErrorState := fbFileWriteLogString.OUTiStateError;
+  OUTbFileOpen := FALSE;
+  IF (iFileWriterErrorState < 30) THEN
+    // errror while FileOpen => repeat with local path
+    bInitPathNetwork := FALSE;
+    bInitFileWriter := TRUE;
+	END_IF
+  iStateFileWriter := 0;
+  
+  
+100: // done
+  fbFileWriteLogString.INbWrite := FALSE;
+  bVisuWriteToFileStart := FALSE;
+  iStateFileWriter := 120;
+
+
+120: // close file ***********************************************
+  fbFileWriteLogString.INbWrite := FALSE;
+  fbFileWriteLogString.INbClose := TRUE;
+  bWriteToFileStartVisible := FALSE;
+  iStateFileWriter := iStateFileWriter + 1;
+
+121: // wait close file
+  IF NOT fbFileWriteLogString.OUTbBusy THEN    
+    fbFileWriteLogString.INbClose := FALSE;
+    OUTbFileOpen := FALSE;
+    tonWaitFileWriting(IN:= FALSE);
+    bWriteToFileStartVisible := TRUE;
+    iStateFileWriter := iStateFileWriter + 1;
+	END_IF
+
+122: // wait after close to avoid file access while data backup
+  IF bVisuInitPathNetwork XOR bInitPathNetwork THEN
+    bInitFileWriter := FALSE;
+	END_IF
+
+  tonWaitFileWriting(IN:= NOT INbCloseFile AND NOT INbWriteToFileAndClose);
+  IF tonWaitFileWriting.Q OR NOT bCloseFileAndWait THEN
+    iStateFileWriter := 0;
+	END_IF
+  
+END_CASE
+ 
+fbFileWriteLogString();
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Method Name="M_ParseFilter" Id="{4df477eb-812f-4739-8a8f-adc3376aaff1}">
+      <Declaration><![CDATA[METHOD PRIVATE M_ParseFilter : BOOL
+VAR_IN_OUT
+  IOszFilterTerm : STRING(80);
+  IOastFilter : ARRAY[1..iMAXNUMOFFILTER] OF ST_LogFilter;
+END_VAR
+VAR
+  iFor : INT;
+  iPosSep : INT;
+  iLen : INT;
+  szFilterTerm : STRING(80);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+FOR iFor := 1 TO iMAXNUMOFFILTER DO
+  IOastFilter[iFor].bEnabled := FALSE;
+END_FOR
+
+IF NOT (IOszFilterTerm = '') THEN
+  szFilterTerm := IOszFilterTerm;  
+  FOR iFor := 1 TO iMAXNUMOFFILTER DO
+    iPosSep := FIND(szFilterTerm, ';');
+    IF (iPosSep > 0) THEN
+      iLen := iPosSep - 1;
+    ELSE
+      iLen := 40;
+		END_IF
+    IOastFilter[iFor].szText := MID(szFilterTerm, iLen, 1);
+    IOastFilter[iFor].bEnabled :=  NOT (IOastFilter[iFor].szText = '');
+    IF (iPosSep > 0) THEN
+      szFilterTerm := MID(szFilterTerm, 40, iPosSep + 1); 
+    ELSE
+      EXIT;
+		END_IF
+  END_FOR
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CheckFilter" Id="{4fd3c173-0c94-4610-a322-bc7802dc0244}">
+      <Declaration><![CDATA[METHOD PRIVATE M_CheckFilter : BOOL
+VAR_INPUT
+  iMode : INT; // 0= white, 1= black
+END_VAR
+VAR_INPUT
+  IOszText : STRING(80);
+  IOastFilter : ARRAY[1..iMAXNUMOFFILTER] OF ST_LogFilter;
+END_VAR
+VAR
+  iFor : INT;
+  iResult : INT;
+  bCheckResultOR : BOOL;
+  bResultOR : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+M_CheckFilter := TRUE;
+bResultOR := FALSE;
+bCheckResultOR := FALSE;
+
+FOR iFor := 1 TO iMAXNUMOFFILTER DO
+  IF IOastFilter[iFor].bEnabled THEN
+    iResult := FIND(IOszText, IOastFilter[iFor].szText);
+    IF (iMode = 0) THEN
+      // search mode white
+      IF bVisuFilterWhiteMode_OR THEN
+        // search mode OR
+        bCheckResultOR := TRUE;
+        IF (iResult > 0) THEN
+          bResultOR := TRUE;
+				END_IF
+      ELSIF (iResult = 0) THEN
+        // search mode AND
+        M_CheckFilter := FALSE;
+        EXIT;
+      END_IF
+    ELSIF (iMode = 1) AND (iResult > 0) THEN
+      // search mode black
+      M_CheckFilter := FALSE;
+      EXIT;
+		END_IF
+	END_IF
+END_FOR
+ 
+IF bCheckResultOR AND NOT bResultOR THEN
+  M_CheckFilter := FALSE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_GetMsgString" Id="{5bf42111-7f4b-467e-82e0-9a6f5e5ed9a7}">
+      <Declaration><![CDATA[METHOD PRIVATE M_GetMsgString : BOOL
+VAR_INPUT
+  INiLogId : INT;
+END_VAR
+VAR_IN_OUT
+  IOszTarget : STRING(120);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+M_GetMsgString := FALSE;
+IF (INiLogId > 0) AND (INiLogId <= G_Logger.iMAXNUMOFMSGPERSISTENT) THEN
+  IF NOT (anvstLogMsg[INiLogId].szMessage = '') THEN  
+    IOszTarget :=
+      CONCAT(MID(DT_TO_STRING(anvstLogMsg[INiLogId].dtDateTime), 19, 4),
+        CONCAT(' ',
+          CONCAT(anvstLogMsg[INiLogId].szPath,
+            CONCAT(': ', anvstLogMsg[INiLogId].szMessage))));
+    M_GetMsgString := TRUE;
+  END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetInitMessage" Id="{b189d170-24a0-4c72-9bb9-7d99d55ad119}">
+      <Declaration><![CDATA[METHOD PRIVATE M_SetInitMessage
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF (gfbSystemCX.OUTdtDateClock > DT#1970-01-01-00:00) THEN
+  fbLog.M_AddMsgWarning(
+    INszTxt := 'PLC-Init after restart');
+  bSetInitMessage := FALSE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Init" Id="{df9bc389-0a64-41ee-9ef8-2e529202362f}">
+      <Declaration><![CDATA[METHOD PRIVATE M_Init
+VAR_INPUT
+END_VAR
+VAR
+  iId : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+iPathLenMax := SIZEOF(anvstLogMsg[nviLogId].szPath) - 1;
+bVisuInitPathNetwork := bInitPathNetwork;
+
+bSetInitMessage := TRUE;
+
+bInit := FALSE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetMessage" Id="{ffe5e72c-dde3-4491-813b-135e4d0b8129}">
+      <Declaration><![CDATA[METHOD PUBLIC M_SetMessage
+VAR_INPUT
+	INiTyp : INT;
+END_VAR
+VAR_IN_OUT
+	IOszPath : STRING;
+	IOszLogTxt : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+nviLogId := nviLogId + 1;
+IF (nviLogId > G_Logger.iMAXNUMOFMSGPERSISTENT) THEN
+	nviLogId := 1;
+END_IF
+anvstLogMsg[nviLogId].iTyp := INiTyp;
+anvstLogMsg[nviLogId].dtDateTime := gfbSystemCX.OUTdtDateClock;
+anvstLogMsg[nviLogId].szPath := RIGHT(IOszPath, iPathLenMax);
+anvstLogMsg[nviLogId].szMessage := IOszLogTxt;
+
+nvstVisuActualMessage.iLogId := nviLogId;
+nvstVisuActualMessage.iTyp := INiTyp;
+M_GetMsgString(nviLogId, nvstVisuActualMessage.szLogMsg);
+
+IF (nviLogId = nviLogIdFileWriter) THEN
+  nviLogIdFileWriter := nviLogIdFileWriter + 1;
+  IF (nviLogIdFileWriter > G_Logger.iMAXNUMOFMSGPERSISTENT) THEN
+    nviLogIdFileWriter := 1;
+  END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

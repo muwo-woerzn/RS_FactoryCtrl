@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <Visu Name="V_RadioButton" Id="{48c887ea-0db2-4d2c-a7df-c71bd5edee13}">
     <XmlArchive>
       <Data>
@@ -137,10 +137,6 @@
                       <v n="Id">823443203L</v>
                       <v n="Value">"60"</v>
                     </o>
-                    <o>
-                      <v n="Id">3438453433L</v>
-                      <v n="Value">""</v>
-                    </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Rectangle"</v>
@@ -149,7 +145,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_2"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="STSnippetInputAction">
                     <o>
@@ -184,8 +180,6 @@
                 <v>e19e56e5-c2ee-46fb-b302-c56312a82557</v>
                 <v>ContainsPoint</v>
                 <v>3a1445ce-0d9f-45f1-b577-47d3bb3df48a</v>
-                <v>FB_Reinit</v>
-                <v>10f451bb-8650-4120-bc30-f89a228df000</v>
                 <v>HasInputAccess</v>
                 <v>5add4183-4804-496b-8560-cef3d4523cd1</v>
                 <v>HasInputAccessIntern</v>
@@ -224,6 +218,8 @@
                 <v>180e6741-ccae-47bb-8f33-b6c08159fd94</v>
                 <v>Initialize</v>
                 <v>d22addd4-e8c1-4e96-a2fb-526ddc5e4db3</v>
+                <v>Destruct</v>
+                <v>c02a8fca-b575-4f48-af0a-7ae0f884588e</v>
                 <v>SetStaticState</v>
                 <v>e43587e9-e372-4204-bc95-1cd8e07bff15</v>
                 <v>GetSurroundingRect</v>
@@ -238,8 +234,8 @@
                 <v>b39e71f2-da8a-42af-a98e-c5c88df2051b</v>
                 <v>SetDialogInterface</v>
                 <v>d4e5abc5-38d1-4486-a150-b84c34e8cad0</v>
-                <v>Destruct</v>
-                <v>c02a8fca-b575-4f48-af0a-7ae0f884588e</v>
+                <v>FB_Reinit</v>
+                <v>10f451bb-8650-4120-bc30-f89a228df000</v>
                 <v>FB_Exit</v>
                 <v>09e44c0d-45a3-439e-9337-6c9ca6d38e87</v>
                 <v>GetInitializeVersion</v>
@@ -264,10 +260,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>1feb2dff-9693-40d0-bdcc-927371ad26cc</v>
-                <v>FB_Reinit</v>
-                <v>4edfc46b-a529-44f5-84aa-70f456c2e061</v>
                 <v>FB_Exit</v>
                 <v>bde10b14-7bef-46f8-a145-d9dbe5ce25e9</v>
+                <v>FB_Reinit</v>
+                <v>4edfc46b-a529-44f5-84aa-70f456c2e061</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{d5151461-3180-4482-bf29-206f78e673ee}</v>
@@ -379,13 +375,13 @@
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
-        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.6.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>
         <Type n="Int32">System.Int32</Type>
         <Type n="Int64">System.Int64</Type>
         <Type n="NamedStyleColor">{fa491db2-51ff-4bc1-9cd0-ce8c94ff6216}</Type>
         <Type n="String">System.String</Type>
         <Type n="STSnippetInputAction">{6302d3fe-6ea5-4c42-819a-a9734a133b3d}</Type>
+        <Type n="STSnippetInputAction[]">_3S.CoDeSys.VisualElem.STSnippetInputAction[], VisualElem.plugin, Version=3.5.6.10, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="TextDocument">{f3878285-8e4f-490b-bb1b-9acbb7eb04db}</Type>
         <Type n="TextLine">{a5de0b0b-1cb5-4913-ac21-9d70293ec00d}</Type>
         <Type n="UInt32">System.UInt32</Type>

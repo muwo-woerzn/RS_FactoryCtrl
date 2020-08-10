@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+  <DUT Name="ST_LogFilter" Id="{053ad8bb-1563-4327-84f1-9956b621a745}">
+    <Declaration><![CDATA[TYPE ST_LogFilter :
+(*
+  ***************************************************************************
+  ***************************************************************************
+  Module owner:                 ST_EW_SW_SY, woerz 
+  Keyword:                      keyword, <Feature-ID> 
+  
+  Description (summary): PLC Message logger filter
+
+  ***************************************************************************
+*)
+STRUCT
+  bEnabled : BOOL;
+  szText : STRING(40);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

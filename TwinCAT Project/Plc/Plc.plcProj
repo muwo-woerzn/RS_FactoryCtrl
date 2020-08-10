@@ -15,12 +15,17 @@
   <ItemGroup>
     <Folder Include="Data types" />
     <Folder Include="Global Variables" />
+    <Folder Include="Logger" />
+    <Folder Include="Logger\DUTs" />
+    <Folder Include="Logger\VISUs" />
     <Folder Include="POUs" />
     <Folder Include="POUs\Abluftsteuerung\SubSysteme" />
     <Folder Include="POUs\KG_Raueme" />
     <Folder Include="POUs\Abluftsteuerung" />
     <Folder Include="POUs\Kompressor" />
     <Folder Include="POUs\EG" />
+    <Folder Include="POUs\Monitoring" />
+    <Folder Include="POUs\Monitoring\Submodule" />
     <Folder Include="POUs\Temperaturen" />
     <Folder Include="POUs\_Grundfunktionen" />
     <Folder Include="POUs\_Grundfunktionen\System" />
@@ -55,6 +60,51 @@
       <SubType>Code</SubType>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
     </Compile>
+    <Compile Include="Logger\DUTs\ST_LogFilter.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\DUTs\ST_LogMessage.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\DUTs\ST_LogMessageVisu.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\FB_FileWriteLogString.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\FB_Logger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\FB_LoggerSetMsg.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\G_Logger.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\VISUs\V_LoggerFilterBlack.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Logger\VISUs\V_LoggerFilterLine.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Logger\VISUs\V_LoggerFilterList.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Logger\VISUs\V_LoggerFilterWhite.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Logger\VISUs\V_LoggerModul.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Logger\VISUs\V_LoggerMsgLine.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="PlcTaskMain.TcTTO" />
     <Compile Include="POUs\Abluftsteuerung\FB_Abluftsteuerung.TcPOU">
       <SubType>Code</SubType>
@@ -83,6 +133,15 @@
     <Compile Include="POUs\Kompressor\FB_KompressorSteuerung.TcPOU">
       <SubType>Code</SubType>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="POUs\Monitoring\FB_LiquidMonitoring.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Monitoring\Submodule\FB_LiquidSensor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Monitoring\Submodule\FB_Transor.TcPOU">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PLC_PRG.TcPOU" />
     <Compile Include="POUs\Temperaturen\PRG_Temperaturen.TcPOU">
@@ -126,6 +185,9 @@
     <Compile Include="POUs\_Grundfunktionen\F_RolDownTime.TcPOU" />
     <Compile Include="POUs\_Grundfunktionen\F_Scaling.TcPOU" />
     <Compile Include="POUs\_Grundfunktionen\F_SunRise.TcPOU" />
+    <Compile Include="POUs\_Grundfunktionen\System\FB_BK1250Diag.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\_Grundfunktionen\System\FB_SystemCX.TcPOU">
       <SubType>Code</SubType>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
@@ -146,6 +208,22 @@
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
     </Compile>
+    <Compile Include="Visualizations\Module\V_ECReset.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_LiquidSensorCfg.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_LiquidSensorState.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_LiquidTransorState.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="Visualizations\Module\V_NumInputReal.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
@@ -155,6 +233,10 @@
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
+    <Compile Include="Visualizations\Module\V_TCReset.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
     <Compile Include="Visualizations\Module\V_WCRaum.TcVIS">
       <SubType>Code</SubType>
@@ -166,6 +248,10 @@
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
     </Compile>
+    <Compile Include="Visualizations\Module\V_dwBitToggle.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="Visualizations\VisuStart.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
@@ -175,6 +261,14 @@
     <Compile Include="Visualizations\Module\V_Licht.TcVIS" />
     <Compile Include="Visualizations\Module\V_Rol.TcVIS" />
     <Compile Include="Visualizations\Module\V_RolGrp.TcVIS" />
+    <Compile Include="Visualizations\V_Monitoring.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Visualizations\V_Logger.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="Visualizations\V_KomprWRG.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
@@ -248,6 +342,10 @@
     <PlaceholderReference Include="Tc2_DMX">
       <DefaultResolution>Tc2_DMX, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_DMX</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_IoFunctions">
+      <DefaultResolution>Tc2_IoFunctions, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_IoFunctions</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -347,7 +445,7 @@
             <o t="UserList">
               <a n="Users" cet="User">
                 <o>
-                  <v n="Id">{85858113-2cd5-4842-a8db-65a14c58a74a}</v>
+                  <v n="Id">{ee8275c1-b026-4ba6-ba27-e30425da0db6}</v>
                   <v n="Name">"Owner"</v>
                   <v n="FullName">""</v>
                   <v n="Description">""</v>
@@ -363,24 +461,24 @@
             <o t="GroupList">
               <a n="Groups" cet="Group">
                 <o>
-                  <v n="Id">{969b878c-be03-4e9a-b61f-1ae51f0820e9}</v>
-                  <v n="Name">"Owner"</v>
-                  <v n="Description">""</v>
-                  <v n="IsEveryoneGroup">false</v>
-                  <v n="IsOwnerGroup">true</v>
-                  <l n="UserMembers" t="ArrayList" cet="Guid">
-                    <v>85858113-2cd5-4842-a8db-65a14c58a74a</v>
-                  </l>
-                  <l n="GroupMembers" t="ArrayList" />
-                </o>
-                <o>
-                  <v n="Id">{21aa4f02-e287-4aa7-a1c3-b7a529505e04}</v>
+                  <v n="Id">{758b55a2-8603-4d2c-be1f-d01deaf5e8e5}</v>
                   <v n="Name">"Everyone"</v>
                   <v n="Description">""</v>
                   <v n="IsEveryoneGroup">true</v>
                   <v n="IsOwnerGroup">false</v>
                   <l n="UserMembers" t="ArrayList" cet="Guid">
-                    <v>85858113-2cd5-4842-a8db-65a14c58a74a</v>
+                    <v>ee8275c1-b026-4ba6-ba27-e30425da0db6</v>
+                  </l>
+                  <l n="GroupMembers" t="ArrayList" />
+                </o>
+                <o>
+                  <v n="Id">{51253db6-ed29-4fbb-ae78-3361172e3885}</v>
+                  <v n="Name">"Owner"</v>
+                  <v n="Description">""</v>
+                  <v n="IsEveryoneGroup">false</v>
+                  <v n="IsOwnerGroup">true</v>
+                  <l n="UserMembers" t="ArrayList" cet="Guid">
+                    <v>ee8275c1-b026-4ba6-ba27-e30425da0db6</v>
                   </l>
                   <l n="GroupMembers" t="ArrayList" />
                 </o>
@@ -389,7 +487,7 @@
             <v>UserAuthentication</v>
             <o t="UserAuthentication">
               <d n="UserToPasswordHash" t="Hashtable" ckt="Guid" cvt="String">
-                <v>85858113-2cd5-4842-a8db-65a14c58a74a</v>
+                <v>ee8275c1-b026-4ba6-ba27-e30425da0db6</v>
                 <v>d41d8cd98f00b204e9800998ecf8427e</v>
               </d>
             </o>

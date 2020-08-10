@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <Visu Name="V_NumInputReal" Id="{0c6b8483-457e-4ae4-b590-38caa1fd09d3}">
     <XmlArchive>
       <Data>
@@ -126,7 +126,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_12"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="STSnippetInputAction">
                     <o>
@@ -262,7 +262,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_14"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="STSnippetInputAction">
                     <o>
@@ -398,7 +398,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_26"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="STSnippetInputAction">
                     <o>
@@ -534,7 +534,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_28"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="STSnippetInputAction">
                     <o>
@@ -572,8 +572,6 @@
                 <v>40024309-a4b8-4b94-964a-45b8c3e90c76</v>
                 <v>ContainsPoint</v>
                 <v>40f0c1e6-ba56-43be-8454-5f9026dfb2a8</v>
-                <v>FB_Reinit</v>
-                <v>78231b45-c0cf-4e9f-a09a-36fa4af50f43</v>
                 <v>HasInputAccess</v>
                 <v>a5702672-1946-4f0e-82cd-df0fff6ae9be</v>
                 <v>HasInputAccessIntern</v>
@@ -612,6 +610,8 @@
                 <v>fdeb5067-98ec-472a-ab92-5a61e586e19c</v>
                 <v>Initialize</v>
                 <v>236679fe-3ec0-4d3c-a677-31431ad13714</v>
+                <v>Destruct</v>
+                <v>1619f19e-2a41-4e09-84e6-5680a2b16cbb</v>
                 <v>SetStaticState</v>
                 <v>8e8db822-0d81-4573-90e8-65e124176853</v>
                 <v>GetSurroundingRect</v>
@@ -626,8 +626,8 @@
                 <v>5f8116de-ebaf-4d66-8c74-2a69f0809031</v>
                 <v>SetDialogInterface</v>
                 <v>60f57936-1a45-4d8a-8ede-5d527b46805f</v>
-                <v>Destruct</v>
-                <v>1619f19e-2a41-4e09-84e6-5680a2b16cbb</v>
+                <v>FB_Reinit</v>
+                <v>78231b45-c0cf-4e9f-a09a-36fa4af50f43</v>
                 <v>FB_Exit</v>
                 <v>81bb48bf-c8ae-4c60-91b2-1ac15bbe85a0</v>
                 <v>GetInitializeVersion</v>
@@ -652,10 +652,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>8b090494-cd30-4f97-a3f0-2a46ab9670bc</v>
-                <v>FB_Reinit</v>
-                <v>4d97b5d8-89d7-4310-84f5-086eb67b2b88</v>
                 <v>FB_Exit</v>
                 <v>5621bfd8-fb92-4396-9e91-0b4716e42fac</v>
+                <v>FB_Reinit</v>
+                <v>4d97b5d8-89d7-4310-84f5-086eb67b2b88</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{0c976237-6ec2-4ab9-8879-c31089533def}</v>
@@ -777,12 +777,12 @@
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
-        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.6.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>
         <Type n="Int32">System.Int32</Type>
         <Type n="Int64">System.Int64</Type>
         <Type n="String">System.String</Type>
         <Type n="STSnippetInputAction">{6302d3fe-6ea5-4c42-819a-a9734a133b3d}</Type>
+        <Type n="STSnippetInputAction[]">_3S.CoDeSys.VisualElem.STSnippetInputAction[], VisualElem.plugin, Version=3.5.6.10, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="TextDocument">{f3878285-8e4f-490b-bb1b-9acbb7eb04db}</Type>
         <Type n="TextLine">{a5de0b0b-1cb5-4913-ac21-9d70293ec00d}</Type>
         <Type n="UInt32">System.UInt32</Type>

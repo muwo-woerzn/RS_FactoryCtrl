@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
+  <POU Name="FB_Transor" Id="{88a34746-49b1-4be7-affd-e82147f46edf}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Transor
+VAR_INPUT
+  
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	IOdwCtrl : DWORD;
+END_VAR
+VAR
+  iChan : SINT; // Kanalnummer im IOdwState
+  
+	// %I / %Q ********************
+	QbTransor       AT %Q* : BOOL;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+QbTransor := GETBIT32(IOdwCtrl, iChan);
+
+// end of functionblock]]></ST>
+    </Implementation>
+    <Property Name="PiChannel" Id="{312a05a4-0fef-4dc4-9242-a3bf1e37eddf}">
+      <Declaration><![CDATA[PROPERTY PUBLIC PiChannel : SINT]]></Declaration>
+      <Set Name="Set" Id="{82cb4133-60df-4239-9a37-03479ce73626}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[
+IF (PiChannel >= 0) AND (PiChannel <= 31) THEN
+  iChan := PiChannel;
+ELSE
+  iChan := 0;
+END_IF
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

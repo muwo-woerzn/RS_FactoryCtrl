@@ -30,6 +30,7 @@ VAR
 
 	fbTaster 		: FB_Taster;
 
+  fbLog : FB_LoggerSetMsg;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF bInit THEN
@@ -56,14 +57,19 @@ THEN
 END_IF
 tofEin(IN:= FALSE);
 
-IF fbTaster.bLang
-AND bKlickEnable
-AND bLangEnable
-OR bEinKurz
-OR bEinLang
-OR gbLichtZentralEin
-THEN
+IF fbTaster.bLang AND bKlickEnable AND bLangEnable THEN
+  IF NOT QbOutLicht THEN
+    fbLog.M_AddMsgHint('Licht EIN Taster');
+  END_IF
 	QbOutLicht := TRUE;
+ELSIF bEinKurz OR bEinLang THEN
+  IF NOT QbOutLicht THEN
+    fbLog.M_AddMsgHint('Licht EIN INPUT');
+  END_IF
+	QbOutLicht := TRUE;
+ELSIF gbLichtZentralEin THEN
+	QbOutLicht := TRUE;
+  //fbLog.M_AddMsgHint('Licht EIN ZentralEin');
 END_IF
 
 IF (fbTaster.bKlick
@@ -72,12 +78,32 @@ OR (fbTaster.bLang
 		AND NOT bKlickEnable
 		AND bLangEnable)
 THEN
-	QbOutLicht := NOT QbOutLicht;
+  IF NOT QbOutLicht THEN
+    IF NOT QbOutLicht THEN
+      fbLog.M_AddMsgHint('Licht EIN Taster');
+    END_IF
+  	QbOutLicht := TRUE;
+  ELSE
+    IF QbOutLicht THEN
+      fbLog.M_AddMsgHint('Licht AUS Taster');
+    END_IF
+  	QbOutLicht := FALSE;
+  END_IF
 END_IF
 
-IF QbOutLicht AND NOT tofEin.Q
-OR gbLichtZentralAus OR bAus THEN
+IF QbOutLicht AND NOT tofEin.Q THEN
+  IF QbOutLicht THEN
+    fbLog.M_AddMsgWarning('Licht AUS Taster');
+  END_IF
 	QbOutLicht := FALSE;
+ELSIF bAus THEN
+  IF QbOutLicht THEN
+    fbLog.M_AddMsgWarning('Licht AUS INPUT');
+  END_IF
+	QbOutLicht := FALSE;
+ELSIF gbLichtZentralAus THEN
+	QbOutLicht := FALSE;
+  //fbLog.M_AddMsgHint('Licht AUS ZentralAus');
 END_IF
 
 IF fbTaster.bKlick2 THEN

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <POU Name="FB_SystemCX" Id="{cdfbd0ee-9708-49dd-b618-533912bc4b81}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_SystemCX
 VAR_INPUT
@@ -36,6 +36,8 @@ VAR
 	tonSetTime : ton := (PT:= T#180S);
 	
 	IuiDeviceId_ECMAster AT %I* : UINT; (* Device-ID EtherCAT Master *)
+	IuiDevState_ECMAster AT %I* : UINT; (* EtherCAT Master *)
+	QuiDevCtrl_ECMAster AT %Q* : UINT; (* EtherCAT Master *)
 
 	(*local Windows NT time, via ADS*)
 	fbNtGetTime				: NT_GetTime;
@@ -52,6 +54,7 @@ VAR
   VbSetTimeReturn : BOOL;
   VbSetTimeError : BOOL;
   
+  fbLog : FB_LoggerSetMsg;
 END_VAR
 VAR PERSISTENT
 	nvbSummerTime			: BOOL;
@@ -59,8 +62,6 @@ VAR PERSISTENT
   VnviTimeCorrectionEachDay : INT; // Zeitkorrektur je Tag [msec]
   
 	nviTcRestartCnt		: INT;
-	nviTcRestartId		: INT;
-	anvszTcRestartReason : ARRAY[0..10] OF STRING;
 	
 END_VAR
 ]]></Declaration>
@@ -126,7 +127,7 @@ IF (OUTstSysTimeDate.wDay
 THEN
 	wDay := OUTstSysTimeDate.wDay;
 	OUTbNewDay := TRUE;
-	OUTeDayOfWeek := OUTstSysTimeDate.wDayOfWeek;
+	OUTeDayOfWeek := WORD_TO_INT(OUTstSysTimeDate.wDayOfWeek);
 	OUTdDate := DT_TO_DATE(OUTdtDateClock);
 	OUTszDate := MID(DATE_TO_STRING(OUTdDate), 10, 3);
 ELSE
@@ -251,17 +252,15 @@ ELSIF iofDeviceReset.RESET THEN
 	
 ELSIF NOT tonTcRestart.IN THEN
 	IF fbBK1250Diag.OUTbError THEN
-		M_SetRestartLog(
-			INszLogTxt:= CONCAT('EC-Master-Reset autom., BK1250-State= ', UINT_TO_STRING(fbBK1250Diag.OUTuiCouplterState)));
+    nviTcRestartCnt := nviTcRestartCnt + 1;
+    fbLog.M_AddMsgError(CONCAT('EC-Master-Reset autom., BK1250-State= ', UINT_TO_STRING(fbBK1250Diag.OUTuiCouplterState)));
 		iofDeviceReset(RESET:= TRUE);
 	ELSIF VbDeviceReset THEN
-		M_SetRestartLog(
-			INszLogTxt:= CONCAT('EC-Master-Reset manuell, BK1250-State= ', UINT_TO_STRING(fbBK1250Diag.OUTuiCouplterState)));
+    fbLog.M_AddMsgWarning(CONCAT('EC-Master-Reset manuell, BK1250-State= ', UINT_TO_STRING(fbBK1250Diag.OUTuiCouplterState)));
 		iofDeviceReset(RESET:= TRUE);
 
 	ELSIF VbTCReset THEN
-		M_SetRestartLog(
-			INszLogTxt:= 'TwinCAT-Reset manuell');
+    fbLog.M_AddMsgWarning(CONCAT('EC-Master-Reset manuell, BK1250-State= ', UINT_TO_STRING(fbBK1250Diag.OUTuiCouplterState)));
 		tcRestart(RESTART:= TRUE);
 		
 	END_IF
@@ -311,28 +310,10 @@ OUTbSummerTime := nvbSummerTime;
 (* END *****************************************)]]></ST>
       </Implementation>
     </Action>
-    <Method Name="M_SetRestartLog" Id="{5ca69cbb-8480-4dc1-b054-4cac44d151cd}">
-      <Declaration><![CDATA[METHOD PRIVATE M_SetRestartLog
-VAR_INPUT
-	INszLogTxt : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[nviTcRestartCnt := nviTcRestartCnt + 1;
-nviTcRestartId := nviTcRestartId + 1;
-IF (nviTcRestartId > 10) THEN
-	nviTcRestartId := 1;
-END_IF
-anvszTcRestartReason[nviTcRestartId] := 
-	CONCAT(DT_TO_STRING(OUTdtDateClock),
-		CONCAT(' ', INszLogTxt));
-]]></ST>
-      </Implementation>
-    </Method>
     <Action Name="M_Summertime" Id="{dd7bba39-e4b7-4a36-a6b4-d5109237b9fe}">
       <Implementation>
         <ST><![CDATA[
-IF (OUTstSysTimeDate.wDayOfWeek = Sonntag) THEN
+IF (WORD_TO_INT(OUTstSysTimeDate.wDayOfWeek) = Sonntag) THEN
 	IF nvbSummerTime THEN
 		IF (OUTtodClockBase = TOD#2:00) THEN
 			IF (OUTstSysTimeDate.wMonth = 10)

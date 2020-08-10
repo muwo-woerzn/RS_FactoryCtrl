@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.10">
   <GVL Name="Globale_Variablen" Id="{5dfb3170-0a5b-47d6-8c79-c623d1099db8}">
     <Declaration><![CDATA[{attribute 'Tc2GvlVarNames'}
 VAR_GLOBAL CONSTANT
@@ -18,6 +18,7 @@ END_VAR
 
 VAR_GLOBAL
 	gbTakt100ms		: BOOL;
+  gdwBlink      : DWORD;
 
 	gfbSystemCX		: FB_SystemCX := (INCFGDiagBK1250:= TRUE);
 
